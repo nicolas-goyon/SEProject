@@ -1,4 +1,4 @@
-package org.openjfx.javafxmavenarchetypes;
+package com.SEApp.app;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

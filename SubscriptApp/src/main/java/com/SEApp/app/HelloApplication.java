@@ -1,10 +1,8 @@
-package org.openjfx.javafxmavenarchetypes;
+package com.SEApp.app;
 
+import com.github.fxrouter.FXRouter;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
-import com.github.fxrouter.FXRouter;
-
 
 import java.io.IOException;
 

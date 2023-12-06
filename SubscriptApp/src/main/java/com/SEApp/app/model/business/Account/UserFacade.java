@@ -48,7 +48,8 @@ public class UserFacade {
 
 
     /**
-     * @param user user
+     * @param email email of the user
+     * @param password password of the user (not encrypted)
      */
     public void register(String email, String password) { // TODO create a exception for null
         // TODO implement here
@@ -56,8 +57,8 @@ public class UserFacade {
     }
 
     /**
-     * @param String email 
-     * @param String password
+     * @param email email of the user
+     * @param password password of the user (not encrypted)
      */
     public boolean login(String email, String password) {
         // TODO implement here

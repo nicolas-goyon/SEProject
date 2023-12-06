@@ -1,15 +1,12 @@
 package com.SEApp.app.controller;
 
-import com.SEApp.app.components.Header;
 import com.SEApp.app.model.business.Account.UserFacade;
-import com.SEApp.app.model.model.User;
 import com.github.fxrouter.FXRouter;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class Login {
 
@@ -20,20 +17,20 @@ public class Login {
     @FXML
     private PasswordField password;
 
-    @FXML
-    private Text longText;
 
     @FXML
-    private Pane myPane;
-
-    @FXML
-    protected void onLogin(){
-        String chaine = "Your login is : "+ email.getText() + " and your password is " + password.getText();
-
+    protected void onLogin() {
         UserFacade userFacade = UserFacade.getInstance();
-        User user = userFacade.login(email.getText(), password.getText());
+        boolean user = userFacade.login(email.getText(), password.getText());
+
+        if (user) {
+            try {
+                FXRouter.goTo("logged");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
     }
-
-
 }

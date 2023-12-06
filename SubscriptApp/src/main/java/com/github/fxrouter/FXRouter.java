@@ -15,6 +15,7 @@ package com.github.fxrouter;
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import java.io.IOException;
+import java.net.URL;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import javafx.fxml.FXMLLoader;
@@ -107,6 +108,16 @@ public final class FXRouter {
 
         private static double getWindowHeight() {
             return FXRouter.windowHeight != null ? FXRouter.windowHeight : WINDOW_HEIGHT;
+        }
+
+        public String toString() {
+            return "RouteScene{" +
+                    "scenePath='" + scenePath + '\'' +
+                    ", windowTitle='" + windowTitle + '\'' +
+                    ", sceneWidth=" + sceneWidth +
+                    ", sceneHeight=" + sceneHeight +
+                    ", data=" + data +
+                    '}';
         }
     }
 
@@ -207,17 +218,20 @@ public final class FXRouter {
      * @throws Exception: throw FXMLLoader exception if file is not loaded correctly
      */
     private static void loadNewRoute(RouteScene route) throws IOException {
+
         // get Main Class package name to get correct files path
         String pathRef = mainRef.getClass().getPackage().getName();
 
         // set FXRouter current route reference
         currentRoute = route;
 
-        // create correct file path.  "/" doesn't affect any OS
-        String scenePath = "/" + pathRef + "/" + route.scenePath;
+        // add package name to scene path
+        route.scenePath = "/" + pathRef.replace(".", "/") + "/" + route.scenePath;
+
+        URL ressource = mainRef.getClass().getResource(currentRoute.scenePath);
 
         // load .fxml resource
-        Parent resource = FXMLLoader.load(mainRef.getClass().getResource(route.scenePath));
+        Parent resource = FXMLLoader.load(ressource);
 
         // set window title from route settings or default setting
         window.setTitle(route.windowTitle);

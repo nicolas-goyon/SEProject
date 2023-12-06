@@ -10,9 +10,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXRouter.bind(this, stage, "Hello Title", 300, 200);
-        FXRouter.when("logged", "dashboard.fxml");
-        FXRouter.when("mainPage", "hello-view.fxml");
+        FXRouter.bind(this, stage, "Hello Title");
+        FXRouter.when("mainPage", "view/login.fxml");
         try{
             FXRouter.goTo("mainPage");
         }

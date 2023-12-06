@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<?import com.SEApp.app.components.*?>
+<VBox alignment="CENTER"
+      prefHeight="239.0"
+      prefWidth="243.0"
+      spacing="20.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.SEApp.app.controller.Login">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Header />
+    <Label styleClass="h1" text="Login" />
+    <Label styleClass="form-control" text="Your login" />
+    <TextField fx:id="email" styleClass="form-control" />
+    <Label styleClass="form-control" text="Your password" />
+    <PasswordField fx:id="password" styleClass="form-control" />
+    <Button onAction="#onLogin" styleClass="btn-danger, btn" text="Login" />
+    <Text fx:id="longText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+   <Pane fx:id="myPane" prefHeight="80.0" prefWidth="203.0" />
+
+</VBox>

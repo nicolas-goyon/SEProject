@@ -26,6 +26,13 @@ public class UserDaoMySQL extends UserDao {
     private Connection sqlConnection;
 
 
+
+    @Override
+    public User get(long id) {
+        // TODO implement here
+        throw new RuntimeException("not implemented");
+    }
+
     @Override
     public User GetUser(long id) {
         // TODO implement here
@@ -39,19 +46,26 @@ public class UserDaoMySQL extends UserDao {
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         // TODO implement here
         throw new RuntimeException("not implemented");
     }
 
     @Override
-    public void update(User user, String[] params) {
+    public User update(User obj) {
+        // TODO implement here
+        throw new RuntimeException("not implemented");
+    }
+
+
+    @Override
+    public boolean delete(User user) {
         // TODO implement here
         throw new RuntimeException("not implemented");
     }
 
     @Override
-    public void delete(User user) {
+    public List<User> list() {
         // TODO implement here
         throw new RuntimeException("not implemented");
     }

@@ -1,6 +1,7 @@
 package com.SEApp.app.model.persist;
 
 import com.SEApp.app.model.persist.account.UserDao;
+import com.SEApp.app.model.persist.account.UserDaoMySQL;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class MysqlDaoFactory extends AbstractDAOFactory {
     /**
      * 
      */
-    private MySQL mysql;
+    private final MySQL mysql;
 
     /**
      * 
@@ -31,8 +32,12 @@ public class MysqlDaoFactory extends AbstractDAOFactory {
      * 
      */
     public UserDao getUserDao() {
-        // TODO implement here
-        return null;
+        try {
+            this.userDao = new UserDaoMySQL(this.mysql.getConnection());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return this.userDao;
     }
 
     /**

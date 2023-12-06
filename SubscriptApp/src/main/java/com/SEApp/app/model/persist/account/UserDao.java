@@ -1,6 +1,7 @@
 package com.SEApp.app.model.persist.account;
 
 import com.SEApp.app.model.model.User;
+import com.SEApp.app.model.persist.Dao;
 
 import java.io.*;
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class UserDao {
+public abstract class UserDao implements Dao<User> {
 
     /**
      * @param long id
@@ -23,21 +24,20 @@ public abstract class UserDao {
     /**
      * @param User user
      */
-    public abstract void save(User user);
+    public abstract User save(User user);
 
     /**
-     * @param User user 
-     * @param String[] params
+     * @param user
      */
-    public abstract void update(User user, String[] params) ;
+    public abstract User update(User user) ;
     /**
-     * @param User user
+     * @param user
      */
-    public abstract void delete(User user);
+    public abstract boolean delete(User user);
 
 
     /**
-     * @param String email
+     * @param email
      */
     public abstract User findByEmail(String email);
 }

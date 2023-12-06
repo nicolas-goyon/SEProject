@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Login {
 
@@ -20,7 +21,12 @@ public class Login {
 
     @FXML
     protected void onLogin() {
-        UserFacade userFacade = UserFacade.getInstance();
+        UserFacade userFacade = null;
+        try {
+            userFacade = UserFacade.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         boolean user = userFacade.login(email.getText(), password.getText());
 
         if (user) {

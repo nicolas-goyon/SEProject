@@ -2,6 +2,8 @@ package com.SEApp.app.model.persist;
 
 import com.SEApp.app.model.persist.account.UserDao;
 
+import java.sql.SQLException;
+
 /**
  * 
  */
@@ -24,6 +26,6 @@ public abstract class AbstractDAOFactory {
     /**
      * 
      */
-    public abstract UserDao getUserDao();
+    public abstract UserDao getUserDao() throws SQLException;
 
 }

@@ -6,6 +6,34 @@ import java.util.*;
 /**
  * 
  */
-public interface Dao {
+public interface Dao<T> {
 
+        /**
+        * @param id
+        * @return
+        */
+        public T get(long id);
+
+        /**
+        * @param obj
+        * @return
+        */
+        public T save(T obj);
+
+        /**
+        * @param obj
+        * @return
+        */
+        public T update(T obj);
+
+        /**
+        * @param obj
+        * @return
+        */
+        public boolean delete(T obj);
+
+        /**
+        * @return List<Object> return a list of all the objects
+        */
+        public List<T> list();
 }

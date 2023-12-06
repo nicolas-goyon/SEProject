@@ -13,17 +13,17 @@ public class MySQL {
     /**
      * 
      */
-    private String url;
+    private final String url;
 
     /**
      * 
      */
-    private String username;
+    private final String username;
 
     /**
      * 
      */
-    private String password;
+    private final String password;
 
     /**
      *
@@ -36,6 +36,7 @@ public class MySQL {
      * 
      */
     public MySQL() {
+        // TODO import from config file (json)
         // TODO implement here
         throw  new RuntimeException("MySQL not initialized");
     }

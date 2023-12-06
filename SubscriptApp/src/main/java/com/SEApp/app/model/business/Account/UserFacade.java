@@ -6,12 +6,18 @@ import com.SEApp.app.model.persist.account.UserDao;
 import com.SEApp.app.model.model.User;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
  * 
  */
 public class UserFacade {
+
+    @Deprecated
+    public static boolean debugMethod() {
+        return true;
+    }
 
     /**
      * 
@@ -33,12 +39,12 @@ public class UserFacade {
      */
     private User currentUser;
 
-    private UserFacade() {
+    private UserFacade() throws SQLException {
         factory = AbstractDAOFactory.getInstance();
         userDao = factory.getUserDao();
     }
 
-    public static UserFacade getInstance() {
+    public static UserFacade getInstance() throws SQLException {
         if (instance == null) {
             instance = new UserFacade();
         }
@@ -65,7 +71,8 @@ public class UserFacade {
         throw new RuntimeException("not implemented");
     }
 
-    public User getCurrentUser() { // TODO create a exception for null
+    public User getCurrentUser() {
+        // TODO create a exception for null
         return currentUser;
     }
 

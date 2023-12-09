@@ -3,6 +3,8 @@ package com.SEApp.app.model.persist;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -24,11 +26,6 @@ public class MySQL {
      */
     private final String password;
 
-    /**
-     *
-     */
-    private Connection connection;
-
 
 
     /**
@@ -37,100 +34,161 @@ public class MySQL {
     public MySQL() {
         // load the environment variables
         Dotenv dotenv = Dotenv.load();
-        this.url = dotenv.get("MYSQL_URL");
-        this.username = dotenv.get("MYSQL_USER");
+        String url = dotenv.get("MYSQL_URL");
+        this.username = dotenv.get("MYSQL_USER"); // TODO isn't needed because of azure connection string
         this.password = dotenv.get("MYSQL_PASS");
+
+        this.url = url.replace("{your_password_here}", this.password);
     }
 
     /**
      * 
      */
-    public void closeConnection() throws SQLException {
-        this.connection.close();
-    }
-
-    /**
-     * 
-     */
-    public Connection getConnection() throws SQLException {
-        this.connection = DriverManager.getConnection(url, username, password);
-        return this.connection;
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, username, password);
     }
 
     // TODO implement methods for CRUD
-    public void create(
-            String table,
-            String[] columns,
-            String[] values
-    ) throws SQLException {
-        String query = "INSERT INTO " + table + " (";
-        for (int i = 0; i < columns.length; i++) {
-            query += columns[i];
-            if (i < columns.length - 1) {
-                query += ", ";
-            }
+
+    public int delete(String table, WhereOperand[] whereOperands) throws SQLException, IncorrectOperandException {
+        Connection connection = this.getConnection();
+
+        StringBuilder query = new StringBuilder("DELETE FROM "); // TODO prevent SQL injection
+        query.append(table).append(where(whereOperands));
+        query.append(";");
+
+        PreparedStatement statement = connection.prepareStatement(query.toString());
+        int i = 1;
+        for (WhereOperand whereOperand : whereOperands) {
+            statement.setObject(i, whereOperand.getValue());
+            i++;
         }
-        query += ") VALUES (";
-        for (int i = 0; i < values.length; i++) {
-            query += "'" + values[i] + "'";
-            if (i < values.length - 1) {
-                query += ", ";
-            }
-        }
-        query += ");";
-        System.out.println(query);
-        this.connection.createStatement().executeUpdate(query);
+        int affectedRows = statement.executeUpdate();
+
+        connection.close();
+        statement.close();
+
+        return affectedRows;
     }
 
-    public void update(
-            String table,
-            String[] columns,
-            String[] values,
-            String[] whereColumns,
-            String[] whereValues
-    ) throws SQLException {
-        String query = "UPDATE " + table + " SET ";
-        for (int i = 0; i < columns.length; i++) {
-            query += columns[i] + " = '" + values[i] + "'";
-            if (i < columns.length - 1) {
-                query += ", ";
-            }
+    public int create(String table, UpdateOperand[] values) throws SQLException {
+        Connection connection = this.getConnection();
+
+        StringBuilder query = new StringBuilder("INSERT INTO ");
+        query.append(table).append(" (");
+        for (UpdateOperand value : values) {
+            query.append(value.getColumn()).append(", ");
         }
-        query += " WHERE ";
-        for (int i = 0; i < whereColumns.length; i++) {
-            query += whereColumns[i] + " = '" + whereValues[i] + "'";
-            if (i < whereColumns.length - 1) {
-                query += " AND ";
-            }
+        query.delete(query.length() - 2, query.length());
+        query.append(") VALUES (");
+        for (UpdateOperand value : values) {
+            query.append("?, ");
         }
-        query += ";";
-        System.out.println(query);
-        this.connection.createStatement().executeUpdate(query);
+        query.delete(query.length() - 2, query.length());
+        query.append(");");
+
+        PreparedStatement statement = connection.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS); // TODO prevent SQL injection
+        int i = 1;
+        for (UpdateOperand value : values) {
+            statement.setObject(i, value.getValue());
+            i++;
+        }
+        // res = id of the created row
+        int affectedRows = statement.executeUpdate();
+
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating user failed, no rows affected.");
+        }
+
+        ResultSet generatedKeys = statement.getGeneratedKeys();
+        int res = -1;
+        if (generatedKeys.next()) {
+            res = generatedKeys.getInt(1);
+        } else {
+            throw new SQLException("Creating user failed, no ID obtained.");
+        }
+
+
+        connection.close();
+        statement.close();
+
+        return res;
     }
 
-    public void delete(
-            String table,
-            String[] whereColumns,
-            String[] whereValues
-    ) throws SQLException {
-        String query = "DELETE FROM " + table + " WHERE ";
-        for (int i = 0; i < whereColumns.length; i++) {
-            query += whereColumns[i] + " = '" + whereValues[i] + "'";
-            if (i < whereColumns.length - 1) {
-                query += " AND ";
-            }
+    public int update(String table, UpdateOperand[] updateOperands, WhereOperand[] whereOperands) throws SQLException, IncorrectOperandException {
+        Connection connection = this.getConnection();
+
+        StringBuilder query = new StringBuilder("UPDATE "); // TODO prevent SQL injection
+        query.append(table).append(set(updateOperands));
+        query.append(where(whereOperands));
+        query.append(";");
+
+        PreparedStatement statement = connection.prepareStatement(query.toString());
+        int i = 1;
+        for (UpdateOperand updateOperand : updateOperands) {
+            statement.setObject(i, updateOperand.getValue());
+            i++;
         }
-        query += ";";
-        System.out.println(query);
-        this.connection.createStatement().executeUpdate(query);
+        for (WhereOperand whereOperand : whereOperands) {
+            statement.setObject(i, whereOperand.getValue());
+            i++;
+        }
+
+        int affectedRows = statement.executeUpdate();
+
+        connection.close();
+        statement.close();
+
+        return affectedRows;
     }
 
-    public Object[] read(
+
+
+    public Map<String, Object>[] read(
             String table,
             String[] columns,
-            String[] whereColumns,
-            String[] whereValues
+            WhereOperand[] whereOperands
     ) throws SQLException {
+        Connection connection = this.getConnection();
+
+        StringBuilder query = select(columns);
+        query.append(" FROM ").append(table).append(where(whereOperands));
+        query.append(";");
+
+        PreparedStatement statement = connection.prepareStatement(query.toString()); // TODO prevent SQL injection
+        int i = 1;
+        for (WhereOperand whereOperand : whereOperands) {
+            statement.setObject(i, whereOperand.getValue());
+            i++;
+        }
+        ResultSet resultSet = statement.executeQuery();
+
+        Map<String, Object>[] res = resultSetToMap(resultSet);
+
+        connection.close();
+        resultSet.close();
+        statement.close();
+
+        return res;
+    }
+
+    private Map<String, Object>[] resultSetToMap(ResultSet resultSet) throws SQLException {
+        ArrayList<Map<String, Object>> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, Object> row = new java.util.HashMap<>();
+            for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
+                row.put(resultSet.getMetaData().getColumnName(i + 1), resultSet.getObject(i + 1));
+            }
+            resultList.add(row);
+        }
+        @SuppressWarnings("unchecked")
+        Map<String, Object>[] res = new Map[resultList.size()];
+        res = resultList.toArray(res);
+        return res;
+    }
+
+    private StringBuilder select(String[] columns) {
         StringBuilder query = new StringBuilder("SELECT ");
         for (int i = 0; i < columns.length; i++) {
             query.append(columns[i]);
@@ -138,22 +196,37 @@ public class MySQL {
                 query.append(", ");
             }
         }
-        query.append(" FROM ").append(table).append(" WHERE ");
-        for (int i = 0; i < whereColumns.length; i++) {
-            query.append(whereColumns[i]).append(" = '").append(whereValues[i]).append("'");
-            if (i < whereColumns.length - 1) {
+        return query;
+    }
+
+    private StringBuilder set(UpdateOperand[] updateOperands) throws IncorrectOperandException {
+        if (updateOperands == null || updateOperands.length == 0) {
+            throw new IncorrectOperandException("updateOperands must not be null or empty");
+        }
+
+        StringBuilder query = new StringBuilder(" SET ");
+        for (int i = 0; i < updateOperands.length; i++) {
+            query.append(updateOperands[i].toPreparedString());
+            if (i < updateOperands.length - 1) {
+                query.append(", ");
+            }
+        }
+        return query;
+    }
+
+    private StringBuilder where(WhereOperand[] whereOperands) {
+        if (whereOperands == null) {
+            return new StringBuilder();
+        }
+
+        StringBuilder query = new StringBuilder(" WHERE ");
+        for (int i = 0; i < whereOperands.length; i++) {
+            query.append(whereOperands[i].toPreparedString());
+            if (i < whereOperands.length - 1) {
                 query.append(" AND ");
             }
         }
-        query.append(";");
-        System.out.println(query);
-        ResultSet resultSet = this.connection.createStatement().executeQuery(query.toString());
-        resultSet.next();
-        Object[] result = new Object[columns.length];
-        for (int i = 0; i < columns.length; i++) {
-            result[i] = resultSet.getObject(columns[i]);
-        }
-        return result;
+        return query;
     }
 
     // TODO implement methods for complex queries

@@ -28,22 +28,7 @@ public class MysqlDaoFactory extends AbstractDAOFactory {
      * 
      */
     public UserDao getUserDao() throws SQLException {
-        return new UserDaoMySQL(mysql.getConnection());
-    }
-
-    /**
-     * 
-     */
-    public Connection getMySQLConnection() throws SQLException {
-        mysql.getConnection();
-        return mysql.getConnection();
-    }
-
-    /**
-     * 
-     */
-    public void closeConnectionToDB() throws SQLException {
-        mysql.closeConnection();
+        return new UserDaoMySQL(mysql);
     }
 
 }

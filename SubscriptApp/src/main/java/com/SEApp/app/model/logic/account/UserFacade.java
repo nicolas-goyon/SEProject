@@ -3,6 +3,7 @@ package com.SEApp.app.model.logic.account;
 
 import com.SEApp.app.model.classes.User;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
+import com.SEApp.app.model.persist.PasswordEncrypt;
 import com.SEApp.app.model.persist.account.UserDao;
 
 import java.sql.SQLException;
@@ -11,11 +12,6 @@ import java.sql.SQLException;
  * 
  */
 public class UserFacade {
-
-    @Deprecated
-    public static boolean debugMethod() {
-        return true;
-    }
 
     /**
      * 
@@ -57,12 +53,14 @@ public class UserFacade {
         UserDao userDao = factory.getUserDao();
         User user = userDao.findByEmail(email);
 
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && PasswordEncrypt.checkPassword(password, user.getPassword())) {
             currentUser = user;
             return true;
         }
         return false;
     }
+
+
 
     public User getCurrentUser() {
         // TODO create a exception for null

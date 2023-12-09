@@ -7,13 +7,6 @@ import java.sql.SQLException;
 
 public class UserFacadeTest {
 
-    // TODO: This method should be deleted, it's for testing purposes only
-    // TODO: This is an example of a test method with assertions
-    @Test
-    public void testDebugMethodWorking(){
-        boolean res = UserFacade.debugMethod();
-        Assertions.assertFalse(res);
-    }
 
 
     @Test
@@ -27,16 +20,5 @@ public class UserFacadeTest {
     }
 
 
-    @Test
-    public void testRegisterIsImplemented() {
-        UserFacade userFacade = null;
-        try {
-            userFacade = UserFacade.getInstance();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        // Verify that the method is implemented
-        userFacade.register("", "");
-    }
 
 }

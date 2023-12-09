@@ -40,11 +40,12 @@ public class Login {
         }
 
         if (isLog) {
-            try {
+            error.setText("Login successful");
+            /*try {
                 FXRouter.goTo("logged");
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
         else {
             error.setText("Wrong email or password");

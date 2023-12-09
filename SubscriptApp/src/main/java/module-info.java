@@ -4,6 +4,7 @@ module com.SEApp.app {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
+    requires jbcrypt;
 
     opens com.SEApp.app to javafx.fxml;
     opens com.SEApp.app.controller to javafx.fxml;

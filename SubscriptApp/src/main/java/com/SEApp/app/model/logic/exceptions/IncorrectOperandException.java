@@ -1,4 +1,4 @@
-package com.SEApp.app.model.persist;
+package com.SEApp.app.model.logic.exceptions;
 
 public class IncorrectOperandException extends  Exception{
 

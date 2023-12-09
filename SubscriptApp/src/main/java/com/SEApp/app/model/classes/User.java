@@ -1,7 +1,7 @@
 package com.SEApp.app.model.classes;
 
-import com.SEApp.app.model.persist.PasswordEncrypt;
-import com.SEApp.app.model.persist.UpdateOperand;
+import com.SEApp.app.model.persist.utils.PasswordEncrypt;
+import com.SEApp.app.model.persist.utils.UpdateOperand;
 import com.SEApp.app.model.persist.schemas.UserSchema;
 
 import java.util.HashMap;
@@ -30,7 +30,6 @@ public class User {
      */
     private String password;
 
-    private boolean isPasswordEncrypted;
 
     /**
      *
@@ -92,15 +91,6 @@ public class User {
                 ", " + UserSchema.PASSWORD +"=" + password +
                 ", " + UserSchema.ROLE +"='" + role + '\'' +
                 '}';
-    }
-
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put(UserSchema.USERNAME, this.username);
-        map.put(UserSchema.EMAIL, this.email);
-        map.put(UserSchema.PASSWORD, this.password);
-        map.put(UserSchema.ROLE, this.role);
-        return map;
     }
 
     public UpdateOperand[] toUpdateOperands() {

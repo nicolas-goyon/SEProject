@@ -1,6 +1,7 @@
 package com.SEApp.app.model.persist;
 
-import java.io.*;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
+
 import java.sql.SQLException;
 import java.util.*;
 

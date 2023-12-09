@@ -2,7 +2,7 @@ package com.SEApp.app.model.persist.account;
 
 import com.SEApp.app.model.classes.User;
 import com.SEApp.app.model.persist.Dao;
-import com.SEApp.app.model.persist.IncorrectOperandException;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 
 import java.sql.SQLException;
 
@@ -11,15 +11,12 @@ import java.sql.SQLException;
  */
 public abstract class UserDao implements Dao<User> {
 
-    /**
-     * @param long id
-     */
-    public abstract User GetUser(long id);
 
     /**
-     * 
+     * @param id
+     * @return
      */
-    public abstract User[] getAll() throws SQLException;
+    public abstract User get(long id);
 
     /**
      * @param User user

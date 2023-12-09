@@ -1,5 +1,8 @@
 package com.SEApp.app.model.persist;
 
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
+import com.SEApp.app.model.persist.utils.UpdateOperand;
+import com.SEApp.app.model.persist.utils.WhereOperand;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
@@ -231,4 +234,23 @@ public class MySQL {
 
     // TODO implement methods for complex queries
 
+    public Map<String, Object>[] executeQuery(String query, Object[] values) throws SQLException {
+        Connection connection = this.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement(query); // TODO prevent SQL injection
+        int i = 1;
+        for (Object value : values) {
+            statement.setObject(i, value);
+            i++;
+        }
+        ResultSet resultSet = statement.executeQuery();
+
+        Map<String, Object>[] res = resultSetToMap(resultSet);
+
+        connection.close();
+        resultSet.close();
+        statement.close();
+
+        return res;
+    }
 }

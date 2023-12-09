@@ -1,4 +1,4 @@
-package com.SEApp.app.model.persist;
+package com.SEApp.app.model.persist.utils;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.mindrot.jbcrypt.BCrypt;

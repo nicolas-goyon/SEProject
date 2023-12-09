@@ -1,6 +1,6 @@
 package com.SEApp.app.model.persist.account;
 
-import com.SEApp.app.model.persist.IncorrectOperandException;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.MySQL;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

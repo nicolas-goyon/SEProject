@@ -1,13 +1,11 @@
 package com.SEApp.app.model.persist.account;
 
 import com.SEApp.app.model.classes.User;
-import com.SEApp.app.model.persist.IncorrectOperandException;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.MySQL;
-import com.SEApp.app.model.persist.UpdateOperand;
-import com.SEApp.app.model.persist.WhereOperand;
+import com.SEApp.app.model.persist.utils.WhereOperand;
 import com.SEApp.app.model.persist.schemas.UserSchema;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -28,8 +26,6 @@ public class UserDaoMySQL extends UserDao {
      *
      */
     private MySQL mysql;
-
-
 
     @Override
     public User get(long id) {
@@ -56,16 +52,6 @@ public class UserDaoMySQL extends UserDao {
                 (String) row.get(UserSchema.ROLE),
                 true
         );
-    }
-
-    @Override
-    public User GetUser(long id) {
-        return this.get(id);
-    }
-
-    @Override
-    public User[] getAll() throws SQLException {
-        return (User[]) this.list().toArray();
     }
 
     @Override
@@ -109,7 +95,6 @@ public class UserDaoMySQL extends UserDao {
 
         return obj;
     }
-
 
     @Override
     public boolean delete(User user) throws SQLException, IncorrectOperandException {

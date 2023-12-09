@@ -2,8 +2,9 @@ package com.SEApp.app.model.logic.account;
 
 
 import com.SEApp.app.model.classes.User;
+import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
-import com.SEApp.app.model.persist.PasswordEncrypt;
+import com.SEApp.app.model.persist.utils.PasswordEncrypt;
 import com.SEApp.app.model.persist.account.UserDao;
 
 import java.sql.SQLException;
@@ -62,8 +63,10 @@ public class UserFacade {
 
 
 
-    public User getCurrentUser() {
-        // TODO create a exception for null
+    public User getCurrentUser() throws LoginException {
+        if (currentUser == null) {
+            throw new LoginException("User not logged in");
+        }
         return currentUser;
     }
 

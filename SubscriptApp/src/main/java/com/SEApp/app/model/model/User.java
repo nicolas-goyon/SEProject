@@ -38,5 +38,6 @@ public class User {
      */
     private String role;
 
+    // TODO implement accessors and mutators
 
 }

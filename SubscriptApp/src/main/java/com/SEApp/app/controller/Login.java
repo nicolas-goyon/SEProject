@@ -27,16 +27,15 @@ public class Login {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        boolean user = userFacade.login(email.getText(), password.getText());
+        boolean isLog = userFacade.login(email.getText(), password.getText());
 
-        if (user) {
+        if (isLog) {
             try {
                 FXRouter.goTo("logged");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-
 
     }
 }

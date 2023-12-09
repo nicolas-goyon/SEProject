@@ -15,6 +15,7 @@ public class UserFacadeTest {
         Assertions.assertFalse(res);
     }
 
+
     @Test
     public void testUserFacadeGetInstanceWorking(){
         UserFacade userFacade = null;

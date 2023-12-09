@@ -26,6 +26,6 @@ public class Header extends HBox {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        welcomeText.setText("Hello");
+        welcomeText.setText("Substrack");
     }
 }

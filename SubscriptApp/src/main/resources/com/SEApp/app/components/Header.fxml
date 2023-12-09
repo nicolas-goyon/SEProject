@@ -2,11 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 
-<fx:root prefWidth="479.0" styleClass="headerBox" stylesheets="@../Style/header.css" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-      <Label fx:id="welcomeText" styleClass="h1" text="name" textFill="WHITE" />
-   <Circle fill="DODGERBLUE" radius="43.0" stroke="BLACK" strokeType="INSIDE" />
-   <Circle fill="DODGERBLUE" radius="45.0" stroke="BLACK" strokeType="INSIDE" />
+<fx:root prefHeight="76.0" prefWidth="479.0" styleClass="headerBox" stylesheets="@../Style/header.css" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+      <Label fx:id="welcomeText" styleClass="h1" text="Substrack" textFill="WHITE" />
 
 </fx:root>

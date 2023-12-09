@@ -24,7 +24,5 @@
     <Label styleClass="form-control" text="Your password" />
     <PasswordField fx:id="password" styleClass="form-control" />
     <Button onAction="#onLogin" styleClass="btn-danger, btn" text="Login" />
-    <Text fx:id="longText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-   <Pane fx:id="myPane" prefHeight="80.0" prefWidth="203.0" />
 
 </VBox>

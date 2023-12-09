@@ -27,21 +27,9 @@ public class UserFacade {
     /**
      * 
      */
-    private AbstractDAOFactory factory;
-
-    /**
-     * 
-     */
-    private UserDao userDao;
-
-    /**
-     * 
-     */
     private User currentUser;
 
     private UserFacade() throws SQLException {
-        factory = AbstractDAOFactory.getInstance();
-        userDao = factory.getUserDao();
     }
 
     public static UserFacade getInstance() throws SQLException {

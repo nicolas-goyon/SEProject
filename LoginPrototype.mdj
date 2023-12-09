@@ -2565,7 +2565,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGMPmAT2TY/VDM="
 													},
-													"name": "business",
+													"name": "logic",
 													"ownedElements": [
 														{
 															"_type": "UMLClassDiagram",
@@ -2679,7 +2679,7 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmAT2TZApms="
 															},
-															"name": "Account",
+															"name": "account",
 															"ownedElements": [
 																{
 																	"_type": "UMLClassDiagram",
@@ -3511,7 +3511,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGMPmAT2TY/VDM="
 													},
-													"name": "model",
+													"name": "classes",
 													"ownedElements": [
 														{
 															"_type": "UMLClassDiagram",
@@ -9340,7 +9340,7 @@
 											"top": 322,
 											"width": 56.3544921875,
 											"height": 13,
-											"text": "business"
+											"text": "logic"
 										},
 										{
 											"_type": "LabelView",
@@ -9436,7 +9436,7 @@
 											"top": 392,
 											"width": 52,
 											"height": 13,
-											"text": "Account"
+											"text": "account"
 										},
 										{
 											"_type": "LabelView",
@@ -9448,7 +9448,7 @@
 											"font": "Arial;13;0",
 											"width": 89.578125,
 											"height": 13,
-											"text": "(from business)"
+											"text": "(from logic)"
 										},
 										{
 											"_type": "LabelView",
@@ -9530,9 +9530,9 @@
 											"font": "Arial;13;1",
 											"left": 201.57861328125,
 											"top": 322,
-											"width": 40,
+											"width": 46.99169921875,
 											"height": 13,
-											"text": "model"
+											"text": "classes"
 										},
 										{
 											"_type": "LabelView",
@@ -9561,7 +9561,7 @@
 									"font": "Arial;13;0",
 									"left": 196.57861328125,
 									"top": 315,
-									"width": 50,
+									"width": 56.99169921875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGMPmAUHDhIzuA="
@@ -9581,7 +9581,7 @@
 							"containerChangeable": true,
 							"left": 196.57861328125,
 							"top": 300,
-							"width": 50,
+							"width": 56.99169921875,
 							"height": 40,
 							"nameCompartment": {
 								"$ref": "AAAAAAGMPmAUHDhHdcY="
@@ -9937,7 +9937,7 @@
 								"$ref": "AAAAAAGMPmAUHDhGSuA="
 							},
 							"lineStyle": 3,
-							"points": "222:299;222:285;238:270"
+							"points": "223:299;222:285;238:270"
 						},
 						{
 							"_type": "UMLContainmentView",
@@ -11820,7 +11820,7 @@
 											"font": "Arial;13;0",
 											"width": 85.24267578125,
 											"height": 13,
-											"text": "(from Account)"
+											"text": "(from account)"
 										},
 										{
 											"_type": "LabelView",
@@ -12091,9 +12091,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 73.67724609375,
+											"width": 81.6181640625,
 											"height": 13,
-											"text": "(from model)"
+											"text": "(from classes)"
 										},
 										{
 											"_type": "LabelView",
@@ -13629,7 +13629,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"width": 121.9853515625,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -14924,7 +14924,7 @@
 											"top": 318,
 											"width": 603,
 											"height": 13,
-											"text": "business"
+											"text": "logic"
 										},
 										{
 											"_type": "LabelView",
@@ -15030,7 +15030,7 @@
 											"top": 407,
 											"width": 463,
 											"height": 13,
-											"text": "Account"
+											"text": "account"
 										},
 										{
 											"_type": "LabelView",
@@ -15043,7 +15043,7 @@
 											"top": 422,
 											"width": 463,
 											"height": 13,
-											"text": "(from business)"
+											"text": "(from logic)"
 										},
 										{
 											"_type": "LabelView",
@@ -15140,7 +15140,7 @@
 											"top": 318,
 											"width": 551,
 											"height": 13,
-											"text": "model"
+											"text": "classes"
 										},
 										{
 											"_type": "LabelView",
@@ -15263,7 +15263,7 @@
 											"top": 422,
 											"width": 475.05224609375,
 											"height": 13,
-											"text": "(from model)"
+											"text": "(from classes)"
 										},
 										{
 											"_type": "LabelView",
@@ -16384,7 +16384,7 @@
 											"top": 590,
 											"width": 280.00146484375,
 											"height": 13,
-											"text": "(from Account)"
+											"text": "(from account)"
 										},
 										{
 											"_type": "LabelView",

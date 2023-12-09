@@ -25,4 +25,8 @@
     <PasswordField fx:id="password" styleClass="form-control" />
     <Button onAction="#onLogin" styleClass="btn-danger, btn" text="Login" />
 
+    <HBox alignment="CENTER" spacing="10.0">
+            <Label text="Enter your email and password to login" fx:id="error" styleClass="error" />
+    </HBox>
+
 </VBox>

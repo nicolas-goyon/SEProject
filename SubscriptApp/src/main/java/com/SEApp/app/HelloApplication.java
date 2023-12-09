@@ -3,7 +3,7 @@ package com.SEApp.app;
 import com.github.fxrouter.FXRouter;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
+import io.github.cdimascio.dotenv.Dotenv;
 import java.io.IOException;
 
 public class HelloApplication extends Application {

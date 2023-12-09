@@ -2,6 +2,8 @@ package com.SEApp.app.model.logic.account;
 
 
 import com.SEApp.app.model.classes.User;
+import com.SEApp.app.model.persist.AbstractDAOFactory;
+import com.SEApp.app.model.persist.account.UserDao;
 
 import java.sql.SQLException;
 
@@ -50,9 +52,16 @@ public class UserFacade {
      * @param email email of the user
      * @param password password of the user (not encrypted)
      */
-    public boolean login(String email, String password) {
-        // TODO implement here
-        throw new RuntimeException("not implemented");
+    public boolean login(String email, String password) throws SQLException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        UserDao userDao = factory.getUserDao();
+        User user = userDao.findByEmail(email);
+
+        if (user != null && user.getPassword().equals(password)) {
+            currentUser = user;
+            return true;
+        }
+        return false;
     }
 
     public User getCurrentUser() {

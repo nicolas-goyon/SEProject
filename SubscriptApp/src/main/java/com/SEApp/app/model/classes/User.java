@@ -5,6 +5,28 @@ package com.SEApp.app.model.classes;
  */
 public class User {
 
+
+    /**
+     *
+     */
+    private String username;
+
+    /**
+     *
+     */
+    private String email;
+
+    /**
+     *
+     */
+    public String password;
+
+    /**
+     *
+     */
+    private String role;
+
+
     /**
      * Default constructor
      */
@@ -15,26 +37,44 @@ public class User {
         this.role = role;
     }
 
-    /**
-     * 
-     */
-    public String username;
+    public String getUsername() {
+        return username;
+    }
+    public String getEmail() {
+        return email;
+    }
 
-    /**
-     * 
-     */
-    private String email;
+    public String getPassword() {
+        return password;
+    }
 
-    /**
-     * 
-     */
-    public String password;
+    public String getRole() {
+        return role;
+    }
 
-    /**
-     * 
-     */
-    private String role;
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    // TODO implement accessors and mutators
+    public void setEmail(String email) {
+        this.email= email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password=" + password +
+                ", role='" + role + '\'' +
+                '}';
+    }
 
 }

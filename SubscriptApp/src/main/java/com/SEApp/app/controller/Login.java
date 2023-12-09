@@ -3,6 +3,7 @@ package com.SEApp.app.controller;
 import com.SEApp.app.model.logic.account.UserFacade;
 import com.github.fxrouter.FXRouter;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -18,6 +19,9 @@ public class Login {
     @FXML
     private PasswordField password;
 
+    @FXML
+    private Label error;
+
 
     @FXML
     protected void onLogin() {
@@ -27,14 +31,23 @@ public class Login {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        boolean isLog = userFacade.login(email.getText(), password.getText());
+        boolean isLog = false;
+        try {
+            isLog = userFacade.login(email.getText(), password.getText());
+        } catch (SQLException | RuntimeException e) {
+            error.setText("An error occurred, connection to the database failed");
+            e.printStackTrace();
+        }
 
         if (isLog) {
             try {
                 FXRouter.goTo("logged");
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
+        }
+        else {
+            error.setText("Wrong email or password");
         }
 
     }

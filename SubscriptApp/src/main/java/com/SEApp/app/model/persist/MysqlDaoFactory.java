@@ -16,10 +16,6 @@ public class MysqlDaoFactory extends AbstractDAOFactory {
      */
     private final MySQL mysql;
 
-    /**
-     * 
-     */
-    private UserDao userDao;
 
     /**
      * 
@@ -31,13 +27,8 @@ public class MysqlDaoFactory extends AbstractDAOFactory {
     /**
      * 
      */
-    public UserDao getUserDao() {
-        try {
-            this.userDao = new UserDaoMySQL(this.mysql.getConnection());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return this.userDao;
+    public UserDao getUserDao() throws SQLException {
+        return new UserDaoMySQL(mysql.getConnection());
     }
 
     /**

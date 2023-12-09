@@ -1,10 +1,7 @@
 package com.SEApp.app.model.persist.account;
 
-import com.SEApp.app.model.model.User;
+import com.SEApp.app.model.classes.User;
 import com.SEApp.app.model.persist.Dao;
-
-import java.io.*;
-import java.util.*;
 
 /**
  * 

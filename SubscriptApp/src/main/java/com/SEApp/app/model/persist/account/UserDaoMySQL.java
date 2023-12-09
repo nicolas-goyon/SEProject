@@ -1,11 +1,8 @@
 package com.SEApp.app.model.persist.account;
 
-import com.SEApp.app.model.model.User;
+import com.SEApp.app.model.classes.User;
 
-import java.io.*;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 /**

@@ -1,7 +1,4 @@
-package com.SEApp.app.model.model;
-
-import java.io.*;
-import java.util.*;
+package com.SEApp.app.model.classes;
 
 /**
  * 

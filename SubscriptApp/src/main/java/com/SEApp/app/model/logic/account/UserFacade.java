@@ -1,13 +1,9 @@
-package com.SEApp.app.model.business.Account;
+package com.SEApp.app.model.logic.account;
 
 
-import com.SEApp.app.model.persist.AbstractDAOFactory;
-import com.SEApp.app.model.persist.account.UserDao;
-import com.SEApp.app.model.model.User;
+import com.SEApp.app.model.classes.User;
 
-import java.io.*;
 import java.sql.SQLException;
-import java.util.*;
 
 /**
  * 

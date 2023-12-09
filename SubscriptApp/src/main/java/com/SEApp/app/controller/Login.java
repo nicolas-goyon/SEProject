@@ -1,6 +1,6 @@
 package com.SEApp.app.controller;
 
-import com.SEApp.app.model.business.Account.UserFacade;
+import com.SEApp.app.model.logic.account.UserFacade;
 import com.github.fxrouter.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;

@@ -1,4 +1,4 @@
-package com.SEApp.app.model.business.Account;
+package com.SEApp.app.model.logic.account;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

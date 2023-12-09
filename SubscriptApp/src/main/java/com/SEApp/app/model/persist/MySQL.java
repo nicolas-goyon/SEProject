@@ -56,4 +56,8 @@ public class MySQL {
         return this.connection;
     }
 
+    // TODO implement methods for CRUD
+
+    // TODO implement methods for complex queries
+
 }

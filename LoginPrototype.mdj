@@ -100,7 +100,8 @@
 																"$ref": "AAAAAAGMPmATwzXKyh4="
 															},
 															"name": "data",
-															"visibility": "private"
+															"visibility": "private",
+															"type": ""
 														}
 													],
 													"operations": [
@@ -480,7 +481,8 @@
 													},
 													"name": "mainRef",
 													"visibility": "private",
-													"isStatic": true
+													"isStatic": true,
+													"type": ""
 												},
 												{
 													"_type": "UMLAttribute",
@@ -490,7 +492,8 @@
 													},
 													"name": "window",
 													"visibility": "private",
-													"isStatic": true
+													"isStatic": true,
+													"type": ""
 												},
 												{
 													"_type": "UMLAttribute",
@@ -555,7 +558,8 @@
 													},
 													"name": "routes",
 													"visibility": "private",
-													"isStatic": true
+													"isStatic": true,
+													"type": ""
 												}
 											],
 											"operations": [
@@ -585,7 +589,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXiGa0="
 															},
-															"name": "ref"
+															"name": "ref",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -593,7 +598,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXiGa0="
 															},
-															"name": "win"
+															"name": "win",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -621,7 +627,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXmi08="
 															},
-															"name": "ref"
+															"name": "ref",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -629,7 +636,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXmi08="
 															},
-															"name": "win"
+															"name": "win",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -666,7 +674,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXraQE="
 															},
-															"name": "ref"
+															"name": "ref",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -674,7 +683,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXraQE="
 															},
-															"name": "win"
+															"name": "win",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -721,7 +731,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXxxP8="
 															},
-															"name": "ref"
+															"name": "ref",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -729,7 +740,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDXxxP8="
 															},
-															"name": "win"
+															"name": "win",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -786,7 +798,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDX4qrY="
 															},
-															"name": "ref"
+															"name": "ref",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -794,7 +807,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDX4qrY="
 															},
-															"name": "win"
+															"name": "win",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -1068,7 +1082,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDYVdHY="
 															},
-															"name": "data"
+															"name": "data",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -1168,7 +1183,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDYfNlU="
 															},
-															"name": "data"
+															"name": "data",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -1267,7 +1283,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDYqUtA="
 															},
-															"name": "node"
+															"name": "node",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -1296,6 +1313,7 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmATxDYtJ+E="
 															},
+															"type": "",
 															"direction": "return"
 														}
 													]
@@ -2193,7 +2211,8 @@
 																"$ref": "AAAAAAGMPmATyzYyUA8="
 															},
 															"name": "welcomeText",
-															"visibility": "private"
+															"visibility": "private",
+															"type": ""
 														}
 													],
 													"operations": [
@@ -2446,7 +2465,8 @@
 															"_parent": {
 																"$ref": "AAAAAAGMPmAT0jY58fU="
 															},
-															"name": "stage"
+															"name": "stage",
+															"type": ""
 														},
 														{
 															"_type": "UMLParameter",
@@ -7067,6 +7087,7 @@
 																					"_parent": {
 																						"$ref": "AAAAAAGMPmAT5DZuASU="
 																					},
+																					"type": "",
 																					"direction": "return"
 																				}
 																			],
@@ -7285,7 +7306,8 @@
 																				"$ref": "AAAAAAGMPmAT6DZxJew="
 																			},
 																			"name": "mySQL",
-																			"visibility": "private"
+																			"visibility": "private",
+																			"type": ""
 																		}
 																	],
 																	"operations": [
@@ -7305,7 +7327,8 @@
 																					"_parent": {
 																						"$ref": "AAAAAAGMPmAT6DZyH5I="
 																					},
-																					"name": "mySQL"
+																					"name": "mySQL",
+																					"type": ""
 																				}
 																			]
 																		},
@@ -7354,7 +7377,8 @@
 																					"_parent": {
 																						"$ref": "AAAAAAGMPmAT6DZ5O5I="
 																					},
-																					"name": "user"
+																					"name": "user",
+																					"type": ""
 																				},
 																				{
 																					"_type": "UMLParameter",
@@ -7381,7 +7405,8 @@
 																					"_parent": {
 																						"$ref": "AAAAAAGMPmAT6DZ8Sac="
 																					},
-																					"name": "user"
+																					"name": "user",
+																					"type": ""
 																				},
 																				{
 																					"_type": "UMLParameter",
@@ -7418,7 +7443,8 @@
 																					"_parent": {
 																						"$ref": "AAAAAAGMPmAT6DaApII="
 																					},
-																					"name": "user"
+																					"name": "user",
+																					"type": ""
 																				},
 																				{
 																					"_type": "UMLParameter",
@@ -7453,6 +7479,9 @@
 																					"_id": "AAAAAAGMPmAT6TaFB5M=",
 																					"_parent": {
 																						"$ref": "AAAAAAGMPmAT6DaDKY4="
+																					},
+																					"type": {
+																						"$ref": "AAAAAAGMPmAT3DZR030="
 																					},
 																					"direction": "return"
 																				}
@@ -7552,6 +7581,7 @@
 																			"_parent": {
 																				"$ref": "AAAAAAGMPmAT7TaPLJg="
 																			},
+																			"type": "",
 																			"direction": "return"
 																		}
 																	]
@@ -7570,6 +7600,7 @@
 																			"_parent": {
 																				"$ref": "AAAAAAGMPmAT7TaRtyY="
 																			},
+																			"type": "",
 																			"direction": "return"
 																		}
 																	]
@@ -9513,7 +9544,8 @@
 																"$ref": "AAAAAAGMPmAT0DY1eps="
 															},
 															"name": "email",
-															"visibility": "private"
+															"visibility": "private",
+															"type": ""
 														},
 														{
 															"_type": "UMLAttribute",
@@ -9522,7 +9554,8 @@
 																"$ref": "AAAAAAGMPmAT0DY1eps="
 															},
 															"name": "password",
-															"visibility": "private"
+															"visibility": "private",
+															"type": ""
 														},
 														{
 															"_type": "UMLAttribute",
@@ -9531,7 +9564,8 @@
 																"$ref": "AAAAAAGMPmAT0DY1eps="
 															},
 															"name": "longText",
-															"visibility": "private"
+															"visibility": "private",
+															"type": ""
 														},
 														{
 															"_type": "UMLAttribute",
@@ -9540,7 +9574,8 @@
 																"$ref": "AAAAAAGMPmAT0DY1eps="
 															},
 															"name": "myPane",
-															"visibility": "private"
+															"visibility": "private",
+															"type": ""
 														}
 													],
 													"operations": [
@@ -21562,9 +21597,9 @@
 														"$ref": "AAAAAAGMTzUIyKmxcPg="
 													},
 													"font": "Arial;13;0",
-													"left": 80.72998046875,
+													"left": 79.99365234375,
 													"top": 709,
-													"width": 73.26806640625,
+													"width": 68.1455078125,
 													"height": 13,
 													"text": "If user found"
 												},
@@ -21577,7 +21612,7 @@
 													"font": "Arial;13;1",
 													"left": 61,
 													"top": 709,
-													"width": 14.72998046875,
+													"width": 13.99365234375,
 													"height": 13,
 													"text": "alt"
 												},
@@ -21610,7 +21645,7 @@
 																	"font": "Arial;13;0",
 																	"left": 76,
 																	"top": 742,
-																	"width": 72.9853515625,
+																	"width": 66.79638671875,
 																	"height": 13,
 																	"text": "[user Found]"
 																}
@@ -21643,7 +21678,7 @@
 																	"font": "Arial;13;0",
 																	"left": 76,
 																	"top": 1112,
-																	"width": 92.498046875,
+																	"width": 86.6455078125,
 																	"height": 13,
 																	"text": "[User not found]"
 																}
@@ -21921,9 +21956,9 @@
 														"$ref": "AAAAAAGMTzmgwaowPyc="
 													},
 													"font": "Arial;13;0",
-													"left": 88.72998046875,
+													"left": 87.99365234375,
 													"top": 805,
-													"width": 58.078125,
+													"width": 50.83544921875,
 													"height": 13,
 													"text": "Password"
 												},
@@ -21936,7 +21971,7 @@
 													"font": "Arial;13;1",
 													"left": 69,
 													"top": 805,
-													"width": 14.72998046875,
+													"width": 13.99365234375,
 													"height": 13,
 													"text": "alt"
 												},
@@ -21969,7 +22004,7 @@
 																	"font": "Arial;13;0",
 																	"left": 84,
 																	"top": 838,
-																	"width": 107.6435546875,
+																	"width": 97.82373046875,
 																	"height": 13,
 																	"text": "[Password correct]"
 																}
@@ -22002,7 +22037,7 @@
 																	"font": "Arial;13;0",
 																	"left": 84,
 																	"top": 952,
-																	"width": 117.76171875,
+																	"width": 107.935546875,
 																	"height": 13,
 																	"text": "[Password incorrect]"
 																}

@@ -50,6 +50,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v4
+
+      - name: Sleep
+        run: sleep 180
+
+      - name: Print message
+        run: echo "Sleep completed, moving on to the next step"
+
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -67,5 +74,6 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
+
       - name: Stop Docker Compose
         run: docker-compose -f DockerDB/docker-compose.yml down

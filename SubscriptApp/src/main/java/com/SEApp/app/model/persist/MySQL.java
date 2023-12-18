@@ -38,24 +38,26 @@ public class MySQL {
      * 
      */
     public MySQL() {
-        String envVar = System.getenv("ENVIRONMENT");
+//        String envVar = System.getenv("ENVIRONMENT");
         // load the environment variables
         Dotenv dotenv = Dotenv.load();
 
         String url = "";
-
-        if (envVar != null) {
-            this.environment = envVar;
-
-            url = dotenv.get("TEST_MYSQL_URL");
-            this.username = dotenv.get("TEST_MYSQL_USER");
-            this.password = dotenv.get("TEST_MYSQL_PASS");
-        }
-        else {
-            url = dotenv.get("MYSQL_URL");
-            this.username = dotenv.get("MYSQL_USER");
-            this.password = dotenv.get("MYSQL_PASS");
-        }
+//        if (envVar != null) {
+//            this.environment = envVar;
+//
+//            url = dotenv.get("TEST_MYSQL_URL");
+//            this.username = dotenv.get("TEST_MYSQL_USER");
+//            this.password = dotenv.get("TEST_MYSQL_PASS");
+//        }
+//        else {
+//            url = dotenv.get("MYSQL_URL");
+//            this.username = dotenv.get("MYSQL_USER");
+//            this.password = dotenv.get("MYSQL_PASS");
+//        }
+        url = dotenv.get("MYSQL_URL");
+        this.username = dotenv.get("MYSQL_USER");
+        this.password = dotenv.get("MYSQL_PASS");
         url = url.replace("{your_password_here}", this.password);
         this.url = url.replace("{your_user_here}", this.username);
 

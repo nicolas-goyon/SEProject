@@ -10,6 +10,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: 'test'
 
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +30,6 @@ jobs:
     needs: build  # Ensure that the 'build' job is completed before starting the 'test' job
 
     runs-on: ubuntu-latest
-
     env:
       ENVIRONMENT: 'test'
 
@@ -41,7 +42,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
           cache-dependency-path: 'SubscriptApp/pom.xml'
-      - name: Set up environment variable for tests
-        run: echo "export ENVIRONMENT=${{ env.ENVIRONMENT }}" >> $GITHUB_ENV
       - name: Run Tests with Maven
         run: mvn -B test --file SubscriptApp/pom.xml

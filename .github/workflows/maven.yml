@@ -38,5 +38,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
           cache-dependency-path: 'SubscriptApp/pom.xml'
+      - name: Set up environment variable for tests
+        run: echo "export ENVIRONMENT=${{ env.ENVIRONMENT }}" >> $GITHUB_ENV
       - name: Run Tests with Maven
         run: mvn -B test --file SubscriptApp/pom.xml

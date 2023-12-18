@@ -29,6 +29,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      ENVIRONMENT: 'test'
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -41,6 +44,4 @@ jobs:
       - name: Set up environment variable for tests
         run: echo "export ENVIRONMENT=${{ env.ENVIRONMENT }}" >> $GITHUB_ENV
       - name: Run Tests with Maven
-        env:
-          ENVIRONMENT: 'test'
         run: mvn -B test --file SubscriptApp/pom.xml

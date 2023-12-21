@@ -10,8 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: 'test'
 
     steps:
       - uses: actions/checkout@v4
@@ -22,32 +20,17 @@ jobs:
           distribution: 'temurin'
           cache: maven
           cache-dependency-path: 'SubscriptApp/pom.xml'
-      - name: Compile with Maven
-        run: mvn -B compile --file SubscriptApp/pom.xml
-
-  start-docker-compose:
-
-    needs: build
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v4
-      - name: Start Docker Compose
-        run: docker-compose -f DockerDB/docker-compose.yml up -d
+      - name: Build with Maven
+        run: mvn -B clean package --file SubscriptApp/pom.xml
 
   test:
 
-    needs: start-docker-compose
+    needs: build  # Ensure that the 'build' job is completed before starting the 'test' job
 
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: 'test'
 
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -55,25 +38,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
           cache-dependency-path: 'SubscriptApp/pom.xml'
-
-      - name: Sleep
-        run: sleep 180
-
-      - name: Print message
-        run: echo "Sleep completed, moving on to the next step"
-
       - name: Run Tests with Maven
         run: mvn -B test --file SubscriptApp/pom.xml
-
-  stop-docker-compose:
-
-    needs: test
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v4
-
-      - name: Stop Docker Compose
-        run: docker-compose -f DockerDB/docker-compose.yml down

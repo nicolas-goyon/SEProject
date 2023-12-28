@@ -27,33 +27,4 @@ public abstract class ManagerDao extends Dao<Manager> {
      */
     public abstract Manager findByEmail(String email) throws SQLException;
 
-    /**
-     * @param id 
-     * @return
-     */
-    public abstract Manager get(int id)throws SQLException;
-
-    /**
-     * @param obj 
-     * @return
-     */
-    public abstract Manager save(Manager obj)throws SQLException;
-    /**
-     * @param obj 
-     * @return
-     */
-    public abstract Manager update(Manager obj)throws SQLException, IncorrectOperandException;
-
-    /**
-     * @param obj 
-     * @return
-     */
-    public abstract boolean delete(Manager obj)throws SQLException, IncorrectOperandException;
-
-
-    /**
-     * @return
-     */
-    public abstract List<Manager> list() throws SQLException;
-
 }

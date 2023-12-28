@@ -18,26 +18,5 @@ public abstract class PaymentTypeDAO extends Dao<PaymentType> {
         super(db);
     }
 
-    /**
-     * @param id of user to get
-     * @return the user
-     */
-    public abstract PaymentType get(int id) throws SQLException;
-
-    /**
-     * @param user to save
-     */
-    public abstract PaymentType save(PaymentType user) throws SQLException;
-
-    /**
-     * @param user to update
-     */
-    public abstract PaymentType update(PaymentType user) throws SQLException, IncorrectOperandException;
-    /**
-     * @param user to delete
-     */
-    public abstract boolean delete(PaymentType user) throws SQLException, IncorrectOperandException;
-
-    public abstract List<PaymentType> list() throws SQLException;
 
 }

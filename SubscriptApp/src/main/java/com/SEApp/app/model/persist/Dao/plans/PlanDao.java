@@ -19,48 +19,5 @@ public abstract class PlanDao extends Dao<Plan> {
         super(db);
     }
 
-    /**
-     * @param id 
-     * @return
-     */
-    public Plan get(long id) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param obj 
-     * @return
-     */
-    public Plan save(Plan obj) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param obj 
-     * @return
-     */
-    public Plan update(Plan obj) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param obj 
-     * @return
-     */
-    public boolean delete(Plan obj) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @return
-     */
-    public List<Plan> list() {
-        // TODO implement here
-        return null;
-    }
 
 }

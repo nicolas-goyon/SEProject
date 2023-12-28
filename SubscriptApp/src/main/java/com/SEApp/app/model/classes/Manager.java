@@ -13,7 +13,7 @@ public class Manager implements Savable {
     /**
      * id of the manager
      */
-    private long id;
+    private int id;
 
     /**
      * username of the manager
@@ -38,7 +38,7 @@ public class Manager implements Savable {
      * @param password password of the manager
      * @param isAlreadyEncrypted boolean to check if the password is already encrypted
      */
-    public Manager(long id, String username, String email, String password, boolean isAlreadyEncrypted) {
+    public Manager(int id, String username, String email, String password, boolean isAlreadyEncrypted) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -49,7 +49,7 @@ public class Manager implements Savable {
     /**
      * @return the id of the manager
      */
-    public long getId() {
+    public int getId() {
         return this.id;
     }
 
@@ -78,7 +78,7 @@ public class Manager implements Savable {
     /**
      * @param id the id of the manager
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

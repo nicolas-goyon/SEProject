@@ -1,6 +1,7 @@
 package com.SEApp.app.model.persist;
 
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
+import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 import com.SEApp.app.model.persist.Dao.account.user.UserDao;
 
@@ -35,5 +36,7 @@ public abstract class AbstractDAOFactory {
     public abstract UserDao getUserDao() throws SQLException;
 
     public abstract PaymentTypeDAO getPaymentTypeDao() throws SQLException;
+
+    public abstract ManagerDao getManagerDao() throws SQLException;
 
 }

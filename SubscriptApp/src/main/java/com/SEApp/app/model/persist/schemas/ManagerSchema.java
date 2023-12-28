@@ -1,7 +1,7 @@
 package com.SEApp.app.model.persist.schemas;
 
 public class ManagerSchema {
-    public static final String TABLE = "users";
+    public static final String TABLE = "managers";
 
     public static final String ID = "id";
     public static final String EMAIL = "email";

@@ -1,6 +1,8 @@
 package com.SEApp.app.model.persist;
 
 import com.SEApp.app.model.persist.DBAccess.PostGres;
+import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
+import com.SEApp.app.model.persist.Dao.Manager.ManagerDaoPostGres;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAOPostgres;
 import com.SEApp.app.model.persist.Dao.account.user.UserDao;
@@ -44,6 +46,11 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
 
     public PostGres getDBAccess() {
         return postGres;
+    }
+
+    @Override
+    public ManagerDao getManagerDao() throws SQLException {
+        return new ManagerDaoPostGres(postGres);
     }
 
 }

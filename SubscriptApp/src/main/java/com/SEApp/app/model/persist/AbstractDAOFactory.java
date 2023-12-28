@@ -22,7 +22,6 @@ public abstract class AbstractDAOFactory {
      */
     public static AbstractDAOFactory getInstance() {
         if (instance == null) {
-//            instance = new MysqlDaoFactory();
             instance = new PostgresDaoFactory();
         }
         return instance;

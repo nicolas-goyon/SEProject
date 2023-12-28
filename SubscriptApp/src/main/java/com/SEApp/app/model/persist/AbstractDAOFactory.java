@@ -1,6 +1,9 @@
 package com.SEApp.app.model.persist;
 
-import com.SEApp.app.model.persist.account.UserDao;
+import com.SEApp.app.model.persist.DBAccess.DBAccess;
+import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
+import com.SEApp.app.model.persist.Dao.account.user.UserDao;
+
 
 import java.sql.SQLException;
 
@@ -18,14 +21,19 @@ public abstract class AbstractDAOFactory {
      */
     public static AbstractDAOFactory getInstance() {
         if (instance == null) {
-            instance = new MysqlDaoFactory();
+//            instance = new MysqlDaoFactory();
+            instance = new PostgresDaoFactory();
         }
         return instance;
     }
+
+    public abstract DBAccess getDBAccess();
 
     /**
      * 
      */
     public abstract UserDao getUserDao() throws SQLException;
+
+    public abstract PaymentTypeDAO getPaymentTypeDao() throws SQLException;
 
 }

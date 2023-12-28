@@ -1,0 +1,12 @@
+version: '3'
+services:
+  postgresql:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: YourStrong@Passw0rd
+      POSTGRES_DB: localAzureDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

@@ -1,8 +1,8 @@
-package com.SEApp.app.model.persist.account;
+package com.SEApp.app.model.persist.Dao.account.user;
 
 import com.SEApp.app.model.classes.User;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
-import com.SEApp.app.model.persist.MySQL;
+import com.SEApp.app.model.persist.DBAccess.MySQL;
 import com.SEApp.app.model.persist.utils.WhereOperand;
 import com.SEApp.app.model.persist.schemas.UserSchema;
 
@@ -19,25 +19,16 @@ public class UserDaoMySQL extends UserDao {
      * Default constructor
      */
     public UserDaoMySQL(MySQL mysql){
-        this.mysql = mysql;
+        super(mysql);
     }
 
-    /**
-     *
-     */
-    private MySQL mysql;
-
     @Override
-    public User get(long id) {
+    public User get(int id) throws SQLException {
         String[] columns = {UserSchema.USERNAME, UserSchema.EMAIL, UserSchema.PASSWORD, UserSchema.ROLE};
         WhereOperand whereOperand = new WhereOperand(UserSchema.ID, "=", id + "");
         WhereOperand[] whereOperands = {whereOperand};
-        Map<String, Object>[] res = null;
-        try {
-            res = mysql.read(UserSchema.TABLE, columns, whereOperands);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Map<String, Object>[] res = db.read(UserSchema.TABLE, columns, whereOperands);
+
 
         if (res == null || res.length == 0) {
             return null;
@@ -45,7 +36,7 @@ public class UserDaoMySQL extends UserDao {
 
         Map<String, Object> row = res[0];
         return new User(
-                (long) row.get(UserSchema.ID),
+                (int) row.get(UserSchema.ID),
                 (String) row.get(UserSchema.USERNAME),
                 (String) row.get(UserSchema.EMAIL),
                 (String) row.get(UserSchema.PASSWORD),
@@ -64,7 +55,7 @@ public class UserDaoMySQL extends UserDao {
         }
 
         int insertedID = -1;
-        insertedID = mysql.create(UserSchema.TABLE, user.toUpdateOperands());
+        insertedID = db.create(UserSchema.TABLE, user.toUpdateOperands());
         if (insertedID == -1) {
             throw new SQLException("failed to insert user");
         }
@@ -88,7 +79,7 @@ public class UserDaoMySQL extends UserDao {
         WhereOperand[] whereOperands = {whereOperand};
 
         int affectedRows = -1;
-        affectedRows = mysql.update(UserSchema.TABLE, obj.toUpdateOperands(), whereOperands);
+        affectedRows = db.update(UserSchema.TABLE, obj.toUpdateOperands(), whereOperands);
         if (affectedRows != 1) {
             throw new SQLException("failed to update user (affected rows: " + affectedRows + ")");
         }
@@ -108,7 +99,7 @@ public class UserDaoMySQL extends UserDao {
         WhereOperand whereOperand = new WhereOperand(UserSchema.ID, "=", user.getId() + "");
         WhereOperand[] whereOperands = {whereOperand};
 
-        int affectedRows = mysql.delete(UserSchema.TABLE, whereOperands);
+        int affectedRows = db.delete(UserSchema.TABLE, whereOperands);
         if (affectedRows != 1) {
             throw new RuntimeException("failed to delete user (affected rows: " + affectedRows + ")");
         }
@@ -120,7 +111,7 @@ public class UserDaoMySQL extends UserDao {
     @Override
     public List<User> list() throws SQLException {
         String[] columns = {UserSchema.USERNAME, UserSchema.EMAIL, UserSchema.PASSWORD, UserSchema.ROLE};
-        Map<String, Object>[] res = mysql.read(UserSchema.TABLE, columns, null);
+        Map<String, Object>[] res = db.read(UserSchema.TABLE, columns, null);
 
         List<User> users = new ArrayList<>();
         for (Map<String, Object> row : res) {
@@ -144,7 +135,7 @@ public class UserDaoMySQL extends UserDao {
         WhereOperand[] whereOperands = {whereOperand};
         Map<String, Object>[] res = null;
         try {
-            res = mysql.read(UserSchema.TABLE, columns, whereOperands);
+            res = db.read(UserSchema.TABLE, columns, whereOperands);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -158,7 +149,7 @@ public class UserDaoMySQL extends UserDao {
         Integer baseID = (Integer) row.get(UserSchema.ID);
         long id = baseID.longValue();
         return new User(
-                (long) id,
+                (int) id,
                 (String) row.get(UserSchema.USERNAME),
                 (String) row.get(UserSchema.EMAIL),
                 (String) row.get(UserSchema.PASSWORD),

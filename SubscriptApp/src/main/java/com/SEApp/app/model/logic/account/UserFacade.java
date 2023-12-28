@@ -5,7 +5,7 @@ import com.SEApp.app.model.classes.User;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.utils.PasswordEncrypt;
-import com.SEApp.app.model.persist.account.UserDao;
+import com.SEApp.app.model.persist.Dao.account.user.UserDao;
 
 import java.sql.SQLException;
 

@@ -13,39 +13,54 @@ import java.util.Map;
 public class User {
 
 
-    private long id;
+    private int id;
 
     /**
-     *
+     * username of the user
      */
     private String username;
 
     /**
-     *
+     * email of the user
      */
     private String email;
 
     /**
-     *
+     * password of the user
      */
     private String password;
 
 
     /**
-     *
+     * role of the user
      */
     private String role;
+
+    /**
+     * plan that the user is subscribed to
+     */
+    private Plan plan;
 
 
     /**
      * Default constructor
      */
-    public User(long id, String username, String email, String password, String role, boolean isPasswordEncrypted) {
+    public User(int id, String username, String email, String password, String role, boolean isPasswordEncrypted) {
         this.id = id;
         this.username = username;
         this.email = email;
         setPassword(password, isPasswordEncrypted);
         this.role = role;
+        this.plan = null;
+    }
+
+    public User(String username, String email, String password, String role, boolean isPasswordEncrypted) {
+        this.id = -1;
+        this.username = username;
+        this.email = email;
+        setPassword(password, isPasswordEncrypted);
+        this.role = role;
+        this.plan = null;
     }
 
     public String getUsername() {
@@ -103,11 +118,19 @@ public class User {
         return values;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
     public void setId(int insertedID) {
         this.id = insertedID;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

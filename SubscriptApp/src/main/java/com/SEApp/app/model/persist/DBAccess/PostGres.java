@@ -1,4 +1,4 @@
-package com.SEApp.app.model.persist;
+package com.SEApp.app.model.persist.DBAccess;
 
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.utils.UpdateOperand;
@@ -12,36 +12,40 @@ import java.util.Map;
 /**
  *
  */
-public class MySQL {
+public class PostGres implements DBAccess {
 
     /**
-     * 
+     *
      */
     private final String url;
 
     /**
-     * 
+     *
      */
     private final String username;
 
     /**
-     * 
+     *
      */
     private final String password;
 
 
 
     /**
-     * 
+     *
      */
-    public MySQL() {
+    public PostGres() {
         // load the environment variables
         Dotenv dotenv = Dotenv.load();
-        String url = dotenv.get("MYSQL_URL");
-        this.username = dotenv.get("MYSQL_USER"); // TODO isn't needed because of azure connection string
-        this.password = dotenv.get("MYSQL_PASS");
+        String url = dotenv.get("PSQL_URL");
+        this.username = dotenv.get("PSQL_USER"); // TODO isn't needed because of azure connection string
+        this.password = dotenv.get("PSQL_PASS");
 
         this.url = url.replace("{your_password_here}", this.password);
+
+        if (this.url == null || this.username == null || this.password == null || this.url.isEmpty() || this.username.isEmpty() || this.password.isEmpty()) {
+            throw new IllegalArgumentException("url, username and password must not be null");
+        }
     }
 
     /**
@@ -51,7 +55,36 @@ public class MySQL {
         return DriverManager.getConnection(url, username, password);
     }
 
-    // TODO implement methods for CRUD
+    @Override
+    public <K> Map<String, Object> getByKey(String table, String[] columns, String keyColumn, K key) throws SQLException {
+        Connection connection = this.getConnection();
+
+        StringBuilder query = select(columns);
+        query.append(" FROM ").append(table);
+        query.append(" WHERE ").append(keyColumn).append(" = ?;");
+
+        PreparedStatement statement = connection.prepareStatement(query.toString()); // TODO prevent SQL injection
+        if (key instanceof Integer) {
+            statement.setInt(1, (Integer) key);
+        } else if (key instanceof String) {
+            statement.setString(1, (String) key);
+        } else {
+            // Handle other types as needed
+            throw new IllegalArgumentException("Unsupported key type: " + key.getClass().getName());
+        }
+        ResultSet resultSet = statement.executeQuery();
+
+        Map<String, Object>[] res = resultSetToMap(resultSet);
+
+        connection.close();
+        resultSet.close();
+        statement.close();
+
+        if (res.length == 0) {
+            return null;
+        }
+        return res[0];
+    }
 
     public int delete(String table, WhereOperand[] whereOperands) throws SQLException, IncorrectOperandException {
         Connection connection = this.getConnection();
@@ -156,14 +189,19 @@ public class MySQL {
         Connection connection = this.getConnection();
 
         StringBuilder query = select(columns);
-        query.append(" FROM ").append(table).append(where(whereOperands));
+        query.append(" FROM ").append(table);
+        if (whereOperands != null) {
+            query.append(where(whereOperands));
+        }
         query.append(";");
 
         PreparedStatement statement = connection.prepareStatement(query.toString()); // TODO prevent SQL injection
-        int i = 1;
-        for (WhereOperand whereOperand : whereOperands) {
-            statement.setObject(i, whereOperand.getValue());
-            i++;
+        if (whereOperands != null) {
+            int i = 1;
+            for (WhereOperand whereOperand : whereOperands) {
+                statement.setObject(i, whereOperand.getValue());
+                i++;
+            }
         }
         ResultSet resultSet = statement.executeQuery();
 

@@ -11,5 +11,12 @@ CREATE TABLE users (
     password VARCHAR(255),
     role VARCHAR(255)
 );
+GO
+
+CREATE TABLE payment_type (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(255),
+    description VARCHAR(255)
+);
 
 GO

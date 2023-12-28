@@ -3,7 +3,11 @@ CREATE TABLE users (
     email VARCHAR(255),
     username VARCHAR(255),
     password VARCHAR(255),
-    role VARCHAR(255)
+    role VARCHAR(255),
+    plan_id INT,
+    payment_type_id INT,
+    FOREIGN KEY (plan_id) REFERENCES plans(id),
+    FOREIGN KEY (payment_type_id) REFERENCES payment_type(id)
 );
 
 CREATE TABLE payment_type (

@@ -1,10 +1,10 @@
 package com.SEApp.app.model.persist.account;
 
-import com.SEApp.app.model.classes.PaymentType;
+import com.SEApp.app.model.classes.Plan;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
-import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
+import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 import com.SEApp.app.model.persist.schemas.UserSchema;
 import org.junit.jupiter.api.*;
 
@@ -13,9 +13,9 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
-public class PaymentTypeDAOTest {
+public class PlanDAOTest {
     private static AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
-    private static PaymentTypeDAO paymentTypeDAO;
+    private static PlanDao planDao;
 
     private static boolean connectionOk = false;
     private static boolean isFirst = true;
@@ -26,7 +26,7 @@ public class PaymentTypeDAOTest {
     @BeforeAll
     public static void initAll(){
         try {
-            paymentTypeDAO = daoFactory.getPaymentTypeDao();
+            planDao = daoFactory.getPlanDao();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -58,54 +58,50 @@ public class PaymentTypeDAOTest {
 
     @Test
     @Order(1)
-    public void testCreatePaymentType() {
-         
-        PaymentType paymentType = new PaymentType("testName", "testDescription");
-        try {
-            paymentTypeDAO.save(paymentType);
-        } catch ( SQLException e) {
-            throw new RuntimeException(e);
-        }
-        id = paymentType.getId();
+    public void testCreatePlan() throws SQLException {
+
+        Plan plan = new Plan("testName", "testDescription", 10.0f, null);
+        planDao.save(plan);
+        id = plan.getId();
         assert id != -1;
     }
 
     @Test
     @Order(2)
     public void testFindById() throws SQLException {
-        PaymentType paymentType = paymentTypeDAO.get(id);
-        assert paymentType != null;
+        Plan plan = planDao.get(id);
+        assert plan != null;
     }
 
     @Test
     @Order(3)
-    public void testUpdatePaymentType() throws SQLException {
-         
-        PaymentType paymentType = paymentTypeDAO.get(id);
-        paymentType.setName("testName2");
+    public void testUpdatePlan() throws SQLException {
+
+        Plan plan = planDao.get(id);
+        plan.setName("testName2");
         try {
-            paymentTypeDAO.update(paymentType);
+            planDao.update(plan);
         } catch (SQLException | IncorrectOperandException e) {
             throw new RuntimeException(e);
         }
 
-        PaymentType paymentType2 = paymentTypeDAO.get(id);
+        Plan plan2 = planDao.get(id);
 
-        assert paymentType2.getName().equals("testName2");
+        assert plan2.getName().equals("testName2");
     }
 
     @Test
     @Order(4)
-    public void testDeletePaymentType() throws SQLException {
-         
-        PaymentType paymentType = paymentTypeDAO.get(id);
+    public void testDeletePlan() throws SQLException {
+
+        Plan plan = planDao.get(id);
         try {
-            paymentTypeDAO.delete(paymentType);
+            planDao.delete(plan);
         } catch (SQLException | IncorrectOperandException e) {
             throw new RuntimeException(e);
         }
-        PaymentType paymentType2 = paymentTypeDAO.get(id);
+        Plan plan2 = planDao.get(id);
 
-        assert paymentType2 == null;
+        assert plan2 == null;
     }
 }

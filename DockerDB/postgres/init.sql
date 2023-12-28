@@ -18,3 +18,10 @@ CREATE TABLE managers (
     username VARCHAR(255),
     password VARCHAR(255)
 );
+
+CREATE TABLE plans (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    description VARCHAR(255),
+    price DECIMAL(10, 2)
+);

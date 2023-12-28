@@ -2,7 +2,6 @@ package com.SEApp.app.model.persist.Dao;
 
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
-import com.SEApp.app.model.persist.DBAccess.MySQL;
 
 import java.sql.SQLException;
 import java.util.*;

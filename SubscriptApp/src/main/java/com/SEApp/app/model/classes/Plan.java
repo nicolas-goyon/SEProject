@@ -17,7 +17,7 @@ public class Plan implements Savable {
     /**
      *  id of plan
      */
-    public long id;
+    public int id;
 
     /**
      * name of plan
@@ -46,7 +46,7 @@ public class Plan implements Savable {
      * @param price of plan
      * @param Accesses of plan
      */
-    public Plan(long id, String name, String Description, float price, String[] Accesses) {
+    public Plan(int id, String name, String Description, float price, String[] Accesses) {
         this.id = id;
         this.name = name;
         this.description = Description;
@@ -82,14 +82,14 @@ public class Plan implements Savable {
     /**
      * @return the id
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id of plan
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -157,7 +157,7 @@ public class Plan implements Savable {
         return new UpdateOperand[]{
                 new UpdateOperand(PlanSchema.NAME, name),
                 new UpdateOperand(PlanSchema.DESCRIPTION, description),
-                new UpdateOperand(PlanSchema.PRICE, price + "")
+                new UpdateOperand(PlanSchema.PRICE, price)
         };
     }
 }

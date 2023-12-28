@@ -7,6 +7,8 @@ import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAOPostgres;
 import com.SEApp.app.model.persist.Dao.account.user.UserDao;
 import com.SEApp.app.model.persist.Dao.account.user.UserDaoPostGres;
+import com.SEApp.app.model.persist.Dao.plans.PlanDao;
+import com.SEApp.app.model.persist.Dao.plans.PlanDaoPostGres;
 
 import java.sql.SQLException;
 
@@ -51,6 +53,11 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
     @Override
     public ManagerDao getManagerDao() throws SQLException {
         return new ManagerDaoPostGres(postGres);
+    }
+
+    @Override
+    public PlanDao getPlanDao() throws SQLException {
+        return new PlanDaoPostGres(postGres);
     }
 
 }

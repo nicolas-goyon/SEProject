@@ -4,6 +4,7 @@ import com.SEApp.app.components.ElementLogic;
 import com.SEApp.app.components.ListDisplay;
 import com.SEApp.app.model.classes.Manager;
 import com.SEApp.app.model.logic.Manager.ManagerFacade;
+import com.github.fxrouter.FXRouter;
 import javafx.collections.ObservableListBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -43,20 +44,20 @@ public class ManagerController {
         try {
             facade = ManagerFacade.getInstance();
         } catch (SQLException e) {
-            message.setText("Error while loading managers");
-            System.err.println("Error while loading managers");
+            message.setText("Error while loading managers : connection error");
+            System.err.println("Error while loading managers : connection error");
             return;
         }
         if (facade == null) {
-            message.setText("Error while loading managers");
-            System.err.println("Error while loading managers");
+            message.setText("Error while loading managers : instance error");
+            System.err.println("Error while loading managers : instance error");
             return;
         }
         try {
             managerList = facade.getAllManagers();
         } catch (Exception e) {
-            message.setText("Error while loading managers");
-            System.err.println("Error while loading managers");
+            message.setText("Error while loading managers : get error");
+            System.err.println("Error while loading managers : get error");
             return;
         }
 
@@ -105,8 +106,8 @@ public class ManagerController {
         try {
             facade.deleteManager(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
         } catch (Exception e) {
-            message.setText("Error while deleting manager");
-            System.err.println("Error while deleting manager");
+            message.setText("Error while deleting manager : delete error");
+            System.err.println("Error while deleting manager : delete error");
             return null;
         }
 
@@ -144,14 +145,14 @@ public class ManagerController {
         try {
             isCreated = facade.createManager(manager);
         } catch (Exception e) {
-            message.setText("Error while creating manager");
+            message.setText("Error while creating manager : connection error");
             return;
         }
 
         if (isCreated) {
-            message.setText("Manager created successfully");
+            message.setText("Manager created successfully !");
         } else {
-            message.setText("Error while creating manager");
+            message.setText("Error while creating manager : manager not created");
         }
 
         managerList.add(manager);
@@ -255,6 +256,15 @@ public class ManagerController {
             return false;
         }
         return true;
+    }
+
+
+    public void handleHomeButton() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

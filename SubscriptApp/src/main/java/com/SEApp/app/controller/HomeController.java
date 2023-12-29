@@ -34,7 +34,7 @@ public class HomeController {
 
     public void handlePaymentTypeButton() {
         try {
-            FXRouter.goTo("managersManagement");
+            FXRouter.goTo("paymentTypesManagement");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

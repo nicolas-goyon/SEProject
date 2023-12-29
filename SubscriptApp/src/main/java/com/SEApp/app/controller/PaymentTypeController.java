@@ -5,6 +5,7 @@ import com.SEApp.app.components.ListDisplay;
 import com.SEApp.app.model.classes.Manager;
 import com.SEApp.app.model.classes.PaymentType;
 import com.SEApp.app.model.logic.account.PaymentTypeFacade;
+import com.github.fxrouter.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -44,20 +45,20 @@ public class PaymentTypeController {
         try {
             facade = PaymentTypeFacade.getInstance();
         } catch (SQLException e) {
-            message.setText("Error while loading payment types");
-            System.err.println("Error while loading payment types");
+            message.setText("Error while loading payment types : connection error");
+            System.err.println("Error while loading payment types : connection error");
             return;
         }
         if (facade == null) {
-            message.setText("Error while loading payment types");
-            System.err.println("Error while loading payment types");
+            message.setText("Error while loading payment types : instance error");
+            System.err.println("Error while loading payment types : instance error");
             return;
         }
         try {
             paymentTypeList = facade.getAllPaymentTypes();
         } catch (Exception e) {
-            message.setText("Error while loading payment types");
-            System.err.println("Error while loading payment types");
+            message.setText("Error while loading payment types : get error");
+            System.err.println("Error while loading payment types : get error");
             return;
         }
 
@@ -190,5 +191,13 @@ public class PaymentTypeController {
         }
 
         return new PaymentType(nameS, descriptionS);
+    }
+
+    public void handleHomeButton() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

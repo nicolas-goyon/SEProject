@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
         FXRouter.bind(this, stage, "Substrack");
         FXRouter.when("login", "view/login.fxml");
         FXRouter.when("managersManagement", "view/Managers.fxml");
-        FXRouter.when("paymentTypesManagement", "view/PaymentTypes.fxml");
+        FXRouter.when("paymentTypesManagement", "view/PaymentTypeManagement.fxml");
         FXRouter.when("home", "view/home.fxml");
         try{
             FXRouter.goTo("home");

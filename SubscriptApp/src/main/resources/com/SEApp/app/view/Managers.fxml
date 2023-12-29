@@ -12,7 +12,8 @@
                 <Label styleClass="h1" text="Manager's management" />
         </HBox>
         <ToolBar accessibleRole="BUTTON" prefHeight="40.0" prefWidth="200.0">
-                <Button mnemonicParsing="false" text="New" onAction="#handleNewButton" />
+            <Button mnemonicParsing="false" text="Home" onAction="#handleHomeButton"/>
+            <Button mnemonicParsing="false" text="New" onAction="#handleNewButton" />
         </ToolBar>
         <ScrollPane fx:id="displayPane" prefHeight="490.0" prefWidth="570.0" />
     </VBox>

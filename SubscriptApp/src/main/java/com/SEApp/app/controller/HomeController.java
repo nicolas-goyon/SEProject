@@ -6,15 +6,6 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 public class HomeController {
-    public Button managersButton;
-    public Button registerButton;
-    public Button loginButton;
-
-    public void initialize() {
-        managersButton.setOnAction(actionEvent -> handleManagersButton());
-        registerButton.setOnAction(actionEvent -> handleRegisterButton());
-        loginButton.setOnAction(actionEvent -> handleLoginButton());
-    }
 
     public void handleManagersButton() {
         try {
@@ -40,5 +31,13 @@ public class HomeController {
         }
     }
 
+
+    public void handlePaymentTypeButton() {
+        try {
+            FXRouter.goTo("managersManagement");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

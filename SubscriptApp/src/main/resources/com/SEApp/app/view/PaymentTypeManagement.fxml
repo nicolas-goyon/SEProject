@@ -33,26 +33,14 @@
                     <Label text="Manager Name"/>
                     <TextField prefHeight="21.0" prefWidth="375.0" fx:id="name"/>
                 </VBox>
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="emailArea">
+                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="descriptionArea">
                     <Label text="Manager Email"/>
-                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="email"/>
+                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="description"/>
                 </VBox>
-
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="passwordArea">
-                    <Label text="Manager Password"/>
-                    <PasswordField prefHeight="21.0" prefWidth="375.0" fx:id="password"/>
-                </VBox>
-
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="confirmPasswordArea">
-                    <Label text="Confirm Manager Password"/>
-                    <PasswordField prefHeight="21.0" prefWidth="375.0" fx:id="confirmPassword"/>
-                </VBox>
-
 
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <Button mnemonicParsing="false" onAction="#handleManagerCreation" text="Add"/>
-                    <Button mnemonicParsing="false" onAction="#handleManagerUpdate" text="Update"/>
-                    <Button mnemonicParsing="false" onAction="#handleManagerDeletion" text="Delete"/>
+                    <Button mnemonicParsing="false" onAction="#handleCreation" text="Add"/>
+                    <Button mnemonicParsing="false" onAction="#handleUpdate" text="Update"/>
                     <Button mnemonicParsing="false" onAction="#closeModal" text="Cancel"/>
                 </HBox>
 

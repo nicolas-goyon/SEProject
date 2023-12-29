@@ -47,7 +47,6 @@
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <Button mnemonicParsing="false" onAction="#handleManagerCreation" text="Add" />
                     <Button mnemonicParsing="false" onAction="#handleManagerUpdate" text="Update" />
-                    <Button mnemonicParsing="false" onAction="#handleManagerDeletion" text="Delete" />
                     <Button mnemonicParsing="false" onAction="#closeModal" text="Cancel" />
                 </HBox>
 

@@ -13,6 +13,10 @@ import java.util.List;
  */
 public class ManagerFacade {
 
+    private static final AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+
+    private static ManagerDao managerDao;
+
 
     /**
      * 
@@ -22,12 +26,18 @@ public class ManagerFacade {
     /**
      * 
      */
-    private ManagerFacade() {}
+    private ManagerFacade() {
+        try {
+            managerDao = factory.getManagerDao();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * @return
      */
-    public static ManagerFacade getInstance() {
+    public static ManagerFacade getInstance() throws SQLException {
         if (instance == null) {
             instance = new ManagerFacade();
         }
@@ -39,8 +49,6 @@ public class ManagerFacade {
      * @return
      */
     public boolean createManager(Manager manager) throws SQLException {
-        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
-        ManagerDao managerDao = factory.getManagerDao();
         return managerDao.save(manager).getId() != -1;
     }
 
@@ -48,8 +56,6 @@ public class ManagerFacade {
      * @param manager to delete
      */
     public boolean deleteManager(Manager manager) throws SQLException, IncorrectOperandException {
-        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
-        ManagerDao managerDao = factory.getManagerDao();
         return managerDao.delete(manager);
 
     }
@@ -58,8 +64,6 @@ public class ManagerFacade {
      * @param manager to update
      */
     public boolean updateManager(Manager manager) throws SQLException, IncorrectOperandException {
-        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
-        ManagerDao managerDao = factory.getManagerDao();
         return managerDao.update(manager).getId() != -1;
     }
 
@@ -67,14 +71,11 @@ public class ManagerFacade {
      * @param id 
      * @return
      */
-    public Manager getManager(long id) {
-        // TODO implement here
-        return null;
+    public Manager getManager(int id) throws SQLException {
+        return managerDao.get(id);
     }
 
     public List<Manager> getAllManagers() throws SQLException {
-        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
-        ManagerDao managerDao = factory.getManagerDao();
         return managerDao.list();
     }
 }

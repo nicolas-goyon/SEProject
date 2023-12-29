@@ -5,7 +5,8 @@
 
 
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.HomeController">
-    <Button mnemonicParsing="false" text="Login" fx:id="loginButton" />
-    <Button mnemonicParsing="false" text="Register" fx:id="registerButton" />
-    <Button mnemonicParsing="false" text="Managers" fx:id="managersButton" />
+    <Button mnemonicParsing="false" text="Login" onAction="#handleLoginButton" />
+    <Button mnemonicParsing="false" text="Register" onAction="#handleRegisterButton" />
+    <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" />
+    <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton" />
 </VBox>

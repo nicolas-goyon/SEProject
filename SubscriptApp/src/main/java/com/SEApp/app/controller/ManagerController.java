@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -35,9 +36,17 @@ public class ManagerController {
     private List<Manager> managerList;
     public VBox formModal;
 
+    private static ManagerFacade facade;
+
     public void initialize() {
 
-        ManagerFacade facade = ManagerFacade.getInstance();
+        try {
+            facade = ManagerFacade.getInstance();
+        } catch (SQLException e) {
+            message.setText("Error while loading managers");
+            System.err.println("Error while loading managers");
+            return;
+        }
         if (facade == null) {
             message.setText("Error while loading managers");
             System.err.println("Error while loading managers");
@@ -93,12 +102,6 @@ public class ManagerController {
 
     public Void deleteButtonPressed(Integer id){
 
-        ManagerFacade facade = ManagerFacade.getInstance();
-        if (facade == null) {
-            message.setText("Error while deleting manager");
-            System.err.println("Error while deleting manager");
-            return null;
-        }
         try {
             facade.deleteManager(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
         } catch (Exception e) {
@@ -136,12 +139,7 @@ public class ManagerController {
         }
 
         Manager manager = new Manager(nameS, emailS, passwordS, false);
-        ManagerFacade facade = ManagerFacade.getInstance();
 
-        if (facade == null) {
-            message.setText("Error while creating manager");
-            return;
-        }
         boolean isCreated = false;
         try {
             isCreated = facade.createManager(manager);
@@ -194,13 +192,6 @@ public class ManagerController {
 
         if (!passwordS.isEmpty()) {
             newManager.setPassword(passwordS, false);
-        }
-
-        ManagerFacade facade = ManagerFacade.getInstance();
-
-        if (facade == null) {
-            message.setText("Error while updating manager : internal error");
-            return;
         }
 
         boolean isUpdated = false;

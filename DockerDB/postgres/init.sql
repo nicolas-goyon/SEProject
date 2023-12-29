@@ -3,26 +3,26 @@
 CREATE TABLE payment_type (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    description VARCHAR(255)
+    description VARCHAR(255) UNIQUE
 );
 
 CREATE TABLE managers (
     id SERIAL PRIMARY KEY,
-    email VARCHAR(255),
-    username VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    username VARCHAR(255) UNIQUE,
     password VARCHAR(255)
 );
 
 CREATE TABLE plans (
    id SERIAL PRIMARY KEY,
-   name VARCHAR(255),
+   name VARCHAR(255) UNIQUE,
    description VARCHAR(255),
    price DECIMAL(10, 2)
 );
 CREATE TABLE users (
    user_id SERIAL PRIMARY KEY,
-   email VARCHAR(255),
-   username VARCHAR(255),
+   email VARCHAR(255) UNIQUE,
+   username VARCHAR(255) UNIQUE,
    password VARCHAR(255),
    role VARCHAR(255),
    plan_id INT,

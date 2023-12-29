@@ -2,12 +2,14 @@ package com.SEApp.app.controller;
 
 import com.SEApp.app.components.ListElement;
 import com.SEApp.app.model.logic.account.UserFacade;
+import com.github.fxrouter.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Login {
@@ -45,12 +47,11 @@ public class Login {
         }
 
         if (isLog) {
-            error.setText("Login successful");
-            /*try {
-                FXRouter.goTo("logged");
+            try {
+                FXRouter.goTo("home");
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
         }
         else {
             error.setText("Wrong email or password");

@@ -37,12 +37,12 @@ public class UserFacade {
 
 
     /**
-     * @param email email of the user
-     * @param password password of the user (not encrypted)
+     * @param user user to register
      */
-    public void register(String email, String password) { // TODO create a exception for null
-        // TODO implement here
-        throw new RuntimeException("not implemented");
+    public boolean register(User user) throws SQLException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        UserDao userDao = factory.getUserDao();
+        return userDao.save(user) != null;
     }
 
     /**
@@ -68,6 +68,14 @@ public class UserFacade {
             throw new LoginException("User not logged in");
         }
         return currentUser;
+    }
+
+    public void logout() {
+        currentUser = null;
+    }
+
+    public boolean isLogged() {
+        return currentUser != null;
     }
 
 }

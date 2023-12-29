@@ -6,10 +6,7 @@ import java.io.IOException;
 
 public class Header {
 
-    public void initialize() {
-        // TODO implement here
-        System.out.println("Header initialized");
-    }
+    public void initialize() {}
 
 
     public void handleHomeButton() {

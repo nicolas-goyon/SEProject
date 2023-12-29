@@ -4,12 +4,11 @@ import com.SEApp.app.components.ElementLogic;
 import com.SEApp.app.components.ListDisplay;
 import com.SEApp.app.model.classes.Manager;
 import com.SEApp.app.model.logic.Manager.ManagerFacade;
+import javafx.collections.ObservableListBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
@@ -33,24 +32,25 @@ public class ManagerController {
     public Label message;
     public ScrollPane displayPane;
 
-    private ArrayList<Manager> managerList;
+    private List<Manager> managerList;
     public VBox formModal;
 
     public void initialize() {
 
-        managerList = new ArrayList<>();
-        managerList.add(new Manager(1, "testName1", "testEmail1", "testPassword1", false));
-        managerList.add(new Manager(2, "testName2", "testEmail2", "testPassword2", false));
-        managerList.add(new Manager(3, "testName3", "testEmail3", "testPassword3", false));
-        managerList.add(new Manager(4, "testName4", "testEmail4", "testPassword4", false));
-        managerList.add(new Manager(5, "testName5", "testEmail5", "testPassword5", false));
-        managerList.add(new Manager(6, "testName6", "testEmail6", "testPassword6", false));
-        managerList.add(new Manager(7, "testName7", "testEmail7", "testPassword7", false));
-        managerList.add(new Manager(8, "testName8", "testEmail8", "testPassword8", false));
-        managerList.add(new Manager(9, "testName9", "testEmail9", "testPassword9", false));
-        managerList.add(new Manager(10, "testName10", "testEmail10", "testPassword10", false));
+        ManagerFacade facade = ManagerFacade.getInstance();
+        if (facade == null) {
+            message.setText("Error while loading managers");
+            System.err.println("Error while loading managers");
+            return;
+        }
+        try {
+            managerList = facade.getAllManagers();
+        } catch (Exception e) {
+            message.setText("Error while loading managers");
+            System.err.println("Error while loading managers");
+            return;
+        }
 
-        
         listUpdate();
 
     }
@@ -79,14 +79,36 @@ public class ManagerController {
 
     public Void editButtonPressed(Integer id){
         formModal.setVisible(true);
-        this.id.setText(id.toString());
+        int index = managerList.indexOf(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
+        Manager manager = managerList.get(index);
+        this.id.setText(String.valueOf(manager.getId()));
+        name.setText(manager.getUsername());
+        email.setText(manager.getEmail());
+//        passwordArea.setVisible(false);
+//        confirmPasswordArea.setVisible(false);
+
 
         return null;
     }
 
     public Void deleteButtonPressed(Integer id){
-        managerList.removeIf(element -> element.getId() == id);
 
+        ManagerFacade facade = ManagerFacade.getInstance();
+        if (facade == null) {
+            message.setText("Error while deleting manager");
+            System.err.println("Error while deleting manager");
+            return null;
+        }
+        try {
+            facade.deleteManager(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
+        } catch (Exception e) {
+            message.setText("Error while deleting manager");
+            System.err.println("Error while deleting manager");
+            return null;
+        }
+
+        managerList.removeIf(element -> element.getId() == id);
+        listUpdate();
         return null;
     }
 
@@ -120,12 +142,22 @@ public class ManagerController {
             message.setText("Error while creating manager");
             return;
         }
+        boolean isCreated = false;
+        try {
+            isCreated = facade.createManager(manager);
+        } catch (Exception e) {
+            message.setText("Error while creating manager");
+            return;
+        }
 
-        if (facade.createManager(manager)) {
+        if (isCreated) {
             message.setText("Manager created successfully");
         } else {
             message.setText("Error while creating manager");
         }
+
+        managerList.add(manager);
+        listUpdate();
 
     }
 
@@ -133,15 +165,65 @@ public class ManagerController {
      * 
      */
     public void handleManagerUpdate() {
-        // TODO implement here
+        String nameS = name.getText();
+        String emailS = email.getText();
+        String passwordS = password.getText();
+        String confirmPasswordS = confirmPassword.getText();
+
+        if (nameS.isEmpty() && emailS.isEmpty() && passwordS.isEmpty() && confirmPasswordS.isEmpty()) {
+            message.setText("Please fill at least one field");
+            return;
+        }
+
+        if (!passwordS.equals(confirmPasswordS) || !emailValidation(emailS)) {
+            return;
+        }
+
+        // filter the list to get the manager with the id
+        List<Manager> filteredList = managerList.stream().filter(manager -> manager.getId() == Integer.parseInt(id.getText())).toList();
+        Manager manager = filteredList.get(0);
+        Manager newManager = new Manager(manager.getId(), manager.getUsername(), manager.getEmail(), manager.getPassword(), true);
+
+        if (!nameS.isEmpty()) {
+            newManager.setUsername(nameS);
+        }
+
+        if (!emailS.isEmpty()) {
+            newManager.setEmail(emailS);
+        }
+
+        if (!passwordS.isEmpty()) {
+            newManager.setPassword(passwordS, false);
+        }
+
+        ManagerFacade facade = ManagerFacade.getInstance();
+
+        if (facade == null) {
+            message.setText("Error while updating manager : internal error");
+            return;
+        }
+
+        boolean isUpdated = false;
+
+        try {
+            isUpdated = facade.updateManager(newManager);
+        } catch (Exception e) {
+            message.setText("Error while updating manager : connection error");
+            return;
+        }
+
+        if (isUpdated) {
+            message.setText("Manager updated successfully");
+        } else {
+            message.setText("Error while updating manager : manager not updated");
+            return;
+        }
+
+        managerList.set(managerList.indexOf(manager), newManager);
+        listUpdate();
+
     }
 
-    /**
-     * 
-     */
-    public void handleManagerDeletion() {
-        // TODO implement here
-    }
 
     public boolean emailValidation(String email) {
         if (!email.contains("@")) {

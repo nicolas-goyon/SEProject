@@ -2,6 +2,10 @@ package com.SEApp.app.controller;
 
 import com.SEApp.app.model.classes.PaymentType;
 import com.SEApp.app.model.logic.account.PaymentTypeFacade;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.util.*;
@@ -12,6 +16,11 @@ import java.util.*;
 public class PaymentTypeController {
 
 
+    public ScrollPane displayPane;
+    public VBox formModal;
+    public HBox idArea;
+    public TextField name;
+    public VBox nameArea;
 
     /**
      * @param paymentType 

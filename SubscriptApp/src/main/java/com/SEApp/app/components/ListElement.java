@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 
+import java.util.function.Function;
+
 public class ListElement extends VBox {
     @FXML
     private Label titleLabel;
@@ -29,7 +31,16 @@ public class ListElement extends VBox {
     @FXML
     private SplitPane splitPane;
 
-    public ListElement() {
+    private final Function<Integer, Void> callbackEdit;
+
+    private final Function<Integer, Void> callbackDelete;
+
+    private final int id;
+
+    public ListElement(int id, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete) {
+        this.callbackDelete = callbackDelete;
+        this.callbackEdit = callbackEdit;
+        this.id = id;
 
         // Load the FXML file
         try {
@@ -42,6 +53,16 @@ public class ListElement extends VBox {
             e.printStackTrace();
         }
 
+    }
+
+    public void initialize() {
+        editButton.setOnAction(actionEvent -> {
+            callbackEdit.apply(id);
+        });
+
+        deleteButton.setOnAction(actionEvent -> {
+            callbackDelete.apply(id);
+        });
     }
 
 

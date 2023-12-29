@@ -1,6 +1,12 @@
 package com.SEApp.app.model.logic.Manager;
 
 import com.SEApp.app.model.classes.Manager;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
+import com.SEApp.app.model.persist.AbstractDAOFactory;
+import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
+
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * 
@@ -11,46 +17,50 @@ public class ManagerFacade {
     /**
      * 
      */
-    private ManagerFacade instance;
+    private static ManagerFacade instance;
 
     /**
      * 
      */
-    private ManagerFacade() {
-        // TODO implement here
-    }
+    private ManagerFacade() {}
 
     /**
      * @return
      */
     public static ManagerFacade getInstance() {
-        // TODO implement here
-        return null;
+        if (instance == null) {
+            instance = new ManagerFacade();
+        }
+        return instance;
     }
 
     /**
      * @param manager
      * @return
      */
-    public boolean createManager(Manager manager) {
-        // TODO implement here
-        return false;
+    public boolean createManager(Manager manager) throws SQLException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        ManagerDao managerDao = factory.getManagerDao();
+        return managerDao.save(manager).getId() != -1;
     }
 
     /**
-     * @param managerId
+     * @param manager to delete
      */
-    public boolean deleteManager(long managerId) {
-        // TODO implement here
-        return false;
+    public boolean deleteManager(Manager manager) throws SQLException, IncorrectOperandException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        ManagerDao managerDao = factory.getManagerDao();
+        return managerDao.delete(manager);
+
     }
 
     /**
-     * @param manager
+     * @param manager to update
      */
-    public boolean updateManager(Manager manager) {
-        // TODO implement here
-        return false;
+    public boolean updateManager(Manager manager) throws SQLException, IncorrectOperandException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        ManagerDao managerDao = factory.getManagerDao();
+        return managerDao.update(manager).getId() != -1;
     }
 
     /**
@@ -62,4 +72,9 @@ public class ManagerFacade {
         return null;
     }
 
+    public List<Manager> getAllManagers() throws SQLException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        ManagerDao managerDao = factory.getManagerDao();
+        return managerDao.list();
+    }
 }

@@ -35,12 +35,12 @@
 
                 <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="passwordArea">
                     <Label text="Manager Password" />
-                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="password" />
+                    <PasswordField prefHeight="21.0" prefWidth="375.0" fx:id="password" />
                 </VBox>
 
                 <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="confirmPasswordArea">
                     <Label text="Confirm Manager Password" />
-                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="confirmPassword" />
+                    <PasswordField prefHeight="21.0" prefWidth="375.0" fx:id="confirmPassword" />
                 </VBox>
 
 

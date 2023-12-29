@@ -23,10 +23,16 @@ public class ListDisplay extends VBox {
 
     private final List<ElementLogic> list;
 
+    private final Function<Integer, Void> callbackEdit;
+
+    private final Function<Integer, Void> callbackDelete;
+
     private int columnCount = 3;
 
     // Constructor with a list, edit and delete callback functions
     public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete) {
+        this.callbackDelete = callbackDelete;
+        this.callbackEdit = callbackEdit;
         this.list = list;
 
         updateColumnCount(FXRouter.getWindowWidth());
@@ -55,7 +61,7 @@ public class ListDisplay extends VBox {
         int colIndex = 0;
 
         for (ElementLogic element : list) {
-            ListElement listElement = new ListElement();
+            ListElement listElement = new ListElement(element.getId() , callbackEdit, callbackDelete);
             listElement.setTitle(element.getTitle());
             listElement.setDescription(element.getDescription());
             gridPane.add(listElement, colIndex, rowIndex);

@@ -1,8 +1,12 @@
 package com.SEApp.app.model.logic.Plan;
 
 import com.SEApp.app.model.classes.Plan;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
+import com.SEApp.app.model.persist.AbstractDAOFactory;
+import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -10,63 +14,71 @@ import java.util.*;
  */
 public class PlanFacade {
 
+    private static PlanFacade facade;
+
+    private static AbstractDAOFactory factory;
+
+    private static PlanDao dao;
+
     /**
      * 
      */
     private PlanFacade() {
-        // TODO implement here
+        factory = AbstractDAOFactory.getInstance();
+        try {
+            dao = factory.getPlanDao();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * @return
      */
     public static PlanFacade getInstance() {
-        // TODO implement here
-        return null;
+        if (facade == null) {
+            facade = new PlanFacade();
+        }
+        return facade;
     }
 
     /**
      * @return
      */
-    public Set<Plan> getPlanList() {
-        // TODO implement here
-        return null;
+    public List<Plan> getPlanList() throws SQLException {
+        return dao.list();
     }
 
     /**
      * @param id 
      * @return
      */
-    public Plan getPlan(long id) {
-        // TODO implement here
-        return null;
+    public Plan getPlan(int id) throws SQLException {
+        return dao.get(id);
     }
 
     /**
      * @param plan 
      * @return
      */
-    public boolean createPlan(Plan plan) {
-        // TODO implement here
-        return false;
+    public boolean createPlan(Plan plan) throws SQLException {
+        return dao.save(plan) != null;
     }
 
     /**
      * @param plan 
      * @param
      */
-    public boolean updatePlan(Plan plan) {
-        // TODO implement here
-        return false;
+    public boolean updatePlan(Plan plan) throws SQLException, IncorrectOperandException {
+        return dao.update(plan) != null;
     }
 
     /**
-     * @param id 
+     * @param plan
      * @return
      */
-    public boolean deletePlan(long id) {
-        // TODO implement here
-        return false;
+    public boolean deletePlan(Plan plan) throws SQLException, IncorrectOperandException {
+        return dao.delete(plan);
     }
 
 }

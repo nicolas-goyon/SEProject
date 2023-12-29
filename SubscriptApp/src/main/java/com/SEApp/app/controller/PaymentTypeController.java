@@ -130,9 +130,12 @@ public class PaymentTypeController {
     public void handleUpdate() {
         PaymentType paymentType = getPaymentTypeFromForm();
 
+
         if (paymentType == null) {
             return;
         }
+        int id = Integer.parseInt(this.id.getText());
+        paymentType.setId(id);
 
         boolean updated = false;
         try {

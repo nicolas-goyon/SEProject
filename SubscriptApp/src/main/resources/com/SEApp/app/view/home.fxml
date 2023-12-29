@@ -9,6 +9,7 @@
     <Button mnemonicParsing="false" text="Login" onAction="#handleLoginButton" fx:id="loginButton" />
     <Button mnemonicParsing="false" text="Register" onAction="#handleRegisterButton" fx:id="registerButton" />
     <Button mnemonicParsing="false" text="LogOff" onAction="#handleLogOffButton" fx:id="logOffButton" />
-    <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" />
-    <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton" />
+    <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" fx:id="managersButton" />
+    <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton" fx:id="paymentTypeButton" />
+    <Button mnemonicParsing="false" text="Plans" onAction="#handlePlansButton" fx:id="plansButton" />
 </VBox>

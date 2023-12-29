@@ -7,26 +7,48 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class HomeController {
 
     public Button loginButton;
     public Button registerButton;
     public Button logOffButton;
+    public Button plansButton;
+    public Button paymentTypeButton;
+    public Button managersButton;
+
+    private List<Button> loggedButtons;
+    private List<Button> notLoggedButtons;
 
 
     public void initialize() throws SQLException {
+        loggedButtons = List.of(logOffButton, plansButton, paymentTypeButton, managersButton);
+        notLoggedButtons = List.of(loginButton, registerButton);
+
         UserFacade userFacade = UserFacade.getInstance();
         if(userFacade.isLogged()) {
-            loginButton.setVisible(false);
-            registerButton.setVisible(false);
-            logOffButton.setVisible(true);
+            setLoggedButtonsVisibility(true);
+            setNotLoggedButtonsVisibility(false);
         } else {
-            loginButton.setVisible(true);
-            registerButton.setVisible(true);
-            logOffButton.setVisible(false);
+            setLoggedButtonsVisibility(false);
+            setNotLoggedButtonsVisibility(true);
+        }
+
+    }
+
+    private void setLoggedButtonsVisibility(boolean visible) {
+        for(Button button : loggedButtons) {
+            button.setVisible(visible);
         }
     }
+
+    private void setNotLoggedButtonsVisibility(boolean visible) {
+        for(Button button : notLoggedButtons) {
+            button.setVisible(visible);
+        }
+    }
+
 
 
     public void handleManagersButton() {
@@ -68,6 +90,14 @@ public class HomeController {
 
         try {
             FXRouter.goTo("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handlePlansButton() {
+        try {
+            FXRouter.goTo("planManagement");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

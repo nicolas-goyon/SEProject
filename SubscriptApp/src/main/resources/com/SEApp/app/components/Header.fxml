@@ -3,7 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="76.0" prefWidth="479.0" styleClass="headerBox" stylesheets="@../Style/header.css" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-      <Label fx:id="welcomeText" styleClass="h1" text="Substrack" textFill="WHITE" />
+<HBox alignment="CENTER"
+      prefHeight="76.0"
+      prefWidth="479.0"
+      styleClass="headerBox"
+      stylesheets="@../Style/header.css"
+      xmlns="http://javafx.com/javafx/17.0.2-ea">
+      <Label styleClass="h1" text="Substrack" textFill="WHITE"/>
 
-</fx:root>
+</HBox>

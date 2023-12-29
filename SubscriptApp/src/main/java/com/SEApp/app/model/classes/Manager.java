@@ -47,6 +47,21 @@ public class Manager implements Savable {
     }
 
     /**
+     * Default constructor
+     * @param username username of the manager
+     * @param email email of the manager
+     * @param password password of the manager
+     * @param isAlreadyEncrypted boolean to check if the password is already encrypted
+     */
+    public Manager(String username, String email, String password, boolean isAlreadyEncrypted) {
+        this.id = -1;
+        this.username = username;
+        this.email = email;
+        setPassword(password, isAlreadyEncrypted);
+
+    }
+
+    /**
      * @return the id of the manager
      */
     public int getId() {

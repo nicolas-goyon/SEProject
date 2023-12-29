@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root alignment="CENTER" prefHeight="150.0" prefWidth="300.0" styleClass="listElement" stylesheets="@../Style/listElement.css" type="VBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <Label fx:id="titleLabel" alignment="CENTER" styleClass="h1" stylesheets="@../Style/main.css" text="Titre" />
+   <Label fx:id="descriptionLabel" alignment="CENTER" prefHeight="54.0" prefWidth="221.0" styleClass="description" text="Description courte" />
+    <SplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="77.0" prefWidth="338.0">
+        <VBox fx:id="editButtonContainer" alignment="CENTER">
+            <HBox alignment="CENTER">
+                <Button fx:id="editButton" text="Editer" />
+            </HBox>
+        </VBox>
+        <VBox fx:id="deleteButtonContainer" alignment="CENTER">
+            <HBox alignment="CENTER">
+                <Button fx:id="deleteButton" text="Supprimer" />
+            </HBox>
+        </VBox>
+    </SplitPane>
+
+</fx:root>

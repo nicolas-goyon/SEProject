@@ -2,9 +2,6 @@ package com.SEApp.app.model.logic.Manager;
 
 import com.SEApp.app.model.classes.Manager;
 
-import java.io.*;
-import java.util.*;
-
 /**
  * 
  */
@@ -33,23 +30,27 @@ public class ManagerFacade {
 
     /**
      * @param manager
+     * @return
      */
-    public void createManager(Manager manager) {
+    public boolean createManager(Manager manager) {
         // TODO implement here
+        return false;
     }
 
     /**
      * @param managerId
      */
-    public void deleteManager(long managerId) {
+    public boolean deleteManager(long managerId) {
         // TODO implement here
+        return false;
     }
 
     /**
      * @param manager
      */
-    public void updateManager(Manager manager) {
+    public boolean updateManager(Manager manager) {
         // TODO implement here
+        return false;
     }
 
     /**

@@ -225,9 +225,6 @@ public final class FXRouter {
         // set FXRouter current route reference
         currentRoute = route;
 
-        // add package name to scene path
-        route.scenePath = "/" + pathRef.replace(".", "/") + "/" + route.scenePath;
-
         URL ressource = mainRef.getClass().getResource(currentRoute.scenePath);
 
         // load .fxml resource
@@ -292,5 +289,35 @@ public final class FXRouter {
     public static Object getData() {
         return currentRoute.data;
     }
+
+
+    /**
+     * Add window width change listener
+     */
+    public static void addWindowWidthListener( javafx.beans.value.ChangeListener<Number> listener) {
+        window.widthProperty().addListener(listener);
+    }
+
+    /**
+     * Add window height change listener
+     */
+    public static void addWindowHeightListener( javafx.beans.value.ChangeListener<Number> listener) {
+        window.heightProperty().addListener(listener);
+    }
+
+    /**
+     * get window width
+     */
+    public static double getWindowWidth() {
+        return window.getWidth();
+    }
+
+    /**
+     * get window height
+     */
+    public static double getWindowHeight() {
+        return window.getHeight();
+    }
+
 
 }

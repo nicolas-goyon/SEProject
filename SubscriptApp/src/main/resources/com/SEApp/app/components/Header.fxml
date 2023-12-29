@@ -8,7 +8,9 @@
       prefWidth="479.0"
       styleClass="headerBox"
       stylesheets="@../Style/header.css"
-      xmlns="http://javafx.com/javafx/17.0.2-ea">
-      <Label styleClass="h1" text="Substrack" textFill="WHITE"/>
+      onMouseClicked="#handleHomeButton"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      fx:controller="com.SEApp.app.components.Header" xmlns:fx="http://javafx.com/fxml/1">
+      <Label styleClass="h1" text="Substrack" textFill="WHITE" />
 
 </HBox>

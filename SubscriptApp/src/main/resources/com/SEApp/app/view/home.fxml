@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.HomeController">
+<VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.HomeController">
+    <fx:include source="../components/Header.fxml" />
     <Button mnemonicParsing="false" text="Login" onAction="#handleLoginButton" />
     <Button mnemonicParsing="false" text="Register" onAction="#handleRegisterButton" />
     <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" />

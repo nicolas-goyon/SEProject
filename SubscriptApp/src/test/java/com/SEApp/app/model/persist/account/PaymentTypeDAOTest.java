@@ -62,7 +62,7 @@ public class PaymentTypeDAOTest {
          
         PaymentType paymentType = new PaymentType("testName", "testDescription");
         try {
-            paymentTypeDAO.save(paymentType);
+            paymentTypeDAO.create(paymentType);
         } catch ( SQLException e) {
             throw new RuntimeException(e);
         }

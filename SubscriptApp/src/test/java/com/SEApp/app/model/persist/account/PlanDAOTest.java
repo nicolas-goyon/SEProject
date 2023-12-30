@@ -61,7 +61,7 @@ public class PlanDAOTest {
     public void testCreatePlan() throws SQLException {
 
         Plan plan = new Plan("testName", "testDescription", 10.0f, null);
-        planDao.save(plan);
+        planDao.create(plan);
         id = plan.getId();
         assert id != -1;
     }

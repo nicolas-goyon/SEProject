@@ -46,7 +46,7 @@ public class ManagerDaoPostGres extends ManagerDao {
     }
 
     @Override
-    public  Manager save( Manager manager) throws SQLException {
+    public  Manager create(Manager manager) throws SQLException {
         if (manager == null) {
             throw new IllegalArgumentException("manager cannot be null");
         }

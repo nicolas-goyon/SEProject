@@ -49,7 +49,7 @@ public class ManagerFacade {
      * @return
      */
     public boolean createManager(Manager manager) throws SQLException {
-        return managerDao.save(manager).getId() != -1;
+        return managerDao.create(manager).getId() != -1;
     }
 
     /**

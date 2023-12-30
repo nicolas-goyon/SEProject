@@ -37,9 +37,11 @@ public class User {
     private String role;
 
     /**
-     * plan that the user is subscribed to
+     * plan_id that the user is subscribed to
      */
-    private Plan plan;
+    private Integer plan_id;
+
+    private Integer paymentType_id;
 
 
     /**
@@ -51,7 +53,8 @@ public class User {
         this.email = email;
         setPassword(password, isPasswordEncrypted);
         this.role = role;
-        this.plan = null;
+        this.plan_id = null;
+        this.paymentType_id = null;
     }
 
     public User(String username, String email, String password, String role, boolean isPasswordEncrypted) {
@@ -60,7 +63,18 @@ public class User {
         this.email = email;
         setPassword(password, isPasswordEncrypted);
         this.role = role;
-        this.plan = null;
+        this.plan_id = null;
+    }
+
+
+    public User(int id,String username, String email, String password, String role, Integer plan_id, Integer paymentType_id, boolean isPasswordEncrypted) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        setPassword(password, isPasswordEncrypted);
+        this.role = role;
+        this.plan_id = plan_id;
+        this.paymentType_id = paymentType_id;
     }
 
     public String getUsername() {
@@ -105,15 +119,21 @@ public class User {
                 ", " + UserSchema.EMAIL +"='" + email + '\'' +
                 ", " + UserSchema.PASSWORD +"=" + password +
                 ", " + UserSchema.ROLE +"='" + role + '\'' +
+                ", " + UserSchema.PLAN_ID +"=" + plan_id +
+                ", " + UserSchema.PAYMENT_TYPE_ID +"=" + paymentType_id +
                 '}';
     }
 
+    @SuppressWarnings("rawtypes")
     public UpdateOperand[] toUpdateOperands() {
+        @SuppressWarnings("redundant")
         UpdateOperand[] values = {
-                new UpdateOperand(UserSchema.USERNAME, this.username),
-                new UpdateOperand(UserSchema.EMAIL, this.email),
-                new UpdateOperand(UserSchema.PASSWORD, this.password),
-                new UpdateOperand(UserSchema.ROLE, this.role)
+                new UpdateOperand<>(UserSchema.USERNAME, this.username),
+                new UpdateOperand<>(UserSchema.EMAIL, this.email),
+                new UpdateOperand<>(UserSchema.PASSWORD, this.password),
+                new UpdateOperand<>(UserSchema.ROLE, this.role),
+                new UpdateOperand<>(UserSchema.PLAN_ID, this.plan_id),
+                new UpdateOperand<>(UserSchema.PAYMENT_TYPE_ID, this.paymentType_id)
         };
         return values;
     }
@@ -126,11 +146,19 @@ public class User {
         this.id = insertedID;
     }
 
-    public Plan getPlan() {
-        return plan;
+    public Integer getPlan() {
+        return plan_id;
     }
 
-    public void setPlan(Plan plan) {
-        this.plan = plan;
+    public void setPlan(Integer plan_id) {
+        this.plan_id = plan_id;
+    }
+
+    public Integer getPaymentType() {
+        return paymentType_id;
+    }
+
+    public void setPaymentType(Integer paymentType_id) {
+        this.paymentType_id = paymentType_id;
     }
 }

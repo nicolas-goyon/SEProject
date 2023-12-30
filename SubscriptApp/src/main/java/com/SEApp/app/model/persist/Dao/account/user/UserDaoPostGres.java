@@ -17,6 +17,7 @@ import java.util.Map;
 public class UserDaoPostGres extends UserDao {
 
 
+
     /**
      * Default constructor
      */
@@ -26,13 +27,18 @@ public class UserDaoPostGres extends UserDao {
 
     @Override
     public User get(int id) throws SQLException {
-        String[] columns = {UserSchema.USERNAME, UserSchema.EMAIL, UserSchema.PASSWORD, UserSchema.ROLE};
+        return getUserByKey(UserSchema.COLUMNS, UserSchema.ID, id);
+    }
 
-        Map<String, Object> row = db.getByKey(UserSchema.TABLE, columns, UserSchema.ID, id);
+    private <K> User getUserByKey(String[] columns, String key, K value) throws SQLException {
+
+        Map<String, Object> row = db.getByKey(UserSchema.TABLE, columns, key, value);
+
 
         if (row == null) {
-            return null;
+            throw new SQLException("user not found");
         }
+
 
         return new User(
                 (int) row.get(UserSchema.ID),
@@ -40,12 +46,14 @@ public class UserDaoPostGres extends UserDao {
                 (String) row.get(UserSchema.EMAIL),
                 (String) row.get(UserSchema.PASSWORD),
                 (String) row.get(UserSchema.ROLE),
+                (Integer) row.get(UserSchema.PLAN_ID),
+                (Integer) row.get(UserSchema.PAYMENT_TYPE_ID),
                 true
         );
     }
 
     @Override
-    public User save(User user) throws SQLException {
+    public User create(User user) throws SQLException {
         if (user == null) {
             throw new IllegalArgumentException("user cannot be null");
         }
@@ -74,7 +82,8 @@ public class UserDaoPostGres extends UserDao {
             throw new IllegalArgumentException("user id cannot be -1, use save instead");
         }
 
-        WhereOperand whereOperand = new WhereOperand(UserSchema.ID, "=", obj.getId());
+        WhereOperand<Integer> whereOperand = new WhereOperand<>(UserSchema.ID, "=", obj.getId());
+        @SuppressWarnings("rawtypes")
         WhereOperand[] whereOperands = {whereOperand};
 
         int affectedRows = -1;
@@ -95,7 +104,8 @@ public class UserDaoPostGres extends UserDao {
             throw new IllegalArgumentException("user id cannot be -1");
         }
 
-        WhereOperand whereOperand = new WhereOperand(UserSchema.ID, "=", user.getId());
+        WhereOperand<Integer> whereOperand = new WhereOperand<>(UserSchema.ID, "=", user.getId());
+        @SuppressWarnings("rawtypes")
         WhereOperand[] whereOperands = {whereOperand};
 
         int affectedRows = db.delete(UserSchema.TABLE, whereOperands);
@@ -120,6 +130,8 @@ public class UserDaoPostGres extends UserDao {
                     (String) row.get(UserSchema.EMAIL),
                     (String) row.get(UserSchema.PASSWORD),
                     (String) row.get(UserSchema.ROLE),
+                    (Integer) row.get(UserSchema.PLAN_ID),
+                    (Integer) row.get(UserSchema.PAYMENT_TYPE_ID),
                     true
             ));
         }
@@ -129,25 +141,7 @@ public class UserDaoPostGres extends UserDao {
 
     @Override
     public User findByEmail(String email) throws SQLException {
-        String[] columns = {UserSchema.ID, UserSchema.USERNAME, UserSchema.EMAIL, UserSchema.PASSWORD, UserSchema.ROLE};
-
-        Map<String, Object> row = null;
-
-        row = db.getByKey(UserSchema.TABLE, columns, UserSchema.EMAIL, email);
-
-
-        if (row == null) {
-            return null;
-        }
-
-        return new User(
-                (int) row.get(UserSchema.ID),
-                (String) row.get(UserSchema.USERNAME),
-                (String) row.get(UserSchema.EMAIL),
-                (String) row.get(UserSchema.PASSWORD),
-                (String) row.get(UserSchema.ROLE),
-                true
-        );
+        return getUserByKey(UserSchema.COLUMNS, UserSchema.EMAIL, email);
     }
 
 }

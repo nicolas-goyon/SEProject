@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 
@@ -29,23 +30,33 @@ public class ListDisplay extends VBox {
 
     private int columnCount = 3;
 
+    private Map<String, String> options;
+
     // Constructor with a list, edit and delete callback functions
-    public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete) {
+    public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete ) {
+        super();
         this.callbackDelete = callbackDelete;
         this.callbackEdit = callbackEdit;
         this.list = list;
+        this.options = null;
+
 
         updateColumnCount(FXRouter.getWindowWidth());
 
         FXRouter.addWindowWidthListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                System.out.println("Width changed to " + newSceneWidth);
                 updateColumnCount(newSceneWidth.doubleValue());
             }
         });
 
     }
+
+    public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete, Map<String, String> options) {
+        this(list, callbackEdit, callbackDelete);
+        this.options = options;
+    }
+
 
     public void updateGrid() {
         initializeGrid();
@@ -61,7 +72,7 @@ public class ListDisplay extends VBox {
         int colIndex = 0;
 
         for (ElementLogic element : list) {
-            ListElement listElement = new ListElement(element.getId() , callbackEdit, callbackDelete);
+            ListElement listElement = new ListElement(element.getId() , callbackEdit, callbackDelete, options);
             listElement.setTitle(element.getTitle());
             listElement.setDescription(element.getDescription());
             gridPane.add(listElement, colIndex, rowIndex);
@@ -81,14 +92,25 @@ public class ListDisplay extends VBox {
 
     private void updateColumnCount(double width) {
         // Adjust the number of columns based on the width of the parent container
+        if(options != null && options.containsKey("maxWidth")) {
+            double maxWidth = Double.parseDouble(options.get("maxWidth"));
+            if(width > maxWidth) {
+                width = maxWidth;
+            }
+        }
         this.columnCount = calculateColumnCount(width);
+        System.out.println("Column count: " + this.columnCount);
         updateGrid();
     }
 
     private int calculateColumnCount(double width) {
         // Adjust this logic based on your requirements
         int elementWidth = 350; // Adjust this value based on the width of your elements
-        return (int) (width / elementWidth);
+        int columnCount = (int) (width / elementWidth);
+        if (columnCount == 0) {
+            columnCount = 1;
+        }
+        return columnCount;
     }
 
 }

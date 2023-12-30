@@ -17,6 +17,7 @@ public class HelloApplication extends Application {
         FXRouter.when("home", "view/home.fxml");
         FXRouter.when("register", "view/Register.fxml");
         FXRouter.when("planManagement", "view/PlanManagement.fxml");
+        FXRouter.when("User subscription", "view/UserSubscription.fxml");
         try{
             FXRouter.goTo("home");
         }

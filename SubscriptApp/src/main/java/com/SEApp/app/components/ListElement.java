@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Map;
 import java.util.function.Function;
 
 public class ListElement extends VBox {
@@ -55,6 +56,30 @@ public class ListElement extends VBox {
 
     }
 
+    public ListElement(int id, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete, Map<String, String> options) {
+        this(id, callbackEdit, callbackDelete);
+
+        if (options == null) {
+            return;
+        }
+
+        if (options.containsKey("noEdit")) {
+            setNoEdit(options.get("noEdit"));
+        }
+        if (options.containsKey("noDelete")) {
+            setNoDelete(options.get("noDelete"));
+        }
+
+        if (options.containsKey("editText")) {
+            editButton.setText(options.get("editText"));
+        }
+        if (options.containsKey("deleteText")) {
+            deleteButton.setText(options.get("deleteText"));
+        }
+
+
+    }
+
     public void initialize() {
         editButton.setOnAction(actionEvent -> {
             callbackEdit.apply(id);
@@ -84,41 +109,21 @@ public class ListElement extends VBox {
     }
 
     public void setNoEdit(String condition) {
-        if (condition.equals("true")) {
-            editButtonContainer.setVisible(false);
-        }
-        else {
-            editButtonContainer.setVisible(true);
-        }
+        editButtonContainer.setVisible(!condition.equals("true"));
         hideSplitPane();
     }
 
     public void setNoDelete(String condition) {
-        if (condition.equals("true")) {
-            deleteButtonContainer.setVisible(false);
-        }
-        else {
-            deleteButtonContainer.setVisible(true);
-        }
+        deleteButtonContainer.setVisible(!condition.equals("true"));
         hideSplitPane();
     }
 
     public String getNoEdit() {
-        if (editButtonContainer.isVisible()) {
-            return "false";
-        }
-        else {
-            return "true";
-        }
+        return (!editButtonContainer.isVisible()) ? "true" : "false";
     }
 
     public String getNoDelete() {
-        if (deleteButtonContainer.isVisible()) {
-            return "false";
-        }
-        else {
-            return "true";
-        }
+        return (!deleteButtonContainer.isVisible()) ? "true" : "false";
     }
 
     private void hideSplitPane() {
@@ -140,11 +145,5 @@ public class ListElement extends VBox {
             splitPane.setVisible(false);
         }
     }
-
-
-
-
-
-
 
 }

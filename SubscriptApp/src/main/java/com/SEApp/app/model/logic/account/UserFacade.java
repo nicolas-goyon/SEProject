@@ -42,7 +42,7 @@ public class UserFacade {
     public boolean register(User user) throws SQLException {
         AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
         UserDao userDao = factory.getUserDao();
-        return userDao.save(user) != null;
+        return userDao.create(user) != null;
     }
 
     /**

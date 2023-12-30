@@ -27,7 +27,7 @@ public abstract class Dao<T> {
         * @param obj
         * @return
         */
-        public abstract T save(T obj) throws SQLException;
+        public abstract T create(T obj) throws SQLException;
 
         /**
         * @param obj

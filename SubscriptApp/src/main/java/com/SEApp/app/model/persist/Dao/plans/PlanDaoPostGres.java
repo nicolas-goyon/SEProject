@@ -49,7 +49,7 @@ public class PlanDaoPostGres extends PlanDao {
     }
 
     @Override
-    public Plan save(Plan plan) throws SQLException {
+    public Plan create(Plan plan) throws SQLException {
         if (plan == null) {
             throw new IllegalArgumentException("plan cannot be null");
         }

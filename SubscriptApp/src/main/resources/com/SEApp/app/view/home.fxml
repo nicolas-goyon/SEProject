@@ -12,4 +12,5 @@
     <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" fx:id="managersButton" />
     <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton" fx:id="paymentTypeButton" />
     <Button mnemonicParsing="false" text="Plans" onAction="#handlePlansButton" fx:id="plansButton" />
+    <Button mnemonicParsing="false" text="Subscriptions" onAction="#handleSubscriptionsButton" fx:id="subscriptionsButton" />
 </VBox>

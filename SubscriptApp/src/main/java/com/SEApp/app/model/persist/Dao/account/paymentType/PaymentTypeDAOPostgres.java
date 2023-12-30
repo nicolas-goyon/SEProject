@@ -55,7 +55,7 @@ public class PaymentTypeDAOPostgres extends PaymentTypeDAO {
      * @throws SQLException
      */
     @Override
-    public PaymentType save(PaymentType paymentType) throws SQLException {
+    public PaymentType create(PaymentType paymentType) throws SQLException {
         if (paymentType == null) {
             throw new IllegalArgumentException("user cannot be null");
         }

@@ -5,7 +5,6 @@ import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -50,7 +49,7 @@ public class PaymentTypeFacade {
      * @return boolean
      */
     public boolean addPaiementType(PaymentType paymentType) throws SQLException {
-        return paymentTypeDAO.save(paymentType) != null;
+        return paymentTypeDAO.create(paymentType) != null;
     }
 
     /**

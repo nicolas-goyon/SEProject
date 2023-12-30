@@ -65,7 +65,7 @@ public class ManagerDaoTest {
     @Order(1)
     public void testCreateManager() throws SQLException {
         Manager manager = new Manager(-1, "test", "test@test", "test", false);
-        managerDao.save(manager);
+        managerDao.create(manager);
         assert manager.getId() != -1;
     }
 

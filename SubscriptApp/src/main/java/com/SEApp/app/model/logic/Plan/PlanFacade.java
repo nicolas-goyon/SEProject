@@ -5,7 +5,6 @@ import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -62,7 +61,7 @@ public class PlanFacade {
      * @return
      */
     public boolean createPlan(Plan plan) throws SQLException {
-        return dao.save(plan) != null;
+        return dao.create(plan) != null;
     }
 
     /**

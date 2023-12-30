@@ -1,6 +1,5 @@
 package com.SEApp.app.controller;
 
-import com.SEApp.app.components.ListElement;
 import com.SEApp.app.model.logic.account.UserFacade;
 import com.github.fxrouter.FXRouter;
 import javafx.fxml.FXML;
@@ -13,9 +12,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Login {
-
-    @FXML
-    public ListElement listElement;
 
     @FXML
     public Pane loadingPane; // TODO : remove this

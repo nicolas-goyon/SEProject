@@ -1,116 +1,35 @@
 package com.SEApp.app.components;
 
-import com.github.fxrouter.FXRouter;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
-
 
 public class ListDisplay extends VBox {
 
-    private final GridPane gridPane = new GridPane();
 
     private final List<ElementLogic> list;
 
-    private final Function<Integer, Void> callbackEdit;
+    private final Function<Integer, Void> callbackSubscription;
 
-    private final Function<Integer, Void> callbackDelete;
-
-    private int columnCount = 3;
-
-    private Map<String, String> options;
-
-    // Constructor with a list, edit and delete callback functions
-    public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete ) {
+    public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackSubscription){
         super();
-        this.callbackDelete = callbackDelete;
-        this.callbackEdit = callbackEdit;
         this.list = list;
-        this.options = null;
+        this.callbackSubscription = callbackSubscription;
 
-
-        updateColumnCount(FXRouter.getWindowWidth());
-
-        FXRouter.addWindowWidthListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                updateColumnCount(newSceneWidth.doubleValue());
-            }
-        });
+        updateList();
 
     }
 
-    public ListDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete, Map<String, String> options) {
-        this(list, callbackEdit, callbackDelete);
-        this.options = options;
-    }
-
-
-    public void updateGrid() {
-        initializeGrid();
-        setSpacing(10);
+    public void updateList() {
         getChildren().clear();
-        getChildren().add(gridPane);
-    }
-
-    private void initializeGrid() {
-        gridPane.getChildren().clear();
-        int columnCount = this.columnCount; // You can adjust the number of columns as needed
-        int rowIndex = 0;
-        int colIndex = 0;
-
         for (ElementLogic element : list) {
-            ListElement listElement = new ListElement(element.getId() , callbackEdit, callbackDelete, options);
+            ListElement listElement = new ListElement(element.getId(), callbackSubscription);
             listElement.setTitle(element.getTitle());
             listElement.setDescription(element.getDescription());
-            gridPane.add(listElement, colIndex, rowIndex);
 
-            colIndex++;
-            if (colIndex == columnCount) {
-                colIndex = 0;
-                rowIndex++;
-            }
+            getChildren().add(listElement);
         }
-
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(10));
     }
-
-    private void updateColumnCount(double width) {
-        // Adjust the number of columns based on the width of the parent container
-        if(options != null && options.containsKey("maxWidth")) {
-            double maxWidth = Double.parseDouble(options.get("maxWidth"));
-            if(width > maxWidth) {
-                width = maxWidth;
-            }
-        }
-        this.columnCount = calculateColumnCount(width);
-        System.out.println("Column count: " + this.columnCount);
-        updateGrid();
-    }
-
-    private int calculateColumnCount(double width) {
-        // Adjust this logic based on your requirements
-        int elementWidth = 350; // Adjust this value based on the width of your elements
-        int columnCount = (int) (width / elementWidth);
-        if (columnCount == 0) {
-            columnCount = 1;
-        }
-        return columnCount;
-    }
-
 }

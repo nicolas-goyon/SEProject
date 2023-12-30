@@ -8,6 +8,7 @@ import com.SEApp.app.model.persist.utils.PasswordEncrypt;
 import com.SEApp.app.model.persist.Dao.account.user.UserDao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * 
@@ -19,12 +20,16 @@ public class UserFacade {
      */
     private static UserFacade instance;
 
+    private final UserDao dao;
+
     /**
      * 
      */
     private User currentUser;
 
     private UserFacade() throws SQLException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        dao = factory.getUserDao();
     }
 
     public static UserFacade getInstance() throws SQLException {
@@ -78,4 +83,9 @@ public class UserFacade {
         return currentUser != null;
     }
 
+    public List<User> getAllUsers() throws SQLException {
+        AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
+        UserDao userDao = factory.getUserDao();
+        return userDao.list();
+    }
 }

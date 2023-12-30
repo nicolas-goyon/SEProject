@@ -1,11 +1,10 @@
 package com.SEApp.app.controller;
 
 import com.SEApp.app.components.ElementLogic;
-import com.SEApp.app.components.ListDisplay;
+import com.SEApp.app.components.GridDisplay;
 import com.SEApp.app.model.classes.Manager;
 import com.SEApp.app.model.logic.Manager.ManagerFacade;
 import com.github.fxrouter.FXRouter;
-import javafx.collections.ObservableListBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -73,8 +72,8 @@ public class ManagerController {
             list.add(new ElementLogic(manager.getId(), manager.getUsername(), manager.getEmail()));
         }
 
-        ListDisplay listDisplay = new ListDisplay(list, this::editButtonPressed, this::deleteButtonPressed);
-        displayPane.setContent(listDisplay);
+        GridDisplay gridDisplay = new GridDisplay(list, this::editButtonPressed, this::deleteButtonPressed);
+        displayPane.setContent(gridDisplay);
     }
 
 

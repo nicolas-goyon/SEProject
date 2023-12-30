@@ -1,12 +1,10 @@
 package com.SEApp.app.controller;
 
 import com.SEApp.app.components.ElementLogic;
-import com.SEApp.app.components.ListDisplay;
-import com.SEApp.app.model.classes.Manager;
+import com.SEApp.app.components.GridDisplay;
 import com.SEApp.app.model.classes.PaymentType;
 import com.SEApp.app.model.logic.account.PaymentTypeFacade;
 import com.github.fxrouter.FXRouter;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -72,8 +70,8 @@ public class PaymentTypeController {
             list.add(new ElementLogic(type.getId(), type.getName(), type.getDescription()));
         }
 
-        ListDisplay listDisplay = new ListDisplay(list, this::editButtonPressed, this::deleteButtonPressed);
-        displayPane.setContent(listDisplay);
+        GridDisplay gridDisplay = new GridDisplay(list, this::editButtonPressed, this::deleteButtonPressed);
+        displayPane.setContent(gridDisplay);
     }
 
     public Void editButtonPressed(Integer id){

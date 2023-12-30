@@ -1,7 +1,7 @@
 package com.SEApp.app.controller;
 
 import com.SEApp.app.components.ElementLogic;
-import com.SEApp.app.components.ListDisplay;
+import com.SEApp.app.components.GridDisplay;
 import com.SEApp.app.model.classes.PaymentType;
 import com.SEApp.app.model.classes.Plan;
 import com.SEApp.app.model.classes.User;
@@ -13,9 +13,7 @@ import com.SEApp.app.model.logic.exceptions.LoginException;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -127,8 +125,8 @@ public class UserSubscriptionController {
         paymentTypes.forEach(paymentType -> {
             paymentTypeElements.add(new ElementLogic(paymentType.getId(), paymentType.getName(), paymentType.getDescription()));
         });
-        ListDisplay listDisplay = new ListDisplay(paymentTypeElements, this::selectPaymentButton, null, options );
-        paymentTypePane.setContent(listDisplay);
+        GridDisplay gridDisplay = new GridDisplay(paymentTypeElements, this::selectPaymentButton, null, options );
+        paymentTypePane.setContent(gridDisplay);
     }
 
     private void updatePlans() {
@@ -136,8 +134,8 @@ public class UserSubscriptionController {
         plans.forEach(plan -> {
             planElements.add(new ElementLogic(plan.getId(), plan.getName(), plan.getDescription()));
         });
-        ListDisplay listDisplay = new ListDisplay(planElements, this::selectPlanButton, null, options );
-        plansPane.setContent(listDisplay);
+        GridDisplay gridDisplay = new GridDisplay(planElements, this::selectPlanButton, null, options );
+        plansPane.setContent(gridDisplay);
     }
 
     public Void selectPlanButton(Integer id){

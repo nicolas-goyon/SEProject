@@ -1,7 +1,7 @@
 package com.SEApp.app.controller;
 
 import com.SEApp.app.components.ElementLogic;
-import com.SEApp.app.components.ListDisplay;
+import com.SEApp.app.components.GridDisplay;
 import com.SEApp.app.model.classes.Plan;
 import com.SEApp.app.model.logic.Plan.PlanFacade;
 import com.github.fxrouter.FXRouter;
@@ -113,8 +113,8 @@ public class planManager {
             list.add(new ElementLogic(plan.getId(), plan.getName(), plan.getDescription() + " - " + plan.getPrice() + "€"));
         }
 
-        ListDisplay listDisplay = new ListDisplay(list, this::editButtonClicked, this::deleteButtonClicked);
-        displayPane.setContent(listDisplay);
+        GridDisplay gridDisplay = new GridDisplay(list, this::editButtonClicked, this::deleteButtonClicked);
+        displayPane.setContent(gridDisplay);
     }
 
     public Void editButtonClicked(Integer id) {

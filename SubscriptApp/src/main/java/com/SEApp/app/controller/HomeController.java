@@ -18,13 +18,14 @@ public class HomeController {
     public Button paymentTypeButton;
     public Button managersButton;
     public Button subscriptionsButton;
+    public Button usersButton;
 
     private List<Button> loggedButtons;
     private List<Button> notLoggedButtons;
 
 
     public void initialize() throws SQLException {
-        loggedButtons = List.of(logOffButton, plansButton, paymentTypeButton, managersButton, subscriptionsButton);
+        loggedButtons = List.of(logOffButton, plansButton, paymentTypeButton, managersButton, subscriptionsButton, usersButton);
         notLoggedButtons = List.of(loginButton, registerButton);
 
         UserFacade userFacade = UserFacade.getInstance();
@@ -107,6 +108,14 @@ public class HomeController {
     public void handleSubscriptionsButton() {
         try {
             FXRouter.goTo("User subscription");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleUsersButton() {
+        try {
+            FXRouter.goTo("User list");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

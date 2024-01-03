@@ -65,7 +65,7 @@ public class UserListController {
 
         User user = null;
         try {
-            user = userFacade.getCurrentUser();
+            user = userFacade.getUserById(id);
         } catch (Exception e) {
             raiseError("Could not get current user", e);
         }
@@ -74,6 +74,7 @@ public class UserListController {
             raiseError("You must be logged in to subscribe to a plan");
             return null;
         }
+        System.out.printf(user.getUsername());
         SubscriptionFacade.setManagerialUser(user);
 
         try {

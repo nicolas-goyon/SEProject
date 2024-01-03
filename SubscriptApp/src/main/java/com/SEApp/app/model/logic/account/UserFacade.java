@@ -88,4 +88,9 @@ public class UserFacade {
         UserDao userDao = factory.getUserDao();
         return userDao.list();
     }
+
+
+    public User getUserById(int id) throws SQLException {
+        return dao.get(id);
+    }
 }

@@ -42,16 +42,13 @@ public class ManagerialSubscriptionController {
 
     private final Map<String, String> options = new HashMap<>();
 
+    private User selectedUser;
+
     public void initialize() {
         User user = null;
 
         try {
-            UserFacade userFacade = UserFacade.getInstance();
-            user = userFacade.getCurrentUser();
-        } catch (SQLException e) {
-            raiseError("Could not connect to database", e);
-        } catch (LoginException e) {
-            raiseError("You must be logged in to subscribe to a plan", e);
+            user = SubscriptionFacade.getManagerialUser();
         } catch (Exception e) {
             raiseError("Could not get current user", e);
         }
@@ -61,7 +58,14 @@ public class ManagerialSubscriptionController {
             return;
         }
 
-        userLabel.setText(user.getUsername());
+        if(user == null) {
+            raiseError("You must be logged in to subscribe to a plan");
+            return;
+        }
+
+        selectedUser = user;
+
+        userLabel.setText(selectedUser.getUsername());
 
         options.put("editText", "Select");
         options.put("noDelete", "true");
@@ -107,27 +111,9 @@ public class ManagerialSubscriptionController {
     }
 
     private void initializeSubscription(){
-        User user = null;
 
-        try {
-            UserFacade userFacade = UserFacade.getInstance();
-            user = userFacade.getCurrentUser();
-        } catch (SQLException e) {
-            raiseError("Could not connect to database", e);
-        } catch (LoginException e) {
-            raiseError("You must be logged in to subscribe to a plan", e);
-        } catch (Exception e) {
-            raiseError("Could not get current user", e);
-        }
-
-        if(user == null) {
-            raiseError("You must be logged in to subscribe to a plan");
-            return;
-        }
-
-
-        Integer selectedPlanId = user.getPlan();
-        Integer selectedPaymentTypeId = user.getPaymentType();
+        Integer selectedPlanId = selectedUser.getPlan();
+        Integer selectedPaymentTypeId = selectedUser.getPaymentType();
 
         if (selectedPlanId == null || selectedPaymentTypeId == null) {
             setSubscriptionLabel(null, null);

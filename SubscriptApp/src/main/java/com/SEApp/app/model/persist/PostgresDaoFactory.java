@@ -3,6 +3,8 @@ package com.SEApp.app.model.persist;
 import com.SEApp.app.model.persist.DBAccess.PostGres;
 import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
 import com.SEApp.app.model.persist.Dao.Manager.ManagerDaoPostGres;
+import com.SEApp.app.model.persist.Dao.Member.MemberDao;
+import com.SEApp.app.model.persist.Dao.Member.MemberDaoPostGres;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAOPostgres;
 import com.SEApp.app.model.persist.Dao.account.user.UserDao;
@@ -60,4 +62,8 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
         return new PlanDaoPostGres(postGres);
     }
 
+    @Override
+    public MemberDao getMemberDao() throws SQLException {
+        return new MemberDaoPostGres(postGres);
+    }
 }

@@ -172,6 +172,6 @@ public class PlanAccessManagementController {
             return;
         }
 
-        raiseError("Plan accesses updated");
+        message.setText("Plan accesses updated successfully");
     }
 }

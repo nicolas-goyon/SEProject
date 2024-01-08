@@ -28,20 +28,20 @@
         <HBox alignment="CENTER" prefHeight="331.0" prefWidth="554.0">
             <VBox prefHeight="331.0" prefWidth="387.0" styleClass="modal">
                 <HBox prefHeight="100.0" prefWidth="200.0" fx:id="idArea">
-                    <Label text="Payment type ID : "/>
+                    <Label text="Plan ID : "/>
                     <Label fx:id="id" text="1"/>
                 </HBox>
                 <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="nameArea">
-                    <Label text="Payment type Name"/>
+                    <Label text="Plan name"/>
                     <TextField prefHeight="21.0" prefWidth="375.0" fx:id="name"/>
                 </VBox>
                 <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="descriptionArea">
-                    <Label text="Payment type Email"/>
+                    <Label text="Plan description"/>
                     <TextField prefHeight="21.0" prefWidth="375.0" fx:id="description"/>
                 </VBox>
 
                 <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="priceArea">
-                    <Label text="Payment type Price"/>
+                    <Label text="Plan's price"/>
                     <TextField prefHeight="21.0" prefWidth="375.0" fx:id="price"/>
                 </VBox>
 

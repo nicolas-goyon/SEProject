@@ -209,6 +209,8 @@ public class PlanDaoPostGres extends PlanDao {
         deletePlanAccesses(plan);
 
         // insert all accesses from plan.getAccesses() into plan_accesses
+        if(plan.getAccesses() == null) return;
+
 
         for (Access access : plan.getAccesses()) {
             UpdateOperand<Integer> planIdOperand = new UpdateOperand<Integer>(PlanAccessSchema.PLAN_ID, plan.getId());

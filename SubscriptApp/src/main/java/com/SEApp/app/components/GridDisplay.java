@@ -29,11 +29,15 @@ public class GridDisplay extends VBox {
 
     // Constructor with a list, edit and delete callback functions
     public GridDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete ) {
+        this(list, callbackEdit, callbackDelete, null);
+    }
+
+    public GridDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete, Map<String, String> options) {
         super();
         this.callbackDelete = callbackDelete;
         this.callbackEdit = callbackEdit;
         this.list = list;
-        this.options = null;
+        this.options = options;
 
 
         updateColumnCount(FXRouter.getWindowWidth());
@@ -44,12 +48,6 @@ public class GridDisplay extends VBox {
                 updateColumnCount(newSceneWidth.doubleValue());
             }
         });
-
-    }
-
-    public GridDisplay(List<ElementLogic> list, Function<Integer, Void> callbackEdit, Function<Integer, Void> callbackDelete, Map<String, String> options) {
-        this(list, callbackEdit, callbackDelete);
-        this.options = options;
     }
 
 

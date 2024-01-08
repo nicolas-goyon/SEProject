@@ -18,7 +18,7 @@ import java.util.*;
 /**
  *
  */
-public class MemberController extends UserListController {
+public class MemberController {
 
     public VBox confirmPasswordArea;
     public TextField confirmPassword;

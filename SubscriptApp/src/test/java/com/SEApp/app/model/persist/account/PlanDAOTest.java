@@ -5,7 +5,7 @@ import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
-import com.SEApp.app.model.persist.schemas.UserSchema;
+import com.SEApp.app.model.persist.schemas.MemberSchema;
 import org.junit.jupiter.api.*;
 
 import java.sql.SQLException;
@@ -46,8 +46,8 @@ public class PlanDAOTest {
         isFirst = false;
         DBAccess db = daoFactory.getDBAccess();
         try {
-            String table = UserSchema.TABLE;
-            String[] columns = {UserSchema.ID};
+            String table = MemberSchema.TABLE;
+            String[] columns = {MemberSchema.ID};
             db.read(table, columns, null);
         } catch (Exception e) {
             fail("Connection failed " + e.getMessage());

@@ -1,11 +1,11 @@
 package com.SEApp.app.model.logic.Subscription;
 
-import com.SEApp.app.model.classes.User;
-import com.SEApp.app.model.logic.account.UserFacade;
+import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
-import com.SEApp.app.model.persist.Dao.account.user.UserDao;
+import com.SEApp.app.model.persist.Dao.Member.MemberDao;
 
 import java.sql.SQLException;
 
@@ -14,18 +14,18 @@ import java.sql.SQLException;
  */
 public class SubscriptionFacade {
 
-    private static User managerialUser;
+    private static Member managerialMember;
 
     private static SubscriptionFacade instance;
 
-    private static UserDao dao;
+    private static MemberDao dao;
 
     /**
      * 
      */
     private SubscriptionFacade() {
         try {
-            dao = AbstractDAOFactory.getInstance().getUserDao();
+            dao = AbstractDAOFactory.getInstance().getMemberDao();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -41,31 +41,32 @@ public class SubscriptionFacade {
         return instance;
     }
 
-    public static void setManagerialUser(User managerialUser) {
-        SubscriptionFacade.managerialUser = managerialUser;
+    public static void setManagerialMember(Member managerialMember) {
+        SubscriptionFacade.managerialMember = managerialMember;
     }
 
-    public static User getManagerialUser() {
-        return managerialUser;
+    public static Member getManagerialMember() {
+        return managerialMember;
     }
 
 
     /**
-     * @param id 
+     * @param plan_id
+     * @param payment_type_id
      * @return
      */
     public boolean subscribe(int plan_id, int payment_type_id) throws SQLException, LoginException, IncorrectOperandException {
-        UserFacade userFacade = UserFacade.getInstance();
-        User user = userFacade.getCurrentUser();
+        MemberFacade memberFacade = MemberFacade.getInstance();
+        Member member = memberFacade.getCurrentMember();
 
-        if(user == null) {
+        if(member == null) {
             throw new LoginException("You must be logged in to subscribe to a plan");
         }
 
-        user.setPlan(plan_id);
-        user.setPaymentType(payment_type_id);
+        member.setPlan(plan_id);
+        member.setPaymentType(payment_type_id);
 
-        return dao.update(user) != null;
+        return dao.update(member) != null;
 
     }
 
@@ -73,28 +74,28 @@ public class SubscriptionFacade {
      * @return
      */
     public boolean unsubscribe() throws LoginException, SQLException, IncorrectOperandException {
-        UserFacade userFacade = UserFacade.getInstance();
-        User user = userFacade.getCurrentUser();
+        MemberFacade memberFacade = MemberFacade.getInstance();
+        Member member = memberFacade.getCurrentMember();
 
-        if(user == null) {
+        if(member == null) {
             throw new LoginException("You must be logged in to unsubscribe from a plan");
         }
 
-        user.setPlan(null);
+        member.setPlan(null);
 
-        return dao.update(user) != null;
+        return dao.update(member) != null;
     }
 
 
-    public boolean subscribeManagerialUser(int plan_id, int payment_type_id) throws SQLException, IncorrectOperandException {
-        managerialUser.setPlan(plan_id);
-        managerialUser.setPaymentType(payment_type_id);
-        return dao.update(managerialUser) != null;
+    public boolean subscribeManagerialMember(int plan_id, int payment_type_id) throws SQLException, IncorrectOperandException {
+        managerialMember.setPlan(plan_id);
+        managerialMember.setPaymentType(payment_type_id);
+        return dao.update(managerialMember) != null;
     }
 
-    public boolean unsubscribeManagerialUser() throws SQLException, IncorrectOperandException {
-        managerialUser.setPlan(null);
-        return dao.update(managerialUser) != null;
+    public boolean unsubscribeManagerialMember() throws SQLException, IncorrectOperandException {
+        managerialMember.setPlan(null);
+        return dao.update(managerialMember) != null;
     }
 
 

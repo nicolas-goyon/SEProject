@@ -152,4 +152,30 @@ public class MemberDaoPostGres extends MemberDao {
         );
     }
 
+    /**
+     * @param username
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public Member findByUsername(String username) throws SQLException {
+        String[] columns = { MemberSchema.ID,  MemberSchema.USERNAME,  MemberSchema.EMAIL,  MemberSchema.PASSWORD};
+
+        Map<String, Object> row = null;
+
+        row = db.getByKey( MemberSchema.TABLE, columns,  MemberSchema.USERNAME, username);
+
+        if (row == null) {
+            return null;
+        }
+
+        return new  Member(
+                (int) row.get( MemberSchema.ID),
+                (String) row.get( MemberSchema.USERNAME),
+                (String) row.get( MemberSchema.EMAIL),
+                (String) row.get( MemberSchema.PASSWORD),
+                true
+        );
+    }
+
 }

@@ -134,4 +134,12 @@ public class Manager implements Savable {
                 new UpdateOperand(ManagerSchema.PASSWORD, this.password)
         };
     }
+
+    public boolean checkPassword(String password, boolean isEncrypted) {
+        if (isEncrypted) {
+            return this.password.equals(password);
+        } else {
+            return this.password.equals(PasswordEncrypt.encrypt(password));
+        }
+    }
 }

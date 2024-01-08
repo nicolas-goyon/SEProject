@@ -1,8 +1,7 @@
 package com.SEApp.app.controller;
 
-import com.SEApp.app.model.logic.account.UserFacade;
+import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.github.fxrouter.FXRouter;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -18,20 +17,20 @@ public class HomeController {
     public Button paymentTypeButton;
     public Button managersButton;
     public Button subscriptionsButton;
-    public Button usersButton;
-
     public Button membersButton;
+
+    public Button membersManagementButton;
 
     private List<Button> loggedButtons;
     private List<Button> notLoggedButtons;
 
 
     public void initialize() throws SQLException {
-        loggedButtons = List.of(logOffButton, plansButton, paymentTypeButton, managersButton, subscriptionsButton, usersButton, membersButton);
+        loggedButtons = List.of(logOffButton, plansButton, paymentTypeButton, managersButton, subscriptionsButton, membersButton, membersButton);
         notLoggedButtons = List.of(loginButton, registerButton);
 
-        UserFacade userFacade = UserFacade.getInstance();
-        if(userFacade.isLogged()) {
+        MemberFacade memberFacade = MemberFacade.getInstance();
+        if(memberFacade.isLogged()) {
             setLoggedButtonsVisibility(true);
             setNotLoggedButtonsVisibility(false);
         } else {
@@ -65,7 +64,7 @@ public class HomeController {
 
     public void handleMembersButton() {
         try {
-            FXRouter.goTo("membersManagement");
+            FXRouter.goTo("Members list");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -97,8 +96,8 @@ public class HomeController {
     }
 
     public void handleLogOffButton() throws SQLException {
-        UserFacade userFacade = UserFacade.getInstance();
-        userFacade.logout();
+        MemberFacade memberFacade = MemberFacade.getInstance();
+        memberFacade.logout();
 
         try {
             FXRouter.goTo("home");
@@ -117,15 +116,15 @@ public class HomeController {
 
     public void handleSubscriptionsButton() {
         try {
-            FXRouter.goTo("User subscription");
+            FXRouter.goTo("Member subscription");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void handleUsersButton() {
+    public void handleMembersListButton() {
         try {
-            FXRouter.goTo("User list");
+            FXRouter.goTo("Members list");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

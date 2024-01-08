@@ -4,7 +4,7 @@ import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
 import com.SEApp.app.model.persist.Dao.account.user.UserDao;
-import com.SEApp.app.model.persist.schemas.UserSchema;
+import com.SEApp.app.model.persist.schemas.MemberSchema;
 
 import org.junit.jupiter.api.*;
 import com.SEApp.app.model.classes.User;
@@ -48,8 +48,8 @@ public class UserDaoTest {
         isFirst = false;
         DBAccess db = daoFactory.getDBAccess();
         try {
-            String table = UserSchema.TABLE;
-            String[] columns = {UserSchema.ID};
+            String table = MemberSchema.TABLE;
+            String[] columns = {MemberSchema.ID};
             db.read(table, columns, null);
         } catch (Exception e) {
             fail("Connection failed " + e.getMessage());

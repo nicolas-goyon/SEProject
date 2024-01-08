@@ -24,4 +24,10 @@ public abstract class ManagerDao extends Dao<Manager> {
      */
     public abstract Manager findByEmail(String email) throws SQLException;
 
+    /**
+     * @param username
+     * @return
+     */
+    public abstract Manager findByUsername(String username) throws SQLException;
+
 }

@@ -4,7 +4,6 @@ import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
 import com.SEApp.app.model.persist.Dao.Member.MemberDao;
-import com.SEApp.app.model.persist.schemas.MemberSchema;
 import org.junit.jupiter.api.*;
 import com.SEApp.app.model.classes.Member;
 

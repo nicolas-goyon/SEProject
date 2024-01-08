@@ -11,7 +11,7 @@
         prefHeight="600.0"
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
-        fx:controller="com.SEApp.app.controller.UserListController">
+        fx:controller="com.SEApp.app.controller.MemberListController">
     <VBox prefWidth="800.0" >
         <HBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="570.0">
             <fx:include source="../components/Header.fxml"/>

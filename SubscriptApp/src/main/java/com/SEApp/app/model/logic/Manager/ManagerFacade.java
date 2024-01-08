@@ -78,4 +78,12 @@ public class ManagerFacade {
     public List<Manager> getAllManagers() throws SQLException {
         return managerDao.list();
     }
+
+    public boolean login(String username, String password) throws SQLException {
+        Manager manager = managerDao.findByUsername(username);
+        if (manager == null) {
+            return false;
+        }
+        return manager.checkPassword(password, false);
+    }
 }

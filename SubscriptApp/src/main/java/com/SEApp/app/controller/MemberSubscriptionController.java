@@ -4,11 +4,11 @@ import com.SEApp.app.components.ElementLogic;
 import com.SEApp.app.components.GridDisplay;
 import com.SEApp.app.model.classes.PaymentType;
 import com.SEApp.app.model.classes.Plan;
-import com.SEApp.app.model.classes.User;
+import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.SEApp.app.model.logic.Plan.PlanFacade;
 import com.SEApp.app.model.logic.Subscription.SubscriptionFacade;
 import com.SEApp.app.model.logic.account.PaymentTypeFacade;
-import com.SEApp.app.model.logic.account.UserFacade;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * 
  */
-public class UserSubscriptionController {
+public class MemberSubscriptionController {
 
     public Button subscribeButton;
     public Label subscriptionLabel;
@@ -84,27 +84,27 @@ public class UserSubscriptionController {
     }
 
     private void initializeSubscription(){
-        User user = null;
+        Member member = null;
 
         try {
-            UserFacade userFacade = UserFacade.getInstance();
-            user = userFacade.getCurrentUser();
+            MemberFacade memberFacade = MemberFacade.getInstance();
+            member = memberFacade.getCurrentMember();
         } catch (SQLException e) {
             raiseError("Could not connect to database", e);
         } catch (LoginException e) {
             raiseError("You must be logged in to subscribe to a plan", e);
         } catch (Exception e) {
-            raiseError("Could not get current user", e);
+            raiseError("Could not get current member", e);
         }
 
-        if(user == null) {
+        if(member == null) {
             raiseError("You must be logged in to subscribe to a plan");
             return;
         }
 
 
-        Integer selectedPlanId = user.getPlan();
-        Integer selectedPaymentTypeId = user.getPaymentType();
+        Integer selectedPlanId = member.getPlan();
+        Integer selectedPaymentTypeId = member.getPaymentType();
 
         if (selectedPlanId == null || selectedPaymentTypeId == null) {
             setSubscriptionLabel(null, null);

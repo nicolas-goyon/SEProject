@@ -152,4 +152,25 @@ public class ManagerDaoPostGres extends ManagerDao {
         );
     }
 
+
+    @Override
+    public  Manager findByUsername(String username) throws SQLException {
+        String[] columns = {ManagerSchema.ID, ManagerSchema.USERNAME, ManagerSchema.EMAIL, ManagerSchema.PASSWORD};
+
+        Map<String, Object> row = null;
+
+        row = db.getByKey(ManagerSchema.TABLE, columns, ManagerSchema.USERNAME, username);
+
+        if (row == null) {
+            return null;
+        }
+
+        return new Manager(
+                (int) row.get(ManagerSchema.ID),
+                (String) row.get(ManagerSchema.USERNAME),
+                (String) row.get(ManagerSchema.EMAIL),
+                (String) row.get(ManagerSchema.PASSWORD),
+                true
+        );
+    }
 }

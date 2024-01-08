@@ -1,6 +1,7 @@
 package com.SEApp.app.controller;
 
-import com.SEApp.app.model.logic.account.UserFacade;
+import com.SEApp.app.model.logic.Member.MemberFacade;
+import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.github.fxrouter.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,8 +14,6 @@ import java.sql.SQLException;
 
 public class Login {
 
-    @FXML
-    public Pane loadingPane; // TODO : remove this
 
     @FXML
     private TextField email;
@@ -28,9 +27,9 @@ public class Login {
 
     @FXML
     protected void onLogin() {
-        UserFacade userFacade = null;
+        MemberFacade userFacade = null;
         try {
-            userFacade = UserFacade.getInstance();
+            userFacade = MemberFacade.getInstance();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -39,6 +38,9 @@ public class Login {
             isLog = userFacade.login(email.getText(), password.getText());
         } catch (SQLException | RuntimeException e) {
             error.setText("An error occurred, connection to the database failed");
+            e.printStackTrace();
+        } catch (LoginException e) {
+            error.setText("Wrong email or password");
             e.printStackTrace();
         }
 

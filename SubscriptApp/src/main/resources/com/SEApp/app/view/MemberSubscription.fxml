@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="475.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.UserSubscriptionController">
+<VBox prefHeight="475.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.MemberSubscriptionController">
     <fx:include source="../components/Header.fxml" />
    <HBox alignment="CENTER" prefHeight="405.0" prefWidth="874.0" stylesheets="@../Style/main.css">
       <VBox alignment="TOP_CENTER" minWidth="350">

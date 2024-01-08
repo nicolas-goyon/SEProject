@@ -1,7 +1,8 @@
 package com.SEApp.app.controller;
 
-import com.SEApp.app.model.classes.User;
-import com.SEApp.app.model.logic.account.UserFacade;
+import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.logic.Member.MemberFacade;
+import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.github.fxrouter.FXRouter;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -38,41 +39,44 @@ public class Register {
         String usernameText = username.getText();
 
         if (emailText.isEmpty() || passwordText.isEmpty() || confirmPasswordText.isEmpty() || usernameText.isEmpty()) {
-            error.setText("Please fill all the fields");
+            raiseError("Please fill all the fields");
             return;
         }
 
         if (!passwordText.equals(confirmPasswordText)) {
-            error.setText("Passwords don't match");
+            raiseError("Passwords don't match");
             return;
         }
 
         if (passwordText.length() < 8) {
-            error.setText("Password must be at least 8 characters long");
+            raiseError("Password must be at least 8 characters long");
             return;
         }
 
         if(usernameText.length() < 3) {
-            error.setText("Username must be at least 3 characters long");
+            raiseError("Membername must be at least 3 characters long");
             return;
         }
 
-        User user = new User(usernameText, emailText, passwordText, false);
+        Member member = new Member(usernameText, emailText, passwordText, false);
 
-        UserFacade userFacade = null;
+        MemberFacade memberFacade = null;
 
         try {
-            userFacade = UserFacade.getInstance();
+            memberFacade = MemberFacade.getInstance();
         } catch (SQLException e) {
-            error.setText("An error occurred, connection to the database failed");
+            raiseError("An error occurred, connection to the database failed", e);
             return;
         }
 
         boolean isRegistered = false;
         try {
-            isRegistered = userFacade.register(user);
+            isRegistered = memberFacade.register(member);
         } catch (SQLException e) {
-            error.setText("An error occurred, user creation failed");
+            raiseError("An error occurred, member creation failed", e);
+            return;
+        } catch (LoginException e) {
+            raiseError("Email or membername already used", e);
             return;
         }
 
@@ -84,9 +88,18 @@ public class Register {
             }
         }
         else {
-            error.setText("Email or username already used");
+            raiseError("Registration failed");
         }
 
+    }
+
+    private void raiseError(String message) {
+        error.setText(message);
+    }
+
+    private void raiseError(String message, Exception e) {
+        error.setText(message);
+        e.printStackTrace();
     }
 
 }

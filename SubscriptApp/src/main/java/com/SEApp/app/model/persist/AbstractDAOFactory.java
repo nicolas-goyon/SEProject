@@ -3,8 +3,8 @@ package com.SEApp.app.model.persist;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
 import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
 import com.SEApp.app.model.persist.Dao.Member.MemberDao;
+import com.SEApp.app.model.persist.Dao.account.admin.AdminDAO;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
-import com.SEApp.app.model.persist.Dao.account.user.UserDao;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 
 
@@ -31,10 +31,6 @@ public abstract class AbstractDAOFactory {
 
     public abstract DBAccess getDBAccess();
 
-    /**
-     * 
-     */
-    public abstract UserDao getUserDao() throws SQLException;
 
     public abstract PaymentTypeDAO getPaymentTypeDao() throws SQLException;
 
@@ -44,4 +40,5 @@ public abstract class AbstractDAOFactory {
 
     public abstract MemberDao getMemberDao() throws SQLException;
 
+    public abstract AdminDAO getAdminDao() throws SQLException;
 }

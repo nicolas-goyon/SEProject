@@ -5,10 +5,10 @@ import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
 import com.SEApp.app.model.persist.Dao.Manager.ManagerDaoPostGres;
 import com.SEApp.app.model.persist.Dao.Member.MemberDao;
 import com.SEApp.app.model.persist.Dao.Member.MemberDaoPostGres;
+import com.SEApp.app.model.persist.Dao.account.admin.AdminDAO;
+import com.SEApp.app.model.persist.Dao.account.admin.AdminDAOPostgres;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAOPostgres;
-import com.SEApp.app.model.persist.Dao.account.user.UserDao;
-import com.SEApp.app.model.persist.Dao.account.user.UserDaoPostGres;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 import com.SEApp.app.model.persist.Dao.plans.PlanDaoPostGres;
 
@@ -30,13 +30,6 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
      */
     public PostgresDaoFactory() {
         this.postGres = new PostGres();
-    }
-
-    /**
-     * 
-     */
-    public UserDao getUserDao() throws SQLException {
-        return new UserDaoPostGres(postGres);
     }
 
     /**
@@ -65,5 +58,10 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
     @Override
     public MemberDao getMemberDao() throws SQLException {
         return new MemberDaoPostGres(postGres);
+    }
+
+    @Override
+    public AdminDAO getAdminDao() throws SQLException {
+        return new AdminDAOPostgres(postGres);
     }
 }

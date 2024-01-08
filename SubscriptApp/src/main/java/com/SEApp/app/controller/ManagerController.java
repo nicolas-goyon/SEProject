@@ -101,12 +101,20 @@ public class ManagerController {
     }
 
     public Void deleteButtonPressed(Integer id){
-
+        boolean isDeleted = false;
         try {
-            facade.deleteManager(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
+            isDeleted = facade.deleteManager(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
         } catch (Exception e) {
             message.setText("Error while deleting manager : delete error");
             System.err.println("Error while deleting manager : delete error");
+            return null;
+        }
+
+        if (isDeleted) {
+            message.setText("Manager deleted successfully");
+        } else {
+            message.setText("Error while deleting manager : manager not deleted");
+            System.err.println("Error while deleting manager : manager not deleted");
             return null;
         }
 

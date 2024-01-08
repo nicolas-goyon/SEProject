@@ -4,18 +4,14 @@ import com.SEApp.app.components.ElementLogic;
 import com.SEApp.app.components.GridDisplay;
 import com.SEApp.app.model.classes.PaymentType;
 import com.SEApp.app.model.classes.Plan;
-import com.SEApp.app.model.classes.User;
+import com.SEApp.app.model.classes.Member;
 import com.SEApp.app.model.logic.Plan.PlanFacade;
 import com.SEApp.app.model.logic.Subscription.SubscriptionFacade;
 import com.SEApp.app.model.logic.account.PaymentTypeFacade;
-import com.SEApp.app.model.logic.account.UserFacade;
-import com.SEApp.app.model.logic.exceptions.LoginException;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -31,7 +27,7 @@ public class ManagerialSubscriptionController {
     public ScrollPane plansPane;
     public Label planLabel;
     public Label paymentTypeLabel;
-    public Label userLabel;
+    public Label memberLabel;
 
     private List<PaymentType> paymentTypes;
     private List<Plan> plans;
@@ -42,30 +38,30 @@ public class ManagerialSubscriptionController {
 
     private final Map<String, String> options = new HashMap<>();
 
-    private User selectedUser;
+    private Member selectedMember;
 
     public void initialize() {
-        User user = null;
+        Member member = null;
 
         try {
-            user = SubscriptionFacade.getManagerialUser();
+            member = SubscriptionFacade.getManagerialMember();
         } catch (Exception e) {
-            raiseError("Could not get current user", e);
+            raiseError("Could not get current member", e);
         }
 
-        if(user == null) {
+        if(member == null) {
             raiseError("You must be logged in to subscribe to a plan");
             return;
         }
 
-        if(user == null) {
+        if(member == null) {
             raiseError("You must be logged in to subscribe to a plan");
             return;
         }
 
-        selectedUser = user;
+        selectedMember = member;
 
-        userLabel.setText(selectedUser.getUsername());
+        memberLabel.setText(selectedMember.getUsername());
 
         options.put("editText", "Select");
         options.put("noDelete", "true");
@@ -112,8 +108,8 @@ public class ManagerialSubscriptionController {
 
     private void initializeSubscription(){
 
-        Integer selectedPlanId = selectedUser.getPlan();
-        Integer selectedPaymentTypeId = selectedUser.getPaymentType();
+        Integer selectedPlanId = selectedMember.getPlan();
+        Integer selectedPaymentTypeId = selectedMember.getPaymentType();
 
         if (selectedPlanId == null || selectedPaymentTypeId == null) {
             setSubscriptionLabel(null, null);
@@ -182,7 +178,7 @@ public class ManagerialSubscriptionController {
 
         boolean success = false;
         try {
-            success = SubscriptionFacade.getInstance().subscribeManagerialUser(selectedPlan.getId(), selectedPaymentType.getId());
+            success = SubscriptionFacade.getInstance().subscribeManagerialMember(selectedPlan.getId(), selectedPaymentType.getId());
             subscriptionLabel.setText("Successfully subscribed to " + selectedPlan.getName());
         } catch (SQLException e) {
             raiseError("Could not connect to database", e);
@@ -215,7 +211,7 @@ public class ManagerialSubscriptionController {
     public void onUnsubscribe() {
         boolean success = false;
         try {
-            success = SubscriptionFacade.getInstance().unsubscribeManagerialUser();
+            success = SubscriptionFacade.getInstance().unsubscribeManagerialMember();
             subscriptionLabel.setText("Successfully unsubscribed");
         } catch (SQLException e) {
             raiseError("Could not connect to database", e);

@@ -14,7 +14,7 @@
     <fx:include source="../components/Header.fxml"/>
     <HBox alignment="CENTER" stylesheets="@../Style/main.css">
         <Label styleClass="h1" text="Subscription management of the user :"/>
-        <Label fx:id="userLabel" styleClass="h1" text="User name"/>
+        <Label fx:id="memberLabel" styleClass="h1" text="Member name"/>
     </HBox>
     <HBox alignment="CENTER" prefHeight="405.0" prefWidth="874.0" stylesheets="@../Style/main.css">
         <VBox alignment="TOP_CENTER" minWidth="350">

@@ -24,4 +24,5 @@ public abstract class MemberDao extends Dao<Member> {
      */
     public abstract Member findByEmail(String email) throws SQLException;
 
+    public abstract Member findByUsername(String username) throws SQLException;
 }

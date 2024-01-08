@@ -4,15 +4,44 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.HomeController">
-    <fx:include source="../components/Header.fxml" />
-    <Button mnemonicParsing="false" text="Login" onAction="#handleLoginButton" fx:id="loginButton" />
-    <Button mnemonicParsing="false" text="Register" onAction="#handleRegisterButton" fx:id="registerButton" />
-    <Button mnemonicParsing="false" text="LogOff" onAction="#handleLogOffButton" fx:id="logOffButton" />
-    <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" fx:id="managersButton" />
-    <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton" fx:id="paymentTypeButton" />
-    <Button mnemonicParsing="false" text="Plans" onAction="#handlePlansButton" fx:id="plansButton" />
-    <Button mnemonicParsing="false" text="Subscriptions" onAction="#handleSubscriptionsButton" fx:id="subscriptionsButton" />
-    <Button mnemonicParsing="false" text="Members" onAction="#handleMembersListButton" fx:id="membersButton" />
-    <Button mnemonicParsing="false" text="Members management" onAction="#handleMembersButton" fx:id="membersManagementButton" />
+<VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.HomeController">
+    <fx:include source="../components/Header.fxml"/>
+
+
+    <!--  5 button zones : Not logged, All User logged , Member logged, Admin Logged, Manager Logged  -->
+    <!--  Not logged  -->
+    <VBox fx:id="notLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
+          visible="true">
+        <Button mnemonicParsing="false" text="Login" onAction="#handleLoginButton" fx:id="loginButton"/>
+        <Button mnemonicParsing="false" text="Register" onAction="#handleRegisterButton" fx:id="registerButton"/>
+    </VBox>
+
+    <!--  All User logged  -->
+    <VBox fx:id="allUserLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
+          visible="false">
+        <Button mnemonicParsing="false" text="Logout" onAction="#handleLogOffButton" fx:id="logOffButton"/>
+    </VBox>
+
+    <!--  User logged  -->
+    <VBox fx:id="memberLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
+          visible="false">
+        <Button mnemonicParsing="false" text="Subscriptions" onAction="#handleSubscriptionsButton"
+                fx:id="subscriptionsButton"/>
+    </VBox>
+
+    <!--  Admin logged  -->
+    <VBox fx:id="adminLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
+          visible="false">
+        <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" fx:id="managersButton"/>
+        <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton"
+                fx:id="paymentTypeButton"/>
+    </VBox>
+
+    <!--  Manager logged  -->
+    <VBox fx:id="managerLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
+          visible="false">
+        <Button mnemonicParsing="false" text="Plans Management" onAction="#handlePlansButton" fx:id="plansButton"/>
+        <Button mnemonicParsing="false" text="Members management" onAction="#handleMembersButton" fx:id="membersButton"/>
+    </VBox>
 </VBox>

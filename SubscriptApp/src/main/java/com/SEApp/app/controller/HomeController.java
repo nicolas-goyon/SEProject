@@ -1,8 +1,10 @@
 package com.SEApp.app.controller;
 
+import com.SEApp.app.model.classes.Logged;
 import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.github.fxrouter.FXRouter;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,6 +12,8 @@ import java.util.List;
 
 public class HomeController {
 
+
+    // ---- BUTTONS ----
     public Button loginButton;
     public Button registerButton;
     public Button logOffButton;
@@ -19,38 +23,48 @@ public class HomeController {
     public Button subscriptionsButton;
     public Button membersButton;
 
-    public Button membersManagementButton;
 
-    private List<Button> loggedButtons;
-    private List<Button> notLoggedButtons;
+
+    // ---- ZONES ----
+    public VBox managerLoggedZone;
+    public VBox adminLoggedZone;
+    public VBox memberLoggedZone;
+    public VBox allUserLoggedZone;
+    public VBox notLoggedZone;
+
+
 
 
     public void initialize() throws SQLException {
-        loggedButtons = List.of(logOffButton, plansButton, paymentTypeButton, managersButton, subscriptionsButton, membersButton, membersButton);
-        notLoggedButtons = List.of(loginButton, registerButton);
+        Logged logged = Logged.getInstance();
 
-        MemberFacade memberFacade = MemberFacade.getInstance();
-        if(memberFacade.isLogged()) {
-            setLoggedButtonsVisibility(true);
-            setNotLoggedButtonsVisibility(false);
-        } else {
-            setLoggedButtonsVisibility(false);
-            setNotLoggedButtonsVisibility(true);
+        // default display
+        notLoggedZone.setVisible(true);
+        allUserLoggedZone.setVisible(false);
+        memberLoggedZone.setVisible(false);
+        adminLoggedZone.setVisible(false);
+        managerLoggedZone.setVisible(false);
+
+        if (!logged.isLogged()) {
+            return;
         }
 
-    }
+        allUserLoggedZone.setVisible(true);
+        notLoggedZone.setVisible(false);
 
-    private void setLoggedButtonsVisibility(boolean visible) {
-        for(Button button : loggedButtons) {
-            button.setVisible(visible);
+        switch (logged.getUser().getRole()) {
+            case ADMIN:
+                adminLoggedZone.setVisible(true);
+                break;
+            case MANAGER:
+                managerLoggedZone.setVisible(true);
+                break;
+            case MEMBER:
+                memberLoggedZone.setVisible(true);
+                break;
         }
     }
 
-    private void setNotLoggedButtonsVisibility(boolean visible) {
-        for(Button button : notLoggedButtons) {
-            button.setVisible(visible);
-        }
-    }
 
 
 
@@ -122,11 +136,4 @@ public class HomeController {
         }
     }
 
-    public void handleMembersListButton() {
-        try {
-            FXRouter.goTo("Members list");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

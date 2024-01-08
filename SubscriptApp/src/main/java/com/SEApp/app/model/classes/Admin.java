@@ -2,7 +2,12 @@ package com.SEApp.app.model.classes;
 
 import com.SEApp.app.model.persist.utils.PasswordEncrypt;
 
-public class Admin {
+public class Admin implements User {
+
+    public Role getRole() {
+        return Role.ADMIN;
+    }
+
     private String username;
     private String password;
 

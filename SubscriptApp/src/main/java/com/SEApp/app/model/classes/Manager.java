@@ -7,7 +7,11 @@ import com.SEApp.app.model.persist.utils.UpdateOperand;
 /**
  * 
  */
-public class Manager implements Savable {
+public class Manager implements Savable, User {
+
+    public Role getRole() {
+        return Role.MANAGER;
+    }
 
 
     /**

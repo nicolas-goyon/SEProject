@@ -7,7 +7,7 @@ import com.SEApp.app.model.persist.schemas.MemberSchema;
 /**
  * 
  */
-public class Member {
+public class Member implements User {
 
 
     private int id;
@@ -29,11 +29,6 @@ public class Member {
 
 
     /**
-     * role of the user
-     */
-    private String role;
-
-    /**
      * plan_id that the user is subscribed to
      */
     private Integer plan_id;
@@ -52,7 +47,6 @@ public class Member {
         this.username = username;
         this.email = email;
         setPassword(password, isPasswordEncrypted);
-        this.role = role;
         this.plan_id = null;
         this.paymentType_id = null;
     }
@@ -62,7 +56,6 @@ public class Member {
         this.username = username;
         this.email = email;
         setPassword(password, isPasswordEncrypted);
-        this.role = role;
         this.plan_id = null;
     }
 
@@ -72,7 +65,6 @@ public class Member {
         this.username = username;
         this.email = email;
         setPassword(password, isPasswordEncrypted);
-        this.role = role;
         this.plan_id = plan_id;
         this.paymentType_id = paymentType_id;
     }
@@ -88,8 +80,8 @@ public class Member {
         return password;
     }
 
-    public String getRole() {
-        return role;
+    public Role getRole() {
+        return Role.MEMBER;
     }
 
     public void setUsername(String username) {
@@ -116,9 +108,6 @@ public class Member {
         }
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String toString() {
         return "User{" +
@@ -126,7 +115,6 @@ public class Member {
                 ", " + MemberSchema.USERNAME +"='" + username + '\'' +
                 ", " + MemberSchema.EMAIL +"='" + email + '\'' +
                 ", " + MemberSchema.PASSWORD +"=" + password +
-                ", " + MemberSchema.ROLE +"='" + role + '\'' +
                 ", " + MemberSchema.PLAN_ID +"=" + plan_id +
                 ", " + MemberSchema.PAYMENT_TYPE_ID +"=" + paymentType_id +
                 '}';
@@ -139,7 +127,6 @@ public class Member {
                 new UpdateOperand<>(MemberSchema.USERNAME, this.username),
                 new UpdateOperand<>(MemberSchema.EMAIL, this.email),
                 new UpdateOperand<>(MemberSchema.PASSWORD, this.password),
-                new UpdateOperand<>(MemberSchema.ROLE, this.role),
                 new UpdateOperand<>(MemberSchema.PLAN_ID, this.plan_id),
                 new UpdateOperand<>(MemberSchema.PAYMENT_TYPE_ID, this.paymentType_id)
         };

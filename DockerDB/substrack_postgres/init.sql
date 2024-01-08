@@ -26,7 +26,6 @@ CREATE TABLE members (
    email VARCHAR(255) UNIQUE,
    username VARCHAR(255) UNIQUE,
    password VARCHAR(255),
-   role VARCHAR(255),
    plan_id INT,
    payment_type_id INT,
    FOREIGN KEY (plan_id) REFERENCES plans(id),
@@ -48,9 +47,9 @@ INSERT INTO plans (name, description, price) VALUES ('Free', 'Free plan', 0);
 INSERT INTO plans (name, description, price) VALUES ('Basic', 'Basic plan', 10);
 INSERT INTO plans (name, description, price) VALUES ('Premium', 'Premium plan', 20);
 
-INSERT INTO members (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon.attend@gmal.com', 'jonaten', '123456', 'attendee', 1, 1);
-INSERT INTO members (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon2.attend@gmal.com', 'jonate2n', '123456', 'attendee', 1, 1);
-INSERT INTO members (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon3.attend@gmal.com', 'jon3aten', '123456', 'attendee', 1, 1);
-INSERT INTO members (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon4.attend@gmal.com', 'jon4aten', '123456', 'attendee', 1, 1);
-INSERT INTO members (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon5.attend@gmal.com', 'jona5ten', '123456', 'attendee', 1, 1);
+INSERT INTO members (email, username, password, plan_id, payment_type_id) VALUES ('jhon.attend@gmal.com', 'jonaten', '123456',  1, 1);
+INSERT INTO members (email, username, password, plan_id, payment_type_id) VALUES ('jhon2.attend@gmal.com', 'jonate2n', '123456', 1, 1);
+INSERT INTO members (email, username, password, plan_id, payment_type_id) VALUES ('jhon3.attend@gmal.com', 'jon3aten', '123456', 1, 1);
+INSERT INTO members (email, username, password, plan_id, payment_type_id) VALUES ('jhon4.attend@gmal.com', 'jon4aten', '123456', 1, 1);
+INSERT INTO members (email, username, password, plan_id, payment_type_id) VALUES ('jhon5.attend@gmal.com', 'jona5ten', '123456', 1, 1);
 

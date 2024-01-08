@@ -1,5 +1,6 @@
 package com.SEApp.app.model.logic.Manager;
 
+import com.SEApp.app.model.classes.Logged;
 import com.SEApp.app.model.classes.Manager;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
@@ -84,6 +85,15 @@ public class ManagerFacade {
         if (manager == null) {
             return false;
         }
-        return manager.checkPassword(password, false);
+        if (!manager.checkPassword(password, false))
+            return false;
+
+        Logged.getInstance().setUser(manager);
+        return true;
+    }
+
+    public boolean logout() {
+        Logged.getInstance().logout();
+        return true;
     }
 }

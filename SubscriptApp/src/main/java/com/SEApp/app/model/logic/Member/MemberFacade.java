@@ -1,5 +1,6 @@
 package com.SEApp.app.model.logic.Member;
 
+import com.SEApp.app.model.classes.Logged;
 import com.SEApp.app.model.classes.Member;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.logic.exceptions.LoginException;
@@ -18,7 +19,6 @@ public class MemberFacade {
 
     private static MemberDao memberDao;
 
-    private static Member currentMember;
 
 
     /**
@@ -82,15 +82,12 @@ public class MemberFacade {
         return memberDao.list();
     }
 
-    public static void setCurrentMember(Member member) {
-        currentMember = member;
-    }
 
     public static Member getCurrentMember() throws LoginException{
-        if(currentMember == null) {
-            throw new LoginException("You must be logged in to subscribe to a plan");
+        if(Logged.getInstance().isLogged() && Logged.getInstance().isMember()) {
+            return (Member) Logged.getInstance().getUser();
         }
-        return currentMember;
+        throw new LoginException("User not logged");
     }
 
     public boolean login(String username, String password) throws SQLException, LoginException {
@@ -102,7 +99,7 @@ public class MemberFacade {
             throw new LoginException("Invalid username or password");
         }
 
-        currentMember = member;
+        Logged.getInstance().login(member);
         return true;
     }
 
@@ -125,10 +122,10 @@ public class MemberFacade {
     }
 
     public void logout() {
-        currentMember = null;
+        Logged.getInstance().logout();
     }
 
     public boolean isLogged() {
-        return currentMember != null;
+        return Logged.getInstance().isLogged();
     }
 }

@@ -4,10 +4,13 @@ import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
 import com.SEApp.app.model.persist.Dao.Member.MemberDao;
+import com.SEApp.app.model.persist.schemas.MemberSchema;
 import org.junit.jupiter.api.*;
 import com.SEApp.app.model.classes.Member;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -52,7 +55,7 @@ public class MemberDaoTest {
     @Test
     @Order(1)
     public void testCreateMember() throws SQLException {
-        Member member = new Member("test@example.com", "test", "AZERTYUIOP", true);
+        Member member = new Member("test", "test@example.com", "AZERTYUIOP", true);
         memberDao.create(member);
         assert member.getId() != -1;
     }
@@ -61,6 +64,13 @@ public class MemberDaoTest {
     @Order(2)
     public void testFindByEmail() throws SQLException {
         Member member = memberDao.findByEmail("test@example.com");
+        if (member == null){
+            List<Member> members = memberDao.list();
+            for (Member m : members){
+                System.out.println(m.getEmail());
+            }
+            fail("Member not found");
+        }
         assertEquals("test@example.com", member.getEmail());
     }
 

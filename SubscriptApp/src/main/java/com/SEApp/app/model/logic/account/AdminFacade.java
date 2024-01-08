@@ -1,5 +1,7 @@
 package com.SEApp.app.model.logic.account;
 
+import com.SEApp.app.model.classes.Admin;
+import com.SEApp.app.model.classes.Logged;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.account.admin.AdminDAO;
 
@@ -21,6 +23,17 @@ public class AdminFacade {
     public boolean login(String username, String password) throws SQLException {
         AdminDAO adminDAO = AbstractDAOFactory.getInstance().getAdminDao();
 
-        return adminDAO.get(username).checkPassword(password, false);
+        Admin admin = adminDAO.get(username);
+
+        if (admin == null) {
+            return false;
+        }
+
+        if (!admin.checkPassword(password, false)) {
+            return false;
+        }
+
+        Logged.getInstance().login(admin);
+        return true;
     }
 }

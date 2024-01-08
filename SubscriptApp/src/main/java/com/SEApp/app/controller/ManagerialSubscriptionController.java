@@ -2,9 +2,7 @@ package com.SEApp.app.controller;
 
 import com.SEApp.app.components.ElementLogic;
 import com.SEApp.app.components.GridDisplay;
-import com.SEApp.app.model.classes.PaymentType;
-import com.SEApp.app.model.classes.Plan;
-import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.classes.*;
 import com.SEApp.app.model.logic.Plan.PlanFacade;
 import com.SEApp.app.model.logic.Subscription.SubscriptionFacade;
 import com.SEApp.app.model.logic.account.PaymentTypeFacade;
@@ -41,6 +39,12 @@ public class ManagerialSubscriptionController {
     private Member selectedMember;
 
     public void initialize() {
+        if (Logged.getInstance().getUser() == null || Logged.getInstance().getUser().getRole() != Role.MANAGER) {
+            raiseError("You must be logged in as a manager manage a member's subscription");
+            return;
+        }
+
+
         Member member = null;
 
         try {
@@ -50,12 +54,7 @@ public class ManagerialSubscriptionController {
         }
 
         if(member == null) {
-            raiseError("You must be logged in to subscribe to a plan");
-            return;
-        }
-
-        if(member == null) {
-            raiseError("You must be logged in to subscribe to a plan");
+            raiseError("Could not get the member");
             return;
         }
 
@@ -232,8 +231,7 @@ public class ManagerialSubscriptionController {
     }
 
     private void raiseError(String message, Exception e) {
-        subscriptionLabel.setText(message);
-        System.err.println(message);
+        raiseError(message);
         e.printStackTrace();
     }
 }

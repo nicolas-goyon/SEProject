@@ -4,11 +4,13 @@ import com.SEApp.app.model.persist.utils.PasswordEncrypt;
 import com.SEApp.app.model.persist.utils.UpdateOperand;
 import com.SEApp.app.model.persist.schemas.MemberSchema;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 
  */
 public class Member implements User {
-
 
     private int id;
 
@@ -35,8 +37,7 @@ public class Member implements User {
 
     private Integer paymentType_id;
 
-    /* ajouter un bouton qui permet de dire si c'est payé ou pas */
-    private boolean payment;
+    private String lastPaymentDate;
 
 
     /**
@@ -49,22 +50,16 @@ public class Member implements User {
         setPassword(password, isPasswordEncrypted);
         this.plan_id = null;
         this.paymentType_id = null;
+        this.lastPaymentDate = null;
     }
 
     public Member(String username, String email, String password, boolean isPasswordEncrypted) {
-        this.id = -1;
-        this.username = username;
-        this.email = email;
-        setPassword(password, isPasswordEncrypted);
-        this.plan_id = null;
+        this(-1, username, email, password, isPasswordEncrypted);
     }
 
 
-    public Member(int id,String username, String email, String password, String role, Integer plan_id, Integer paymentType_id, boolean isPasswordEncrypted) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        setPassword(password, isPasswordEncrypted);
+    public Member(int id,String username, String email, String password, Integer plan_id, Integer paymentType_id, boolean isPasswordEncrypted) {
+        this(id, username, email, password, isPasswordEncrypted);
         this.plan_id = plan_id;
         this.paymentType_id = paymentType_id;
     }
@@ -128,7 +123,8 @@ public class Member implements User {
                 new UpdateOperand<>(MemberSchema.EMAIL, this.email),
                 new UpdateOperand<>(MemberSchema.PASSWORD, this.password),
                 new UpdateOperand<>(MemberSchema.PLAN_ID, this.plan_id),
-                new UpdateOperand<>(MemberSchema.PAYMENT_TYPE_ID, this.paymentType_id)
+                new UpdateOperand<>(MemberSchema.PAYMENT_TYPE_ID, this.paymentType_id),
+                new UpdateOperand<>(MemberSchema.LAST_PAYMENT_DATE, this.lastPaymentDate)
         };
         return values;
     }
@@ -155,5 +151,23 @@ public class Member implements User {
 
     public void setPaymentType(Integer paymentType_id) {
         this.paymentType_id = paymentType_id;
+    }
+
+    public void setLastPaymentDate(Date lastPaymentDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        this.lastPaymentDate = formatter.format(lastPaymentDate);
+    }
+
+    public String getLastPaymentDate() {
+        return lastPaymentDate;
+    }
+
+    public Date getLastPaymentDateAsDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formatter.parse(lastPaymentDate);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

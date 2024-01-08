@@ -12,7 +12,9 @@ public class MemberSchema {
 
     public static final String PAYMENT_TYPE_ID = "payment_type_id";
 
+    public static final String LAST_PAYMENT_DATE = "last_payment_date";
 
-    public static final String[] COLUMNS = {ID, EMAIL, USERNAME, PASSWORD, PLAN_ID, PAYMENT_TYPE_ID};
+
+    public static final String[] COLUMNS = {ID, EMAIL, USERNAME, PASSWORD, PLAN_ID, PAYMENT_TYPE_ID, LAST_PAYMENT_DATE};
 
 }

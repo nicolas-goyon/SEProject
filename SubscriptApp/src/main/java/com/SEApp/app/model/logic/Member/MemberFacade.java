@@ -10,6 +10,7 @@ import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.Member.MemberDao;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -121,6 +122,20 @@ public class MemberFacade extends UserFacade {
 
 
         return memberDao.create(member_to_register).getId() != -1;
+    }
+
+    public boolean pay() throws SQLException, LoginException, IncorrectOperandException {
+        Member member = getCurrentMember();
+
+        if(member == null) {
+            throw new LoginException("User not logged");
+        }
+
+        if(member.getPaymentType() == null || member.getPlan() == null) {
+            throw new LoginException("You must select a plan and a payment type");
+        }
+        member.setLastPaymentDate(new Date());
+        return memberDao.update(member).getId() != -1;
     }
 
 }

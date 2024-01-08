@@ -29,6 +29,7 @@ public class MemberSubscriptionController {
     public ScrollPane plansPane;
     public Label planLabel;
     public Label paymentTypeLabel;
+    public Label lastPaymentLabel;
 
     private List<PaymentType> paymentTypes;
     private List<Plan> plans;
@@ -39,22 +40,27 @@ public class MemberSubscriptionController {
 
     private final Map<String, String> options = new HashMap<>();
 
+    private PaymentTypeFacade paymentTypeFacade;
+
+    private PlanFacade planFacade;
+
+    private MemberFacade memberFacade;
+
     public void initialize() {
         options.put("editText", "Select");
         options.put("noDelete", "true");
         options.put("maxWidth", "300");
 
-        PlanFacade planFacade = null;
-        PaymentTypeFacade paymentTypeFacade = null;
 
         try {
             planFacade = PlanFacade.getInstance();
             paymentTypeFacade = PaymentTypeFacade.getInstance();
+            memberFacade = MemberFacade.getInstance();
         } catch (SQLException e) {
             raiseError("Could not connect to database", e);
         }
 
-        if (planFacade == null || paymentTypeFacade == null) {
+        if (planFacade == null || paymentTypeFacade == null || memberFacade == null) {
             raiseError("Could not connect to database");
             return;
         }
@@ -81,16 +87,25 @@ public class MemberSubscriptionController {
         initializeSubscription();
 
 
+        Member member = null;
+        try {
+            member = MemberFacade.getCurrentMember();
+        } catch (Exception e) {
+            raiseError("Could not get current member", e);
+        }
+
+        if(member != null) {
+            lastPaymentLabel.setText(member.getLastPaymentDate());
+        }
+
+
     }
 
     private void initializeSubscription(){
         Member member = null;
 
         try {
-            MemberFacade memberFacade = MemberFacade.getInstance();
-            member = memberFacade.getCurrentMember();
-        } catch (SQLException e) {
-            raiseError("Could not connect to database", e);
+            member = MemberFacade.getCurrentMember();
         } catch (LoginException e) {
             raiseError("You must be logged in to subscribe to a plan", e);
         } catch (Exception e) {
@@ -227,9 +242,47 @@ public class MemberSubscriptionController {
     }
 
     private void raiseError(String message, Exception e) {
-        subscriptionLabel.setText(message);
-        System.err.println(message);
+        raiseError(message);
         e.printStackTrace();
     }
 
+    public void pay() {
+        if (selectedPaymentType == null) {
+            raiseError("Please select a payment type");
+            return;
+        }
+
+        if (selectedPlan == null) {
+            raiseError("Please select a plan");
+            return;
+        }
+
+        boolean success = false;
+        try {
+            success = memberFacade.pay();
+        } catch (SQLException e) {
+            raiseError("Could not connect to database", e);
+            return;
+        } catch (LoginException e) {
+            raiseError("You must be logged in to pay", e);
+            return;
+        } catch (Exception e) {
+            raiseError("Could not pay", e);
+            return;
+        }
+
+        if(!success) {
+            raiseError("Could not pay");
+        }
+
+        Member member = null;
+        try {
+            member = MemberFacade.getCurrentMember();
+        } catch (Exception e) {
+            raiseError("Could not get current member", e);
+            return;
+        }
+        lastPaymentLabel.setText(member.getLastPaymentDate());
+
+    }
 }

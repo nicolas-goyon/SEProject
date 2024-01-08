@@ -1,6 +1,7 @@
 package com.SEApp.app.controller;
 
 import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.classes.Role;
 import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.github.fxrouter.FXRouter;
@@ -82,7 +83,7 @@ public class Register {
 
         if (isRegistered) {
             try {
-                FXRouter.goTo("login");
+                FXRouter.goTo("login", Role.MEMBER);
             } catch (IOException e) {
                 e.printStackTrace();
             }

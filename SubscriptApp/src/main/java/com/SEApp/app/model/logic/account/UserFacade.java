@@ -1,7 +1,9 @@
 package com.SEApp.app.model.logic.account;
 
 
+import com.SEApp.app.model.classes.Member;
 import com.SEApp.app.model.classes.User;
+import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.utils.PasswordEncrypt;
@@ -9,6 +11,8 @@ import com.SEApp.app.model.persist.Dao.account.user.UserDao;
 
 import java.sql.SQLException;
 import java.util.List;
+
+
 
 /**
  * 
@@ -19,6 +23,8 @@ public class UserFacade {
      * 
      */
     private static UserFacade instance;
+
+    private static final AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
 
     private final UserDao dao;
 
@@ -92,5 +98,24 @@ public class UserFacade {
 
     public User getUserById(int id) throws SQLException {
         return dao.get(id);
+    }
+
+    public boolean createUser(User user) throws SQLException {
+        return dao.create(user).getId() != -1;
+    }
+
+    /**
+     * @param user to delete
+     */
+    public boolean deleteUser(User user) throws SQLException, IncorrectOperandException {
+        return dao.delete(user);
+
+    }
+
+    /**
+     * @param user to update
+     */
+    public boolean updateUser(User user) throws SQLException, IncorrectOperandException {
+        return dao.update(user).getId() != -1;
     }
 }

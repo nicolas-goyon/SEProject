@@ -18,7 +18,7 @@ import java.util.*;
 /**
  *
  */
-public class MemberController {
+public class MemberController extends UserListController {
 
     public VBox confirmPasswordArea;
     public TextField confirmPassword;
@@ -68,8 +68,8 @@ public class MemberController {
     public void listUpdate(){
         List<ElementLogic> list = new ArrayList<>();
 
-        for (Member Member : MemberList) {
-            list.add(new ElementLogic(Member.getId(), Member.getUsername(), Member.getEmail()));
+        for (Member member : MemberList) {
+            list.add(new ElementLogic(member.getId(), member.getUsername(), member.getEmail()));
         }
 
         GridDisplay gridDisplay = new GridDisplay(list, this::editButtonPressed, this::deleteButtonPressed);
@@ -89,10 +89,10 @@ public class MemberController {
     public Void editButtonPressed(Integer id){
         formModal.setVisible(true);
         int index = MemberList.indexOf(MemberList.stream().filter(Member -> Member.getId() == id).toList().get(0));
-        Member Member = MemberList.get(index);
-        this.id.setText(String.valueOf(Member.getId()));
-        name.setText(Member.getUsername());
-        email.setText(Member.getEmail());
+        Member member = MemberList.get(index);
+        this.id.setText(String.valueOf(member.getId()));
+        name.setText(member.getUsername());
+        email.setText(member.getEmail());
 //        passwordArea.setVisible(false);
 //        confirmPasswordArea.setVisible(false);
 
@@ -103,7 +103,7 @@ public class MemberController {
     public Void deleteButtonPressed(Integer id){
 
         try {
-            facade.deleteMember(MemberList.stream().filter(Member -> Member.getId() == id).toList().get(0));
+            facade.deleteMember(MemberList.stream().filter(member -> member.getId() == id).toList().get(0));
         } catch (Exception e) {
             message.setText("Error while deleting Member : delete error");
             System.err.println("Error while deleting Member : delete error");
@@ -114,9 +114,6 @@ public class MemberController {
         listUpdate();
         return null;
     }
-
-
-
 
 
 
@@ -138,11 +135,11 @@ public class MemberController {
             return;
         }
 
-        Member Member = new Member(nameS, emailS, passwordS, false);
+        Member member = new Member(nameS, emailS, passwordS, false);
 
         boolean isCreated = false;
         try {
-            isCreated = facade.createMember(Member);
+            isCreated = facade.createMember(member);
         } catch (Exception e) {
             message.setText("Error while creating Member : connection error");
             return;
@@ -154,7 +151,7 @@ public class MemberController {
             message.setText("Error while creating Member : Member not created");
         }
 
-        MemberList.add(Member);
+        MemberList.add(member);
         listUpdate();
 
     }
@@ -179,8 +176,8 @@ public class MemberController {
 
         // filter the list to get the Member with the id
         List<Member> filteredList = MemberList.stream().filter(Member -> Member.getId() == Integer.parseInt(id.getText())).toList();
-        Member Member = filteredList.get(0);
-        Member newMember = new Member(Member.getId(), Member.getUsername(), Member.getEmail(), Member.getPassword(), true);
+        Member member = filteredList.get(0);
+        Member newMember = new Member(member.getId(), member.getUsername(), member.getEmail(), member.getPassword(), true);
 
         if (!nameS.isEmpty()) {
             newMember.setUsername(nameS);
@@ -210,7 +207,7 @@ public class MemberController {
             return;
         }
 
-        MemberList.set(MemberList.indexOf(Member), newMember);
+        MemberList.set(MemberList.indexOf(member), newMember);
         listUpdate();
 
     }

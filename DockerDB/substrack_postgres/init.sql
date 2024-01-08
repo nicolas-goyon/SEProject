@@ -13,6 +13,8 @@ CREATE TABLE managers (
     password VARCHAR(255)
 );
 
+
+
 CREATE TABLE plans (
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) UNIQUE,
@@ -51,3 +53,4 @@ INSERT INTO users (email, username, password, role, plan_id, payment_type_id) VA
 INSERT INTO users (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon3.attend@gmal.com', 'jon3aten', '123456', 'attendee', 1, 1);
 INSERT INTO users (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon4.attend@gmal.com', 'jon4aten', '123456', 'attendee', 1, 1);
 INSERT INTO users (email, username, password, role, plan_id, payment_type_id) VALUES ('jhon5.attend@gmal.com', 'jona5ten', '123456', 'attendee', 1, 1);
+

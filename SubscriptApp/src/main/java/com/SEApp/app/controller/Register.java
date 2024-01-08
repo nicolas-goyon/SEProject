@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 
 import java.io.*;
 import java.sql.SQLException;
-import java.util.*;
 
 /**
  * 
@@ -58,7 +57,7 @@ public class Register {
             return;
         }
 
-        User user = new User(usernameText, emailText, passwordText, "user", false);
+        User user = new User(usernameText, emailText, passwordText, false);
 
         UserFacade userFacade = null;
 

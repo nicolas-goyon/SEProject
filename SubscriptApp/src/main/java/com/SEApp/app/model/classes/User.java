@@ -4,9 +4,6 @@ import com.SEApp.app.model.persist.utils.PasswordEncrypt;
 import com.SEApp.app.model.persist.utils.UpdateOperand;
 import com.SEApp.app.model.persist.schemas.UserSchema;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 
  */
@@ -43,11 +40,14 @@ public class User {
 
     private Integer paymentType_id;
 
+    /* ajouter un bouton qui permet de dire si c'est payé ou pas */
+    private boolean payment;
+
 
     /**
      * Default constructor
      */
-    public User(int id, String username, String email, String password, String role, boolean isPasswordEncrypted) {
+    public User(int id, String username, String email, String password, boolean isPasswordEncrypted) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -57,7 +57,7 @@ public class User {
         this.paymentType_id = null;
     }
 
-    public User(String username, String email, String password, String role, boolean isPasswordEncrypted) {
+    public User(String username, String email, String password, boolean isPasswordEncrypted) {
         this.id = -1;
         this.username = username;
         this.email = email;

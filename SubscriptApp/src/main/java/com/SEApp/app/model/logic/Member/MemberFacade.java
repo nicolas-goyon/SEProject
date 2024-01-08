@@ -15,7 +15,7 @@ public class MemberFacade {
 
     private static final AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
 
-    private static MemberDao MemberDao;
+    private static MemberDao memberDao;
 
 
     /**
@@ -28,7 +28,7 @@ public class MemberFacade {
      */
     private MemberFacade() {
         try {
-            MemberDao = factory.getMemberDao();
+            memberDao = factory.getMemberDao();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -45,26 +45,26 @@ public class MemberFacade {
     }
 
     /**
-     * @param Member
+     * @param member
      * @return
      */
-    public boolean createMember(Member Member) throws SQLException {
-        return MemberDao.create(Member).getId() != -1;
+    public boolean createMember(Member member) throws SQLException {
+        return memberDao.create(member).getId() != -1;
     }
 
     /**
-     * @param Member to delete
+     * @param member to delete
      */
-    public boolean deleteMember(Member Member) throws SQLException, IncorrectOperandException {
-        return MemberDao.delete(Member);
+    public boolean deleteMember(Member member) throws SQLException, IncorrectOperandException {
+        return memberDao.delete(member);
 
     }
 
     /**
-     * @param Member to update
+     * @param member to update
      */
-    public boolean updateMember(Member Member) throws SQLException, IncorrectOperandException {
-        return MemberDao.update(Member).getId() != -1;
+    public boolean updateMember(Member member) throws SQLException, IncorrectOperandException {
+        return memberDao.update(member).getId() != -1;
     }
 
     /**
@@ -72,10 +72,10 @@ public class MemberFacade {
      * @return
      */
     public Member getMember(int id) throws SQLException {
-        return MemberDao.get(id);
+        return memberDao.get(id);
     }
 
     public List<Member> getAllMembers() throws SQLException {
-        return MemberDao.list();
+        return memberDao.list();
     }
 }

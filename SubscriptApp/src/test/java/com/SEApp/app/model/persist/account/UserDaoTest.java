@@ -64,7 +64,7 @@ public class UserDaoTest {
     @Test
     @Order(1)
     public void testCreateUser() throws SQLException {
-        User user = new User(-1, "test", "test@test", "test", "user", false);
+        User user = new User(-1, "test", "test@test", "test", false);
         userDao.create(user);
         assert user.getId() != -1;
     }

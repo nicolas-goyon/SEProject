@@ -7,7 +7,7 @@ import com.SEApp.app.model.persist.utils.UpdateOperand;
 /**
  *
  */
-public class Member implements Savable {
+public class Member extends User implements Savable  {
 
 
     /**
@@ -39,11 +39,8 @@ public class Member implements Savable {
      * @param isAlreadyEncrypted boolean to check if the password is already encrypted
      */
     public Member(int id, String username, String email, String password, boolean isAlreadyEncrypted) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        setPassword(password, isAlreadyEncrypted);
-
+        super(id, username, email, password, isAlreadyEncrypted);
+        setPassword( password, isAlreadyEncrypted);
     }
 
     /**
@@ -54,12 +51,13 @@ public class Member implements Savable {
      * @param isAlreadyEncrypted boolean to check if the password is already encrypted
      */
     public Member(String username, String email, String password, boolean isAlreadyEncrypted) {
-        this.id = -1;
-        this.username = username;
-        this.email = email;
+        super(username, email, password,isAlreadyEncrypted);
         setPassword(password, isAlreadyEncrypted);
 
     }
+
+
+
 
     /**
      * @return the id of the Member

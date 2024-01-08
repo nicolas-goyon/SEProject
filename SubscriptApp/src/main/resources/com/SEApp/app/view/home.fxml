@@ -13,7 +13,9 @@
     <!--  Not logged  -->
     <VBox fx:id="notLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
           visible="true">
-        <Button mnemonicParsing="false" text="Login" onAction="#handleLoginButton" fx:id="loginButton"/>
+        <Button mnemonicParsing="false" text="Login as Member" onAction="#handleLoginMemberButton" fx:id="loginMemberButton"/>
+        <Button mnemonicParsing="false" text="Login as Manager" onAction="#handleLoginManagerButton" fx:id="loginManagerButton"/>
+        <Button mnemonicParsing="false" text="Login as Admin" onAction="#handleLoginAdminButton" fx:id="loginAdminButton"/>
         <Button mnemonicParsing="false" text="Register" onAction="#handleRegisterButton" fx:id="registerButton"/>
     </VBox>
 
@@ -34,8 +36,6 @@
     <VBox fx:id="adminLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
           visible="false">
         <Button mnemonicParsing="false" text="Managers" onAction="#handleManagersButton" fx:id="managersButton"/>
-        <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton"
-                fx:id="paymentTypeButton"/>
     </VBox>
 
     <!--  Manager logged  -->
@@ -43,5 +43,7 @@
           visible="false">
         <Button mnemonicParsing="false" text="Plans Management" onAction="#handlePlansButton" fx:id="plansButton"/>
         <Button mnemonicParsing="false" text="Members management" onAction="#handleMembersButton" fx:id="membersButton"/>
+        <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton"
+                fx:id="paymentTypeButton"/>
     </VBox>
 </VBox>

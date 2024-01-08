@@ -1,13 +1,14 @@
 package com.SEApp.app.model.logic.Payment;
 
 import com.SEApp.app.model.classes.Payment;
+import com.SEApp.app.model.logic.Facade;
 
 import java.util.*;
 
 /**
  *
  */
-public class PaymentFacade {
+public class PaymentFacade implements Facade {
 
     /**
      * Default constructor

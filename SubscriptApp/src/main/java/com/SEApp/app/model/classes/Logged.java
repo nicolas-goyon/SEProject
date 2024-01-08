@@ -50,7 +50,9 @@ public class Logged {
         return user instanceof Member;
     }
 
-
+    public Role getRole() {
+        return user.getRole();
+    }
 
 }
 

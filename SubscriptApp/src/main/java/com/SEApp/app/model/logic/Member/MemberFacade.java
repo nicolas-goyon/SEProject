@@ -2,6 +2,8 @@ package com.SEApp.app.model.logic.Member;
 
 import com.SEApp.app.model.classes.Logged;
 import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.logic.Facade;
+import com.SEApp.app.model.logic.account.UserFacade;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  *
  */
-public class MemberFacade {
+public class MemberFacade extends UserFacade {
 
     private static final AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
 
@@ -121,11 +123,4 @@ public class MemberFacade {
         return memberDao.create(member_to_register).getId() != -1;
     }
 
-    public void logout() {
-        Logged.getInstance().logout();
-    }
-
-    public boolean isLogged() {
-        return Logged.getInstance().isLogged();
-    }
 }

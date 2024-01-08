@@ -2,6 +2,8 @@ package com.SEApp.app.model.logic.Manager;
 
 import com.SEApp.app.model.classes.Logged;
 import com.SEApp.app.model.classes.Manager;
+import com.SEApp.app.model.logic.Facade;
+import com.SEApp.app.model.logic.account.UserFacade;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
@@ -12,7 +14,7 @@ import java.util.List;
 /**
  * 
  */
-public class ManagerFacade {
+public class ManagerFacade extends UserFacade {
 
     private static final AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
 
@@ -92,8 +94,4 @@ public class ManagerFacade {
         return true;
     }
 
-    public boolean logout() {
-        Logged.getInstance().logout();
-        return true;
-    }
 }

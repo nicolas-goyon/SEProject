@@ -14,6 +14,7 @@
       xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.SEApp.app.controller.Register">
+    <fx:include source="../components/Header.fxml"/>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>

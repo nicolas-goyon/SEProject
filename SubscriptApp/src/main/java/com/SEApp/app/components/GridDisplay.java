@@ -94,7 +94,6 @@ public class GridDisplay extends VBox {
             }
         }
         this.columnCount = calculateColumnCount(width);
-        System.out.println("Column count: " + this.columnCount);
         updateGrid();
     }
 

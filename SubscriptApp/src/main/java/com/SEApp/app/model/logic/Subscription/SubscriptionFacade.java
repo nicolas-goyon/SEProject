@@ -1,6 +1,7 @@
 package com.SEApp.app.model.logic.Subscription;
 
 import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.logic.Facade;
 import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.logic.exceptions.LoginException;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 /**
  * 
  */
-public class SubscriptionFacade {
+public class SubscriptionFacade implements Facade {
 
     private static Member managerialMember;
 

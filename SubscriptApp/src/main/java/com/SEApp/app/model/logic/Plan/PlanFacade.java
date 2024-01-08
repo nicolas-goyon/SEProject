@@ -1,6 +1,7 @@
 package com.SEApp.app.model.logic.Plan;
 
 import com.SEApp.app.model.classes.Plan;
+import com.SEApp.app.model.logic.Facade;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
@@ -11,7 +12,7 @@ import java.util.*;
 /**
  * 
  */
-public class PlanFacade {
+public class PlanFacade implements Facade {
 
     private static PlanFacade facade;
 

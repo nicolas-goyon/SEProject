@@ -1,20 +1,20 @@
 package com.SEApp.app.controller;
 
 import com.SEApp.app.model.classes.Logged;
+import com.SEApp.app.model.classes.Role;
 import com.SEApp.app.model.logic.Member.MemberFacade;
+import com.SEApp.app.model.logic.account.UserFacade;
 import com.github.fxrouter.FXRouter;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class HomeController {
 
 
     // ---- BUTTONS ----
-    public Button loginButton;
     public Button registerButton;
     public Button logOffButton;
     public Button plansButton;
@@ -92,13 +92,6 @@ public class HomeController {
         }
     }
 
-    public void handleLoginButton() {
-        try {
-            FXRouter.goTo("login");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     public void handlePaymentTypeButton() {
@@ -110,8 +103,8 @@ public class HomeController {
     }
 
     public void handleLogOffButton() throws SQLException {
-        MemberFacade memberFacade = MemberFacade.getInstance();
-        memberFacade.logout();
+        UserFacade userFacade = MemberFacade.getInstance();
+        userFacade.logout();
 
         try {
             FXRouter.goTo("home");
@@ -136,4 +129,27 @@ public class HomeController {
         }
     }
 
+    public void handleLoginMemberButton() {
+        try {
+            FXRouter.goTo("login", Role.MEMBER);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleLoginManagerButton() {
+        try {
+            FXRouter.goTo("login", Role.MANAGER);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleLoginAdminButton() {
+        try {
+            FXRouter.goTo("login", Role.ADMIN);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

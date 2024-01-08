@@ -1,6 +1,7 @@
 package com.SEApp.app.model.logic.account;
 
 import com.SEApp.app.model.classes.PaymentType;
+import com.SEApp.app.model.logic.Facade;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
@@ -11,7 +12,7 @@ import java.util.*;
 /**
  * 
  */
-public class PaymentTypeFacade {
+public class PaymentTypeFacade implements Facade {
 
     private static final AbstractDAOFactory factory = AbstractDAOFactory.getInstance();
     private static PaymentTypeDAO paymentTypeDAO;

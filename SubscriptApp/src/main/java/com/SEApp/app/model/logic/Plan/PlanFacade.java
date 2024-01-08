@@ -61,7 +61,7 @@ public class PlanFacade implements Facade {
      * @param plan 
      * @return
      */
-    public boolean createPlan(Plan plan) throws SQLException {
+    public boolean createPlan(Plan plan) throws SQLException, IncorrectOperandException {
         return dao.create(plan) != null;
     }
 
@@ -80,5 +80,6 @@ public class PlanFacade implements Facade {
     public boolean deletePlan(Plan plan) throws SQLException, IncorrectOperandException {
         return dao.delete(plan);
     }
+
 
 }

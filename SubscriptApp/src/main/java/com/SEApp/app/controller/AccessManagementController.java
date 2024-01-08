@@ -140,8 +140,6 @@ public class AccessManagementController {
         Access access = null;
         try {
             access = accessFacade.createAccess(name.getText(), description.getText());
-
-
         } catch (Exception e) {
             raiseError("Error while creating new access", e);
             return;
@@ -182,10 +180,16 @@ public class AccessManagementController {
         access.setName(name.getText());
         access.setDescription(description.getText());
 
+        boolean isUpdated = false;
         try {
-            accessFacade.updateAccess(access);
+            isUpdated = accessFacade.updateAccess(access);
         } catch (Exception e) {
             raiseError("Error while updating access", e);
+            return;
+        }
+
+        if(!isUpdated){
+            raiseError("Error while updating access");
             return;
         }
 

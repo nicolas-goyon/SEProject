@@ -47,5 +47,6 @@
         <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton"
                 fx:id="paymentTypeButton"/>
         <Button mnemonicParsing="false" text="Access Management" onAction="#handleAccessButton" />
+        <Button mnemonicParsing="false" text="Plan Access Management" onAction="#handlePlanAccessButton" />
     </VBox>
 </VBox>

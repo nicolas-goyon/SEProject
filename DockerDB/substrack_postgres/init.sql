@@ -31,6 +31,16 @@ CREATE TABLE plans
     description VARCHAR(255),
     price       DECIMAL(10, 2)
 );
+
+CREATE TABLE plan_accesses
+(
+    plan_id    INT,
+    access_id  INT,
+    FOREIGN KEY (plan_id) REFERENCES plans (id),
+    FOREIGN KEY (access_id) REFERENCES accesses (id),
+    PRIMARY KEY (plan_id, access_id)
+);
+
 CREATE TABLE members
 (
     id                SERIAL PRIMARY KEY,
@@ -67,6 +77,7 @@ VALUES ('Basic', 'Basic plan', 10);
 INSERT INTO plans (name, description, price)
 VALUES ('Premium', 'Premium plan', 20);
 
+
 INSERT INTO members (email, username, password, plan_id, payment_type_id)
 VALUES ('jhon.attend@gmal.com', 'jonaten', '123456', 1, 1);
 INSERT INTO members (email, username, password, plan_id, payment_type_id)
@@ -89,3 +100,17 @@ VALUES ('sauna', 'Sauna access');
 
 INSERT INTO accesses (name, description)
 VALUES ('jacuzzi', 'Jacuzzi access');
+
+
+
+INSERT INTO plan_accesses (plan_id, access_id)
+VALUES (2, 1);
+
+INSERT INTO plan_accesses (plan_id, access_id)
+VALUES (3, 1);
+
+INSERT INTO plan_accesses (plan_id, access_id)
+VALUES (3, 2);
+
+INSERT INTO plan_accesses (plan_id, access_id)
+VALUES (3, 3);

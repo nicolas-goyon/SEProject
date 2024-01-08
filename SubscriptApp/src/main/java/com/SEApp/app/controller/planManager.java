@@ -94,7 +94,7 @@ public class planManager {
         try {
             inserted = facade.createPlan(plan);
         } catch (Exception e) {
-            raiseError("Error while adding plan : connection error");
+            raiseError("Error while adding plan : connection error", e);
             return;
         }
 
@@ -187,6 +187,11 @@ public class planManager {
     private void raiseError(String error) {
         message.setText(error);
         System.err.println(error);
+    }
+
+    private void raiseError(String error, Exception e) {
+        raiseError(error);
+        e.printStackTrace();
     }
 
     private Plan getPlanFromForm() {

@@ -161,4 +161,12 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
+
+    public void handlePlanAccessButton() {
+        try {
+            FXRouter.goTo("planAccessManagement");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

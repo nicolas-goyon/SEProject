@@ -37,21 +37,21 @@ public class Plan implements Savable {
     /**
      *  access types of plan
      */
-    private String[] accesses;
+    private List<Access> accesses;
 
     /**
      * @param id of plan
      * @param name of plan
      * @param Description of plan
      * @param price of plan
-     * @param Accesses of plan
+     * @param accesses of plan
      */
-    public Plan(int id, String name, String Description, float price, String[] Accesses) {
+    public Plan(int id, String name, String Description, float price, List<Access> accesses) {
         this.id = id;
         this.name = name;
         this.description = Description;
         this.price = price;
-        this.accesses = Accesses;
+        this.accesses = accesses;
     }
 
     /**
@@ -69,14 +69,14 @@ public class Plan implements Savable {
      * @param name of plan
      * @param Description of plan
      * @param price of plan
-     * @param Accesses of plan
+     * @param accesses of plan
      */
-    public Plan(String name, String Description, float price, String[] Accesses) {
+    public Plan(String name, String Description, float price, List<Access> accesses) {
         this.id = -1;
         this.name = name;
         this.description = Description;
         this.price = price;
-        this.accesses = Accesses;
+        this.accesses = accesses;
     }
 
     /**
@@ -138,15 +138,15 @@ public class Plan implements Savable {
     /**
      * @return the accesses
      */
-    public String[] getAccesses() {
+    public List<Access> getAccesses() {
         return accesses;
     }
 
     /**
-     * @param Accesses of plan
+     * @param accesses of plan
      */
-    public void setAccesses(String[] Accesses) {
-        this.accesses = Accesses;
+    public void setAccesses(List<Access> accesses) {
+        this.accesses = accesses;
     }
 
     /**

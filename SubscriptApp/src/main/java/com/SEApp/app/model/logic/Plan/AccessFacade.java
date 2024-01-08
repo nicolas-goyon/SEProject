@@ -12,7 +12,7 @@ public class AccessFacade {
 
     private static AccessFacade instance;
 
-    private AccessDao accessDao;
+    private final AccessDao accessDao;
 
     private AccessFacade() throws SQLException {
         accessDao = AbstractDAOFactory.getInstance().getAccessDao();
@@ -26,7 +26,7 @@ public class AccessFacade {
     }
 
 
-    public Access createAccess(String name, String description) throws SQLException {
+    public Access createAccess(String name, String description) throws SQLException, IncorrectOperandException {
         Access access = new Access(name, description);
         return accessDao.create(access);
     }

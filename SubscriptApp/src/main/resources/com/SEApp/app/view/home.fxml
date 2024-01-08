@@ -10,6 +10,7 @@
 
 
     <!--  5 button zones : Not logged, All User logged , Member logged, Admin Logged, Manager Logged  -->
+
     <!--  Not logged  -->
     <VBox fx:id="notLoggedZone" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0"
           visible="true">
@@ -45,5 +46,6 @@
         <Button mnemonicParsing="false" text="Members management" onAction="#handleMembersButton" fx:id="membersButton"/>
         <Button mnemonicParsing="false" text="Types of Payment" onAction="#handlePaymentTypeButton"
                 fx:id="paymentTypeButton"/>
+        <Button mnemonicParsing="false" text="Access Management" onAction="#handleAccessButton" />
     </VBox>
 </VBox>

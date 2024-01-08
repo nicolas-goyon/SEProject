@@ -5,6 +5,7 @@ import com.SEApp.app.model.classes.Role;
 import com.SEApp.app.model.logic.Member.MemberFacade;
 import com.SEApp.app.model.logic.account.UserFacade;
 import com.github.fxrouter.FXRouter;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -148,6 +149,14 @@ public class HomeController {
     public void handleLoginAdminButton() {
         try {
             FXRouter.goTo("login", Role.ADMIN);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleAccessButton() {
+        try {
+            FXRouter.goTo("accessManagement");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

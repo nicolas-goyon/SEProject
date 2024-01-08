@@ -1,5 +1,12 @@
 -- Table creation script
 
+CREATE TABLE accesses
+(
+    id          SERIAL PRIMARY KEY,
+    name        VARCHAR(255) UNIQUE,
+    description VARCHAR(255)
+);
+
 CREATE TABLE payment_type
 (
     id          SERIAL PRIMARY KEY,
@@ -71,3 +78,14 @@ VALUES ('jhon4.attend@gmal.com', 'jon4aten', '123456', 1, 1);
 INSERT INTO members (email, username, password, plan_id, payment_type_id)
 VALUES ('jhon5.attend@gmal.com', 'jona5ten', '123456', 1, 1);
 
+INSERT INTO accesses (name, description)
+VALUES ('gym', 'Gym access');
+
+INSERT INTO accesses (name, description)
+VALUES ('pool', 'Pool access');
+
+INSERT INTO accesses (name, description)
+VALUES ('sauna', 'Sauna access');
+
+INSERT INTO accesses (name, description)
+VALUES ('jacuzzi', 'Jacuzzi access');

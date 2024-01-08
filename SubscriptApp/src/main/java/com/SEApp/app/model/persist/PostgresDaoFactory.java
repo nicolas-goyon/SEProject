@@ -9,6 +9,8 @@ import com.SEApp.app.model.persist.Dao.account.admin.AdminDAO;
 import com.SEApp.app.model.persist.Dao.account.admin.AdminDAOPostgres;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAO;
 import com.SEApp.app.model.persist.Dao.account.paymentType.PaymentTypeDAOPostgres;
+import com.SEApp.app.model.persist.Dao.plans.AccessDao;
+import com.SEApp.app.model.persist.Dao.plans.AccessDaoPostGres;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 import com.SEApp.app.model.persist.Dao.plans.PlanDaoPostGres;
 
@@ -63,5 +65,10 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
     @Override
     public AdminDAO getAdminDao() throws SQLException {
         return new AdminDAOPostgres(postGres);
+    }
+
+    @Override
+    public AccessDao getAccessDao() throws SQLException {
+        return new AccessDaoPostGres(postGres);
     }
 }

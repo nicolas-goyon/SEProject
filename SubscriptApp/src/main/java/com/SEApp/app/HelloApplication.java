@@ -20,6 +20,7 @@ public class HelloApplication extends Application {
         FXRouter.when("Member subscription", "view/MemberSubscription.fxml");
         FXRouter.when("Managerial Subscription", "view/ManagerialSubscription.fxml");
         FXRouter.when("Members list", "view/Members.fxml");
+        FXRouter.when("accessManagement", "view/AccessManagement.fxml");
         try{
             FXRouter.goTo("home");
         }

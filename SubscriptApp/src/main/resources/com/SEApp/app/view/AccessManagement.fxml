@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="400.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.AccessManagementController">
+    <VBox>
+        <HBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="570.0">
+            <fx:include source="../components/Header.fxml"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="20.0" prefWidth="570.0" stylesheets="@../Style/main.css">
+            <Label styleClass="h1" text="Members management"/>
+        </HBox>
+        <ToolBar accessibleRole="BUTTON" prefHeight="40.0" prefWidth="200.0">
+            <Button mnemonicParsing="false" text="Home" onAction="#handleHomeButton"/>
+            <Button mnemonicParsing="false" text="New" onAction="#handleNewButton"/>
+        </ToolBar>
+        <ScrollPane fx:id="displayPane" prefHeight="490.0" prefWidth="800.0"/>
+    </VBox>
+
+    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="543.0" stylesheets="@../Style/main.css" fx:id="formModal"
+          visible="false">
+        <HBox alignment="CENTER" prefHeight="331.0" prefWidth="554.0">
+            <VBox prefHeight="331.0" prefWidth="387.0" styleClass="modal">
+                <HBox prefHeight="100.0" prefWidth="200.0" fx:id="idArea">
+                    <Label text="Access ID : "/>
+                    <Label fx:id="id" text="1"/>
+                </HBox>
+                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="nameArea">
+                    <Label text="Access Name"/>
+                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="name"/>
+                </VBox>
+                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="descriptionArea">
+                    <Label text="Access description"/>
+                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="description"/>
+                </VBox>
+
+
+
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <Button mnemonicParsing="false" onAction="#handleMemberCreation" text="Add"/>
+                    <Button mnemonicParsing="false" onAction="#handleMemberUpdate" text="Update"/>
+                    <Button mnemonicParsing="false" onAction="#closeModal" text="Cancel"/>
+                </HBox>
+
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <Label fx:id="message" text="Message"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</StackPane>

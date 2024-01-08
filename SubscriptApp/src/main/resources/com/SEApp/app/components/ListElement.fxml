@@ -19,7 +19,9 @@
             <Insets left="10.0"/>
         </padding>
     </HBox>
-    <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="231.0">
-        <Button mnemonicParsing="false" text="Subscription" fx:id="subscriptionButton"/>
-    </HBox>
+    <ScrollPane prefHeight="60.0" prefWidth="231.0" >
+        <HBox alignment="CENTER_RIGHT" fx:id="buttonArea">
+
+        </HBox>
+    </ScrollPane>
 </fx:root>

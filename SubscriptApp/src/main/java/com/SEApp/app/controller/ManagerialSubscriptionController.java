@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class ManagerialSubscriptionController {
 
@@ -44,28 +44,50 @@ public class ManagerialSubscriptionController {
             return;
         }
 
-
-        Member member = null;
-
-        try {
-            member = SubscriptionFacade.getManagerialMember();
-        } catch (Exception e) {
-            raiseError("Could not get current member", e);
-        }
-
-        if(member == null) {
-            raiseError("Could not get the member");
+        if(!initializeSelectedMember()){
             return;
         }
 
-        selectedMember = member;
+        if(!initializeOptions()){
+            return;
+        }
+
+        if(!initializePlansAndPayments()){
+            return;
+        }
+        updatePlans();
+        updatePaymentTypes();
+
+        initializeSubscription();
+
+
+    }
+
+    private boolean initializeSelectedMember(){
+        try {
+            selectedMember = SubscriptionFacade.getInstance().getManagerialMember();
+        } catch (Exception e) {
+            raiseError("Could not get current member", e);
+            return false;
+        }
+
+        if (selectedMember == null) {
+            raiseError("Could not get the member");
+            return false;
+        }
 
         memberLabel.setText(selectedMember.getUsername());
+        return true;
+    }
 
+    private boolean initializeOptions(){
         options.put("editText", "Select");
         options.put("noDelete", "true");
         options.put("maxWidth", "300");
+        return true;
+    }
 
+    private boolean initializePlansAndPayments(){
         PlanFacade planFacade = null;
         PaymentTypeFacade paymentTypeFacade = null;
 
@@ -74,11 +96,12 @@ public class ManagerialSubscriptionController {
             paymentTypeFacade = PaymentTypeFacade.getInstance();
         } catch (SQLException e) {
             raiseError("Could not connect to database", e);
+            return false;
         }
 
         if (planFacade == null || paymentTypeFacade == null) {
             raiseError("Could not connect to database");
-            return;
+            return false;
         }
 
         try {
@@ -86,31 +109,29 @@ public class ManagerialSubscriptionController {
             plans = planFacade.getPlanList();
         } catch (SQLException e) {
             raiseError("Could not connect to database", e);
+            return false;
         }
 
-        if(paymentTypes == null || paymentTypes.isEmpty()) {
+        if (paymentTypes == null || paymentTypes.isEmpty()) {
             raiseError("No payment types found");
-        } else {
-            updatePaymentTypes();
+            return false;
         }
 
-        if(plans == null || plans.isEmpty()) {
+        if (plans == null || plans.isEmpty()) {
             raiseError("No plans found");
-        } else {
-            updatePlans();
+            return false;
         }
 
-        initializeSubscription();
-
-
+        return true;
     }
 
-    private void initializeSubscription(){
+    private void initializeSubscription() {
 
         Integer selectedPlanId = selectedMember.getPlan();
         Integer selectedPaymentTypeId = selectedMember.getPaymentType();
 
         if (selectedPlanId == null || selectedPaymentTypeId == null) {
+            System.err.println("No plan or payment type found");
             setSubscriptionLabel(null, null);
             return;
         }
@@ -129,7 +150,7 @@ public class ManagerialSubscriptionController {
         paymentTypes.forEach(paymentType -> {
             paymentTypeElements.add(new ElementLogic(paymentType.getId(), paymentType.getName(), paymentType.getDescription()));
         });
-        GridDisplay gridDisplay = new GridDisplay(paymentTypeElements, this::selectPaymentButton, null, options );
+        GridDisplay gridDisplay = new GridDisplay(paymentTypeElements, this::selectPaymentButton, null, options);
         paymentTypePane.setContent(gridDisplay);
     }
 
@@ -138,13 +159,13 @@ public class ManagerialSubscriptionController {
         plans.forEach(plan -> {
             planElements.add(new ElementLogic(plan.getId(), plan.getName(), plan.getDescription()));
         });
-        GridDisplay gridDisplay = new GridDisplay(planElements, this::selectPlanButton, null, options );
+        GridDisplay gridDisplay = new GridDisplay(planElements, this::selectPlanButton, null, options);
         plansPane.setContent(gridDisplay);
     }
 
-    public Void selectPlanButton(Integer id){
+    public Void selectPlanButton(Integer id) {
         Plan selectedPlan = plans.stream().filter(plan -> plan.getId() == id).findFirst().orElse(null);
-        if(selectedPlan == null) {
+        if (selectedPlan == null) {
             raiseError("Could not find plan with id " + id);
             return null;
         }
@@ -153,9 +174,9 @@ public class ManagerialSubscriptionController {
         return null;
     }
 
-    public Void selectPaymentButton(Integer id){
+    public Void selectPaymentButton(Integer id) {
         PaymentType selectedPaymentType = paymentTypes.stream().filter(paymentType -> paymentType.getId() == id).findFirst().orElse(null);
-        if(selectedPaymentType == null) {
+        if (selectedPaymentType == null) {
             raiseError("Could not find payment type with id " + id);
             return null;
         }
@@ -165,12 +186,12 @@ public class ManagerialSubscriptionController {
     }
 
 
-    public void subscribe(){
-        if(selectedPlan == null) {
+    public void subscribe() {
+        if (selectedPlan == null) {
             raiseError("Please select a plan");
             return;
         }
-        if(selectedPaymentType == null) {
+        if (selectedPaymentType == null) {
             raiseError("Please select a payment type");
             return;
         }
@@ -185,7 +206,7 @@ public class ManagerialSubscriptionController {
             raiseError("Could not subscribe to plan", e);
         }
 
-        if(!success) {
+        if (!success) {
             raiseError("Could not subscribe to plan");
         }
 
@@ -193,11 +214,11 @@ public class ManagerialSubscriptionController {
     }
 
     private void setSubscriptionLabel(Plan plan, PaymentType paymentType) {
-        if(plan == null) {
+        if (plan == null) {
             subscriptionLabel.setText("Not subscribed to any plan");
             return;
         }
-        if(paymentType == null) {
+        if (paymentType == null) {
             subscriptionLabel.setText("Not subscribed to any payment type");
             return;
         }
@@ -218,7 +239,7 @@ public class ManagerialSubscriptionController {
             raiseError("Could not unsubscribe from plan", e);
         }
 
-        if(!success) {
+        if (!success) {
             raiseError("Could not unsubscribe from plan");
         }
 

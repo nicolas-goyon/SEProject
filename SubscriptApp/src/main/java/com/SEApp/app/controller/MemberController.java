@@ -1,9 +1,14 @@
 package com.SEApp.app.controller;
 
+import com.SEApp.app.components.ButtonData;
 import com.SEApp.app.components.ElementLogic;
 import com.SEApp.app.components.GridDisplay;
+import com.SEApp.app.components.ListDisplay;
+import com.SEApp.app.model.classes.Manager;
 import com.SEApp.app.model.classes.Member;
+import com.SEApp.app.model.logic.Manager.ManagerFacade;
 import com.SEApp.app.model.logic.Member.MemberFacade;
+import com.SEApp.app.model.logic.Subscription.SubscriptionFacade;
 import com.github.fxrouter.FXRouter;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -72,8 +77,39 @@ public class MemberController {
             list.add(new ElementLogic(member.getId(), member.getUsername(), member.getEmail()));
         }
 
-        GridDisplay gridDisplay = new GridDisplay(list, this::editButtonPressed, this::deleteButtonPressed);
-        displayPane.setContent(gridDisplay);
+        List<ButtonData> buttons = new ArrayList<>();
+        buttons.add(new ButtonData("Subscription", this::subscriptionButtonPressed));
+        buttons.add(new ButtonData("Edit", this::editButtonPressed));
+        buttons.add(new ButtonData("Delete", this::deleteButtonPressed));
+
+        ListDisplay listDisplay = new ListDisplay(list, buttons);
+        displayPane.setContent(listDisplay);
+    }
+
+    private Void subscriptionButtonPressed(Integer id) {
+        Member member = null;
+        try {
+            member = MemberFacade.getInstance().getMember(id);
+        } catch (SQLException e) {
+            message.setText("Error while getting Member id can be incorrect : " + id);
+            System.err.println("Error while getting Member id can be incorrect : " + id);
+            e.printStackTrace();
+            return null;
+        }
+
+        if (member == null) {
+            message.setText("Error while getting Member id can be incorrect : " + id);
+            System.err.println("Error while getting Member id can be incorrect : " + id);
+            return null;
+        }
+
+        SubscriptionFacade.getInstance().setManagerialMember(member);
+        try {
+            FXRouter.goTo("Managerial Subscription");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

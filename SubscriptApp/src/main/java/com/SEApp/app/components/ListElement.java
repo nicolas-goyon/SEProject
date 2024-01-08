@@ -5,11 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
+import java.util.List;
 import java.util.function.Function;
 
 public class ListElement extends HBox {
 
+    private final List<ButtonData> buttonsData;
     @FXML
     private Label titleLabel;
 
@@ -20,13 +23,14 @@ public class ListElement extends HBox {
     private Button subscriptionButton;
 
     @FXML
-    private Function<Integer, Void> callBackSubscription;
+    private HBox buttonArea;
+
 
     private final int id;
 
-    public ListElement(int id, Function<Integer, Void> callBackSubscription) {
+    public ListElement(int id, List<ButtonData> buttonData) {
         this.id = id;
-        this.callBackSubscription = callBackSubscription;
+        this.buttonsData = buttonData;
 
         // Load the FXML file
         try {
@@ -42,21 +46,16 @@ public class ListElement extends HBox {
     }
 
     public void initialize() {
-        setSubscriptionButtonAction(callBackSubscription);
-    }
+        buttonArea.getChildren().clear();
 
-
-    public void setSubscriptionButtonText(String text) {
-        subscriptionButton.setText(text);
-    }
-
-    public void setSubscriptionButtonAction(Function<Integer, Void> callback) {
-        if(callback == null) {
-            subscriptionButton.setVisible(false);
-            return;
+        // Add the buttons
+        for (ButtonData buttonData : buttonsData) {
+            Button button = new Button(buttonData.getName());
+            button.setOnAction(event -> buttonData.getCallback().apply(id));
+            buttonArea.getChildren().add(button);
         }
-        subscriptionButton.setOnAction(event -> callback.apply(id));
     }
+
 
     public void setTitle(String title) {
         titleLabel.setText(title);

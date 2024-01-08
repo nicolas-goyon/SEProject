@@ -64,6 +64,8 @@ public class Member implements User {
         this.paymentType_id = paymentType_id;
     }
 
+
+
     public String getUsername() {
         return username;
     }
@@ -112,6 +114,7 @@ public class Member implements User {
                 ", " + MemberSchema.PASSWORD +"=" + password +
                 ", " + MemberSchema.PLAN_ID +"=" + plan_id +
                 ", " + MemberSchema.PAYMENT_TYPE_ID +"=" + paymentType_id +
+                ", " + MemberSchema.LAST_PAYMENT_DATE +"=" + lastPaymentDate +
                 '}';
     }
 
@@ -156,6 +159,10 @@ public class Member implements User {
     public void setLastPaymentDate(Date lastPaymentDate) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         this.lastPaymentDate = formatter.format(lastPaymentDate);
+    }
+
+    public void setLastPaymentDate(String lastPaymentDate) {
+        this.lastPaymentDate = lastPaymentDate;
     }
 
     public String getLastPaymentDate() {

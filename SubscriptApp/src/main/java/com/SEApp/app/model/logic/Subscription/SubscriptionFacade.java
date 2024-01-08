@@ -15,11 +15,12 @@ import java.sql.SQLException;
  */
 public class SubscriptionFacade implements Facade {
 
-    private static Member managerialMember;
 
     private static SubscriptionFacade instance;
 
-    private static MemberDao dao;
+    private final MemberDao dao;
+
+    private Member managerialMember;
 
     /**
      * 
@@ -42,11 +43,11 @@ public class SubscriptionFacade implements Facade {
         return instance;
     }
 
-    public static void setManagerialMember(Member managerialMember) {
-        SubscriptionFacade.managerialMember = managerialMember;
+    public void setManagerialMember(Member managerialMember) {
+        this.managerialMember = managerialMember;
     }
 
-    public static Member getManagerialMember() {
+    public Member getManagerialMember() {
         return managerialMember;
     }
 
@@ -67,7 +68,9 @@ public class SubscriptionFacade implements Facade {
         member.setPlan(plan_id);
         member.setPaymentType(payment_type_id);
 
-        return dao.update(member) != null;
+        member = dao.update(member);
+
+        return member != null;
 
     }
 
@@ -84,19 +87,32 @@ public class SubscriptionFacade implements Facade {
 
         member.setPlan(null);
 
-        return dao.update(member) != null;
+        member = dao.update(member);
+
+        return member != null;
     }
 
 
     public boolean subscribeManagerialMember(int plan_id, int payment_type_id) throws SQLException, IncorrectOperandException {
         managerialMember.setPlan(plan_id);
         managerialMember.setPaymentType(payment_type_id);
-        return dao.update(managerialMember) != null;
+
+        System.err.println("Name : " + managerialMember.getUsername() + " Plan : " + managerialMember.getPlan() + " Payment : " + managerialMember.getPaymentType());
+
+        managerialMember = dao.update(managerialMember);
+
+        return managerialMember != null;
     }
 
     public boolean unsubscribeManagerialMember() throws SQLException, IncorrectOperandException {
         managerialMember.setPlan(null);
-        return dao.update(managerialMember) != null;
+        managerialMember.setPaymentType(null);
+
+        System.err.println("Unsubscribing Name : " + managerialMember.getUsername());
+
+        managerialMember = dao.update(managerialMember);
+
+        return managerialMember != null;
     }
 
 

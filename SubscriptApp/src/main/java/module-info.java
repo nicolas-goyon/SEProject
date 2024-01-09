@@ -5,6 +5,7 @@ module com.SEApp.app {
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
     requires jbcrypt;
+    requires jdk.httpserver;
 
     opens com.SEApp.app to javafx.fxml;
     opens com.SEApp.app.controller to javafx.fxml;

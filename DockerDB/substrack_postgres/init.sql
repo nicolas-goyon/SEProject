@@ -79,7 +79,7 @@ VALUES ('Premium', 'Premium plan', 20);
 
 
 INSERT INTO members (email, username, password, plan_id, payment_type_id)
-VALUES ('jhon.attend@gmal.com', 'jonaten', '123456', 1, 1);
+VALUES ('jhon.attend@gmal.com', 'jonaten', '123456', 3, 1);
 INSERT INTO members (email, username, password, plan_id, payment_type_id)
 VALUES ('jhon2.attend@gmal.com', 'jonate2n', '123456', 1, 1);
 INSERT INTO members (email, username, password, plan_id, payment_type_id)

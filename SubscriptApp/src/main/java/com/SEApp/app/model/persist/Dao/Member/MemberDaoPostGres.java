@@ -37,18 +37,7 @@ public class MemberDaoPostGres extends MemberDao {
             return null;
         }
 
-        Member newMember = new Member(
-                id,
-                (String) row.get(MemberSchema.USERNAME),
-                (String) row.get(MemberSchema.EMAIL),
-                (String) row.get(MemberSchema.PASSWORD),
-                (int) row.get(MemberSchema.PLAN_ID),
-                (int) row.get(MemberSchema.PAYMENT_TYPE_ID),
-                true
-        );
-        newMember.setLastPaymentDate((String) row.get(MemberSchema.LAST_PAYMENT_DATE));
-
-        return newMember;
+        return memberFromRow(row);
     }
 
     @Override
@@ -124,17 +113,7 @@ public class MemberDaoPostGres extends MemberDao {
 
         List<Member> Members = new ArrayList<>();
         for (Map<String, Object> row : res) {
-            Member newMember = new Member(
-                    (int) row.get(MemberSchema.ID),
-                    (String) row.get(MemberSchema.USERNAME),
-                    (String) row.get(MemberSchema.EMAIL),
-                    (String) row.get(MemberSchema.PASSWORD),
-                    (int) row.get(MemberSchema.PLAN_ID),
-                    (int) row.get(MemberSchema.PAYMENT_TYPE_ID),
-                    true
-            );
-            newMember.setLastPaymentDate((String) row.get(MemberSchema.LAST_PAYMENT_DATE));
-            Members.add(newMember);
+            Members.add(memberFromRow(row));
         }
 
         return Members;
@@ -153,18 +132,7 @@ public class MemberDaoPostGres extends MemberDao {
             return null;
         }
 
-        Member newMember = new Member(
-                (int) row.get(MemberSchema.ID),
-                (String) row.get(MemberSchema.USERNAME),
-                (String) row.get(MemberSchema.EMAIL),
-                (String) row.get(MemberSchema.PASSWORD),
-                (int) row.get(MemberSchema.PLAN_ID),
-                (int) row.get(MemberSchema.PAYMENT_TYPE_ID),
-                true
-        );
-        newMember.setLastPaymentDate((String) row.get(MemberSchema.LAST_PAYMENT_DATE));
-
-        return newMember;
+        return memberFromRow(row);
     }
 
     /**
@@ -184,17 +152,20 @@ public class MemberDaoPostGres extends MemberDao {
             return null;
         }
 
+        return memberFromRow(row);
+    }
+
+    private Member memberFromRow(Map<String, Object> row) {
         Member newMember = new Member(
                 (int) row.get(MemberSchema.ID),
                 (String) row.get(MemberSchema.USERNAME),
                 (String) row.get(MemberSchema.EMAIL),
                 (String) row.get(MemberSchema.PASSWORD),
-                (int) row.get(MemberSchema.PLAN_ID),
-                (int) row.get(MemberSchema.PAYMENT_TYPE_ID),
+                (Integer) row.get(MemberSchema.PLAN_ID),
+                (Integer) row.get(MemberSchema.PAYMENT_TYPE_ID),
                 true
         );
         newMember.setLastPaymentDate((String) row.get(MemberSchema.LAST_PAYMENT_DATE));
-
         return newMember;
     }
 

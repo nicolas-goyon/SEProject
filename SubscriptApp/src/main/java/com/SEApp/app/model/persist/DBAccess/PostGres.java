@@ -14,6 +14,7 @@ import java.util.Map;
  */
 public class PostGres implements DBAccess {
 
+
     /**
      *
      */
@@ -29,12 +30,13 @@ public class PostGres implements DBAccess {
      */
     private final String password;
 
+    private boolean inBigTransaction = false;
 
 
     /**
      *
      */
-    public PostGres() {
+    private PostGres() {
         // load the environment variables
         Dotenv dotenv = Dotenv.load();
         String url = dotenv.get("PSQL_URL");
@@ -48,11 +50,26 @@ public class PostGres implements DBAccess {
         }
     }
 
+    private static PostGres instance = null;
+
+    public static PostGres getInstance() {
+        if (instance == null) {
+            instance = new PostGres();
+        }
+
+        return instance;
+    }
+
+    private Connection connection = null;
+
     /**
      * 
      */
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        if (connection == null || connection.isClosed()) {
+            connection = DriverManager.getConnection(url, username, password);
+        }
+        return connection;
     }
 
     @Override
@@ -76,9 +93,7 @@ public class PostGres implements DBAccess {
 
         Map<String, Object>[] res = resultSetToMap(resultSet);
 
-        connection.close();
-        resultSet.close();
-        statement.close();
+        close(connection, resultSet, statement);
 
         if (res.length == 0) {
             return null;
@@ -101,8 +116,7 @@ public class PostGres implements DBAccess {
         }
         int affectedRows = statement.executeUpdate();
 
-        connection.close();
-        statement.close();
+        close(connection, null, statement);
 
         return affectedRows;
     }
@@ -146,8 +160,7 @@ public class PostGres implements DBAccess {
         }
 
 
-        connection.close();
-        statement.close();
+        close(connection, generatedKeys, statement);
 
         return res;
     }
@@ -173,8 +186,7 @@ public class PostGres implements DBAccess {
 
         int affectedRows = statement.executeUpdate();
 
-        connection.close();
-        statement.close();
+        close(connection, null, statement);
 
         return affectedRows;
     }
@@ -207,9 +219,7 @@ public class PostGres implements DBAccess {
 
         Map<String, Object>[] res = resultSetToMap(resultSet);
 
-        connection.close();
-        resultSet.close();
-        statement.close();
+        close(connection, resultSet, statement);
 
         return res;
     }
@@ -285,10 +295,43 @@ public class PostGres implements DBAccess {
 
         Map<String, Object>[] res = resultSetToMap(resultSet);
 
-        connection.close();
-        resultSet.close();
-        statement.close();
+        close(connection, resultSet, statement);
 
         return res;
+    }
+
+    public void startBigTransaction() throws SQLException {
+        Connection connection = this.getConnection();
+        connection.setAutoCommit(false);
+        this.inBigTransaction = true;
+    }
+
+    public void endBigTransaction() throws SQLException {
+        Connection connection = this.getConnection();
+        connection.commit();
+        connection.setAutoCommit(true);
+        this.inBigTransaction = false;
+    }
+
+    public void rollbackBigTransaction() throws SQLException {
+        Connection connection = this.getConnection();
+        connection.rollback();
+        connection.setAutoCommit(true);
+        this.inBigTransaction = false;
+    }
+
+    private void close(Connection connection, ResultSet resultSet, Statement statement) throws SQLException {
+        if(this.inBigTransaction) {
+            return;
+        }
+
+        if(connection != null)
+            connection.close();
+
+        if(resultSet != null)
+            resultSet.close();
+
+        if(statement != null)
+            statement.close();
     }
 }

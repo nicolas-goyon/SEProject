@@ -31,7 +31,7 @@ public class PostgresDaoFactory extends AbstractDAOFactory {
      *
      */
     public PostgresDaoFactory() {
-        this.postGres = new PostGres();
+        this.postGres = PostGres.getInstance();
     }
 
     /**

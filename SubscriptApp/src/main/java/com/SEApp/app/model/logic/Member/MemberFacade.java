@@ -94,7 +94,7 @@ public class MemberFacade extends UserFacade {
     }
 
     public boolean login(String username, String password) throws SQLException, LoginException {
-        Member member = memberDao.findByEmail(username);
+        Member member = memberDao.findByUsername(username);
         if(member == null) {
             throw new LoginException("Invalid username or password");
         }

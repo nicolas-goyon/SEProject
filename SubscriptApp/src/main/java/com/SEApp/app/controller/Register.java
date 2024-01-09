@@ -55,7 +55,7 @@ public class Register {
         }
 
         if(usernameText.length() < 3) {
-            raiseError("Membername must be at least 3 characters long");
+            raiseError("MemberName must be at least 3 characters long");
             return;
         }
 
@@ -101,6 +101,22 @@ public class Register {
     private void raiseError(String message, Exception e) {
         error.setText(message);
         e.printStackTrace();
+    }
+
+    public void handleLoginMemberButton() {
+        try {
+            FXRouter.goTo("login", Role.MEMBER);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleHomeButton() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

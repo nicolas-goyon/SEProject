@@ -3,23 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="475.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.PlanAccessManagementController">
-    <fx:include source="../components/Header.fxml"/>
+<VBox prefHeight="475.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.PlanAccessManagementController">
+    <fx:include source="../components/Header.fxml" />
     <HBox alignment="CENTER" prefHeight="405.0" prefWidth="874.0" stylesheets="@../Style/main.css">
         <VBox alignment="TOP_CENTER" minWidth="350">
-            <Label styleClass="h1" text="Payment type"/>
-            <ScrollPane fx:id="planPane" minWidth="350.0"/>
+            <Label styleClass="h1" text="Payment type" />
+            <ScrollPane fx:id="planPane" minWidth="350.0" prefHeight="175.0" prefWidth="350.0" />
         </VBox>
         <VBox alignment="CENTER" fillWidth="false" minWidth="158.0" prefHeight="375.0" prefWidth="158.0" spacing="20.0">
-            <Button mnemonicParsing="false" onAction="#save" text="Save accesses"/>
-            <Label fx:id="message" text=" "/>
+            <Button mnemonicParsing="false" onAction="#save" text="Save accesses" />
+            <Label fx:id="message" text=" " />
         </VBox>
         <VBox alignment="TOP_CENTER" minWidth="350">
-            <Label styleClass="h1" text="Plans"/>
-            <ScrollPane minWidth="350.0">
+            <Label styleClass="h1" text="Plans" />
+            <ScrollPane minWidth="350.0" prefHeight="160.0" prefWidth="350.0">
                 <VBox fx:id="accessesListArea">
-                    <CheckBox mnemonicParsing="false" text="Gym" userData="1" onAction="#accessChange"/>
+                    <CheckBox mnemonicParsing="false" onAction="#accessChange" text="Gym" userData="1" />
                 </VBox>
             </ScrollPane>
         </VBox>

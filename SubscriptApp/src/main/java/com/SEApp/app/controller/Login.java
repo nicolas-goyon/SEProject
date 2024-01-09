@@ -7,10 +7,12 @@ import com.SEApp.app.model.logic.account.AdminFacade;
 import com.SEApp.app.model.logic.account.UserFacade;
 import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.github.fxrouter.FXRouter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -106,5 +108,21 @@ public class Login {
     private void raiseError(String message, Exception e) {
         raiseError(message);
         e.printStackTrace();
+    }
+
+    public void handleRegisterButton() {
+        try {
+            FXRouter.goTo("register");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleHomeButton() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

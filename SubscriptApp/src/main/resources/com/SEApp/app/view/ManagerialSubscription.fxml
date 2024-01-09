@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="475.0"
-      prefWidth="873.0"
-      xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.SEApp.app.controller.ManagerialSubscriptionController">
-    <fx:include source="../components/Header.fxml"/>
+<VBox prefHeight="767.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.ManagerialSubscriptionController">
+    <fx:include source="../components/Header.fxml" />
     <HBox alignment="CENTER" stylesheets="@../Style/main.css">
-        <Label styleClass="h1" text="Subscription management of the user :"/>
-        <Label fx:id="memberLabel" styleClass="h1" text="Member name"/>
+        <Label styleClass="h1" text="Subscription management of the user :" />
+        <Label fx:id="memberLabel" styleClass="h1" text="Member name" />
     </HBox>
     <HBox alignment="CENTER" prefHeight="405.0" prefWidth="874.0" stylesheets="@../Style/main.css">
         <VBox alignment="TOP_CENTER" minWidth="350">
-            <Label styleClass="h1" text="Payment type"/>
-            <ScrollPane fx:id="paymentTypePane" minWidth="350.0"/>
+            <ScrollPane fx:id="paymentTypePane" minWidth="350.0" prefHeight="186.0" prefWidth="350.0">
+            <content>
+                  <Label styleClass="h1" text="Payment type" />
+            </content></ScrollPane>
         </VBox>
         <VBox alignment="CENTER" fillWidth="false" minWidth="158.0" prefHeight="375.0" prefWidth="158.0" spacing="20.0">
-            <Button fx:id="subscribeButton" mnemonicParsing="false" text="Subscribe" onAction="#subscribe"/>
-            <Label fx:id="subscriptionLabel" alignment="TOP_CENTER" prefHeight="62.0" prefWidth="158.0"
-                   text="You are currently subscribe to : 1 with the payment type 1" textOverrun="CLIP"
-                   wrapText="true"/>
-            <Button fx:id="unsubscribeButton" mnemonicParsing="false" text="Unsubscribe" onAction="#onUnsubscribe"/>
+            <Button fx:id="subscribeButton" mnemonicParsing="false" onAction="#subscribe" text="Subscribe" />
+            <Label fx:id="subscriptionLabel" alignment="TOP_CENTER" prefHeight="62.0" prefWidth="158.0" text="You are currently subscribe to : 1 with the payment type 1" textOverrun="CLIP" wrapText="true" />
+            <Button fx:id="unsubscribeButton" mnemonicParsing="false" onAction="#onUnsubscribe" text="Unsubscribe" />
             <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="158.0">
-                <Label text="Payment type : " underline="true"/>
-                <Label text=" " fx:id="paymentTypeLabel"/>
+                <Label text="Payment type : " underline="true" />
+                <Label fx:id="paymentTypeLabel" text=" " />
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                <Label text="Plan : " underline="true"/>
-                <Label text=" " fx:id="planLabel"/>
+                <Label text="Plan : " underline="true" />
+                <Label fx:id="planLabel" text=" " />
             </HBox>
         </VBox>
-        <VBox alignment="TOP_CENTER" minWidth="350">
-            <Label styleClass="h1" text="Plans"/>
-            <ScrollPane fx:id="plansPane" minWidth="350.0"/>
+        <VBox alignment="TOP_CENTER" minWidth="350" prefHeight="335.0" prefWidth="406.0">
+            <Label styleClass="h1" text="Plans" />
+            <ScrollPane fx:id="plansPane" minWidth="350.0" />
         </VBox>
     </HBox>
 </VBox>

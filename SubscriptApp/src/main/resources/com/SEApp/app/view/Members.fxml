@@ -12,36 +12,36 @@
             <Label styleClass="h1" text="Members management" />
         </HBox>
         <ToolBar accessibleRole="BUTTON" prefHeight="40.0" prefWidth="200.0">
-            <Button mnemonicParsing="false" text="Home" onAction="#handleHomeButton"/>
-            <Button mnemonicParsing="false" text="New" onAction="#handleNewButton" />
+            <Button mnemonicParsing="false" onAction="#handleHomeButton" style="-fx-background-color: #24C7E6;;" text="Home" />
+            <Button mnemonicParsing="false" onAction="#handleNewButton" style="-fx-background-color: A3E270;" text="New" />
         </ToolBar>
-        <ScrollPane fx:id="displayPane" prefHeight="490.0" prefWidth="800.0"/>
+        <ScrollPane fx:id="displayPane" prefHeight="490.0" prefWidth="800.0" />
     </VBox>
 
-    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="543.0" stylesheets="@../Style/main.css" fx:id="formModal" visible="false">
+    <VBox fx:id="formModal" alignment="CENTER" prefHeight="400.0" prefWidth="543.0" stylesheets="@../Style/main.css" visible="false">
         <HBox alignment="CENTER" prefHeight="331.0" prefWidth="554.0">
             <VBox prefHeight="331.0" prefWidth="387.0" styleClass="modal">
-                <HBox prefHeight="100.0" prefWidth="200.0" fx:id="idArea">
+                <HBox fx:id="idArea" prefHeight="100.0" prefWidth="200.0">
                     <Label text="Manager ID : " />
                     <Label fx:id="id" text="1" />
                 </HBox>
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="nameArea">
+                <VBox fx:id="nameArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
                     <Label text="Manager Name" />
-                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="name" />
+                    <TextField fx:id="name" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="emailArea">
+                <VBox fx:id="emailArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
                     <Label text="Manager Email" />
-                    <TextField prefHeight="21.0" prefWidth="375.0" fx:id="email" />
+                    <TextField fx:id="email" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
 
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="passwordArea">
+                <VBox fx:id="passwordArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
                     <Label text="Manager Password" />
-                    <PasswordField prefHeight="21.0" prefWidth="375.0" fx:id="password" />
+                    <PasswordField fx:id="password" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
 
-                <VBox prefHeight="74.0" prefWidth="387.0" styleClass="formControl" fx:id="confirmPasswordArea">
+                <VBox fx:id="confirmPasswordArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
                     <Label text="Confirm Manager Password" />
-                    <PasswordField prefHeight="21.0" prefWidth="375.0" fx:id="confirmPassword" />
+                    <PasswordField fx:id="confirmPassword" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
 
 

@@ -168,17 +168,68 @@ public final class FXRouter {
             window = win;
     }
 
-    public static void when(String routeLabel, String scenePath) {
-        RouteScene routeScene = new RouteScene(scenePath);
-        routes.put(routeLabel, routeScene);
+    public static void checkScene(String scenePath) {
+        // check if scenePath is not null, not empty and ends with .fxml
+        if(scenePath == null || !scenePath.endsWith(".fxml"))
+            throw new IllegalArgumentException("scenePath must be not null, not empty and ends with .fxml");
+
+        // check if scenePath matches with a valid file
+        URL resource = mainRef.getClass().getResource(scenePath);
+
+        if(resource == null)
+            throw new IllegalArgumentException("scenePath must match with a valid file path, path: " + scenePath);
+
     }
 
+    public static void checkRoute(String routeLabel) {
+        // check if routeLabel is not null and not empty
+        if(routeLabel == null || routeLabel.isEmpty())
+            throw new IllegalArgumentException("routeLabel must be not null and not empty");
+
+        // check if routeLabel is not already defined
+        if(routes.containsKey(routeLabel))
+            throw new IllegalArgumentException("routeLabel must be not already defined");
+    }
+
+
+
+    /** Define a FXRouter route
+     * @param routeLabel: Route label identifier
+     * @param scenePath: .FXML scene file
+     */
+    public static void when(String routeLabel, String scenePath) {
+        // Check scenePath
+        checkScene(scenePath);
+        checkRoute(routeLabel);
+
+        RouteScene routeScene = new RouteScene(scenePath);
+        routes.put(routeLabel, routeScene);
+
+    }
+
+    /** Define a FXRouter route
+     * @param routeLabel: Route label identifier
+     * @param scenePath: .FXML scene file
+     * @param winTitle: Scene (Stage) title
+     */
     public static void when(String routeLabel, String scenePath, String winTitle) {
+        checkScene(scenePath);
+        checkRoute(routeLabel);
+
         RouteScene routeScene = new RouteScene(scenePath, winTitle);
         routes.put(routeLabel, routeScene);
     }
 
+    /** Define a FXRouter route
+     * @param routeLabel: Route label identifier
+     * @param scenePath: .FXML scene file
+     * @param sceneWidth: Scene Width
+     * @param sceneHeight: Scene Height
+     */
     public static void when(String routeLabel, String scenePath, double sceneWidth, double sceneHeight) {
+        checkScene(scenePath);
+        checkRoute(routeLabel);
+
         RouteScene routeScene = new RouteScene(scenePath, sceneWidth, sceneHeight);
         routes.put(routeLabel, routeScene);
     }
@@ -191,14 +242,15 @@ public final class FXRouter {
      * @param sceneHeight: Scene Height
      */
     public static void when(String routeLabel, String scenePath, String winTitle, double sceneWidth, double sceneHeight) {
+        checkScene(scenePath);
+        checkRoute(routeLabel);
+
         RouteScene routeScene = new RouteScene(scenePath, winTitle, sceneWidth, sceneHeight);
         routes.put(routeLabel, routeScene);
     }
 
     public static void goTo(String routeLabel) throws IOException {
-        // get corresponding route
-        RouteScene route = routes.get(routeLabel);
-        loadNewRoute(route);
+        goTo(routeLabel, null);
     }
 
     /** Switch between FXRouter route and show corresponding scenes
@@ -209,6 +261,11 @@ public final class FXRouter {
     public static void goTo(String routeLabel, Object data) throws IOException {
         // get corresponding route
         RouteScene route = routes.get(routeLabel);
+
+        if (route == null) {
+            throw new IOException("Route not found");
+        }
+
         // set route data
         route.data = data;
         loadNewRoute(route);
@@ -220,13 +277,10 @@ public final class FXRouter {
     private static void loadNewRoute(RouteScene route) throws IOException {
 
         // get Main Class package name to get correct files path
-        String pathRef = mainRef.getClass().getPackage().getName();
+        // String pathRef = mainRef.getClass().getPackage().getName();
 
         // set FXRouter current route reference
         currentRoute = route;
-
-        // add package name to scene path
-        route.scenePath = "/" + pathRef.replace(".", "/") + "/" + route.scenePath;
 
         URL ressource = mainRef.getClass().getResource(currentRoute.scenePath);
 
@@ -292,5 +346,35 @@ public final class FXRouter {
     public static Object getData() {
         return currentRoute.data;
     }
+
+
+    /**
+     * Add window width change listener
+     */
+    public static void addWindowWidthListener( javafx.beans.value.ChangeListener<Number> listener) {
+        window.widthProperty().addListener(listener);
+    }
+
+    /**
+     * Add window height change listener
+     */
+    public static void addWindowHeightListener( javafx.beans.value.ChangeListener<Number> listener) {
+        window.heightProperty().addListener(listener);
+    }
+
+    /**
+     * get window width
+     */
+    public static double getWindowWidth() {
+        return window.getWidth();
+    }
+
+    /**
+     * get window height
+     */
+    public static double getWindowHeight() {
+        return window.getHeight();
+    }
+
 
 }

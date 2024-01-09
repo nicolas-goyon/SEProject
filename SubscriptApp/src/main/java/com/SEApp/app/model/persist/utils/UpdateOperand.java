@@ -1,11 +1,11 @@
 package com.SEApp.app.model.persist.utils;
 
-public class UpdateOperand {
+public class UpdateOperand<T> {
 
         private String column;
-        private String value;
+        private T value;
 
-        public UpdateOperand(String column, String value) {
+        public UpdateOperand(String column, T value) {
             this.column = column;
             this.value = value;
         }
@@ -13,7 +13,7 @@ public class UpdateOperand {
         public String getColumn() {
             return column;
         }
-        public String getValue() {
+        public T getValue() {
             return value;
         }
 
@@ -28,7 +28,11 @@ public class UpdateOperand {
         public void setColumn(String column) {
             this.column = column;
         }
-        public void setValue(String value) {
+        public void setValue(T value) {
             this.value = value;
         }
 }
+
+/**
+ *
+ */

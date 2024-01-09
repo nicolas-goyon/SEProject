@@ -9,5 +9,8 @@
         <module name="javafx-maven-archetypes" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SubscriptAPI" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

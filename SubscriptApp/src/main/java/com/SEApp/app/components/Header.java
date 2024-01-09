@@ -1,31 +1,19 @@
 package com.SEApp.app.components;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import com.github.fxrouter.FXRouter;
+
+import java.io.IOException;
+
+public class Header {
+
+    public void initialize() {}
 
 
-public class Header extends HBox {
-
-    @FXML
-    private Label welcomeText;
-
-
-    public Header(){
-        // Load the FXML file
+    public void handleHomeButton() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/SEApp/app/components/Header.fxml"));
-            loader.setController(this);
-            loader.setRoot(this);
-            loader.load();
-
-        } catch (Exception e) {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        welcomeText.setText("Substrack");
     }
 }

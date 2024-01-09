@@ -1,4 +1,19 @@
-.test{
-    -fx-background-color: red;
+.h1{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }
 
+.modal{
+    -fx-background-color: rgb(217, 217, 217);
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-border-color: rgb(0, 0, 0);
+}
+
+.formControl{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 10;
+    -fx-border-color: rgb(217, 217, 217);
+    -fx-border-width: 1;
+    -fx-padding: 5;
+}

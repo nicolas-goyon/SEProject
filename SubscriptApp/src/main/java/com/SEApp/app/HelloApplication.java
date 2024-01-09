@@ -11,14 +11,23 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXRouter.bind(this, stage, "Substrack");
-        FXRouter.when("mainPage", "view/login.fxml");
+        FXRouter.when("login", "view/login.fxml");
+        FXRouter.when("managersManagement", "view/Managers.fxml");
+        FXRouter.when("paymentTypesManagement", "view/PaymentTypeManagement.fxml");
+        FXRouter.when("home", "view/home.fxml");
+        FXRouter.when("register", "view/Register.fxml");
+        FXRouter.when("planManagement", "view/PlanManagement.fxml");
+        FXRouter.when("Member subscription", "view/MemberSubscription.fxml");
+        FXRouter.when("Managerial Subscription", "view/ManagerialSubscription.fxml");
+        FXRouter.when("Members list", "view/Members.fxml");
+        FXRouter.when("accessManagement", "view/AccessManagement.fxml");
+        FXRouter.when("planAccessManagement", "view/PlanAccessManagement.fxml");
         try{
-            FXRouter.goTo("mainPage");
+            FXRouter.goTo("home");
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        //scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
     }
 
     public static void main(String[] args) {

@@ -4,6 +4,7 @@ import com.SEApp.app.model.classes.Access;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.DBAccess.PostGres;
 import com.SEApp.app.model.persist.schemas.AccessSchema;
+import com.SEApp.app.model.persist.schemas.PlanAccessSchema;
 import com.SEApp.app.model.persist.utils.WhereOperand;
 
 import java.sql.SQLException;
@@ -99,6 +100,8 @@ public class AccessDaoPostGres extends AccessDao {
             throw new IllegalArgumentException("access id cannot be -1");
         }
 
+        deletePlanAccess(access.getId());
+
         WhereOperand<Integer> whereOperand = new WhereOperand<Integer>(AccessSchema.ID, "=", access.getId());
         @SuppressWarnings("rawtypes")
         WhereOperand[] whereOperands = {whereOperand};
@@ -107,6 +110,7 @@ public class AccessDaoPostGres extends AccessDao {
         if (affectedRows != 1) {
             throw new RuntimeException("failed to delete access (affected rows: " + affectedRows + ")");
         }
+
 
         return true;
 
@@ -131,4 +135,13 @@ public class AccessDaoPostGres extends AccessDao {
 
         return accesses;
     }
+
+    private void deletePlanAccess(int id) throws SQLException, IncorrectOperandException {
+        WhereOperand<Integer> whereOperand = new WhereOperand<Integer>(PlanAccessSchema.ACCESS_ID, "=", id);
+        @SuppressWarnings("rawtypes")
+        WhereOperand[] whereOperands = {whereOperand};
+
+        db.delete(PlanAccessSchema.TABLE, whereOperands);
+    }
+
 }

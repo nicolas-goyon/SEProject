@@ -4,7 +4,6 @@ import com.SEApp.app.model.classes.Plan;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
-import com.SEApp.app.model.persist.DBAccess.PostGres;
 import com.SEApp.app.model.persist.Dao.plans.PlanDao;
 import com.SEApp.app.model.persist.schemas.MemberSchema;
 import org.junit.jupiter.api.*;
@@ -26,7 +25,7 @@ public class PlanDAOTest {
 
     @BeforeAll
     public static void initAll(){
-        PostGres db = PostGres.getInstance();
+        DBAccess db = daoFactory.getDBAccess();
         try {
             db.startBigTransaction();
         } catch (SQLException e) {
@@ -41,7 +40,7 @@ public class PlanDAOTest {
 
     @AfterAll
     public static void endAll() {
-        PostGres db = PostGres.getInstance();
+        DBAccess db = daoFactory.getDBAccess();
         try {
             db.rollbackBigTransaction();
         } catch (SQLException e) {

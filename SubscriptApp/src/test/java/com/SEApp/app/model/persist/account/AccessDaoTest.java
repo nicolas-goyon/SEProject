@@ -1,9 +1,11 @@
 package com.SEApp.app.model.persist.account;
 
+import com.SEApp.app.model.classes.Access;
 import com.SEApp.app.model.logic.exceptions.IncorrectOperandException;
 import com.SEApp.app.model.persist.AbstractDAOFactory;
 import com.SEApp.app.model.persist.DBAccess.DBAccess;
-import com.SEApp.app.model.persist.Dao.Manager.ManagerDao;
+import com.SEApp.app.model.persist.Dao.plans.AccessDao;
+import com.SEApp.app.model.persist.schemas.AccessSchema;
 import com.SEApp.app.model.persist.schemas.ManagerSchema;
 
 import org.junit.jupiter.api.*;
@@ -13,10 +15,10 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
-public class ManagerDaoTest {
+public class AccessDaoTest {
     private static AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
 
-    private static ManagerDao managerDao;
+    private static AccessDao dao;
 
 
     private static boolean connectionOk = false;
@@ -32,7 +34,7 @@ public class ManagerDaoTest {
         }
 
         try {
-            managerDao = daoFactory.getManagerDao();
+            dao = daoFactory.getAccessDao();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -65,8 +67,8 @@ public class ManagerDaoTest {
         isFirst = false;
         DBAccess db = daoFactory.getDBAccess();
         try {
-            String table = ManagerSchema.TABLE;
-            String[] columns = {ManagerSchema.ID};
+            String table = AccessSchema.TABLE;
+            String[] columns = {AccessSchema.ID};
             db.read(table, columns, null);
         } catch (Exception e) {
             fail("Connection failed " + e.getMessage());
@@ -81,40 +83,37 @@ public class ManagerDaoTest {
     @Test
     @Order(1)
     public void testCreateManager() throws SQLException {
-        Manager manager = new Manager(-1, "test", "test@test", "test", false);
-        managerDao.create(manager);
-        assert manager.getId() != -1;
+        Access access = new Access("test name", "test description");
+        dao.create(access);
+        assert access.getId() != -1;
     }
 
     @Test
     @Order(2)
-    public void testFindByEmail() throws SQLException {
-        Manager manager =  managerDao.findByEmail("test@test");
-        assertEquals("test@test", manager.getEmail());
+    public void testGet() throws SQLException {
+        Access access = dao.get(1);
+        assertNotNull(access);
     }
 
     @Test
     @Order(3)
-    public void testUpdateManager() throws SQLException, IncorrectOperandException {
-        Manager manager =  managerDao.findByEmail("test@test");
-        assertNotNull(manager);
-        manager.setUsername("test2");
-        managerDao.update(manager);
-        Manager manager2 =  managerDao.findByEmail("test@test");
-        assertEquals("test2", manager2.getUsername());
+    public void testUpdateAccess() throws SQLException, IncorrectOperandException {
+        Access access = dao.get(1);
+        assertNotNull(access);
+        access.setName("test name 2");
+        dao.update(access);
+        Access access2 = dao.get(1);
+        assertEquals("test name 2", access2.getName());
     }
 
     @Test
     @Order(4)
-    public void testDeleteManager() throws SQLException, IncorrectOperandException {
-        Manager manager =  managerDao.findByEmail("test@test");
-        assertNotNull(manager);
-        boolean res = managerDao.delete(manager);
-
-        assertTrue(res);
-
-        Manager manager2 =  managerDao.findByEmail("test@test");
-        assertNull(manager2);
+    public void testDeleteAccess() throws SQLException, IncorrectOperandException {
+        Access access = dao.get(1);
+        assertNotNull(access);
+        dao.delete(access);
+        Access access2 = dao.get(1);
+        assertNull(access2);
     }
 
 

@@ -2,6 +2,8 @@ package com.SEApp.app.model.logic.account;
 
 import com.SEApp.app.model.classes.Member;
 import com.SEApp.app.model.logic.Member.MemberFacade;
+import com.SEApp.app.model.persist.AbstractDAOFactory;
+import com.SEApp.app.model.persist.DBAccess.DBAccess;
 import com.SEApp.app.model.persist.DBAccess.PostGres;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,9 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MemberFacadeTest {
 
+    private static AbstractDAOFactory daoFactory = AbstractDAOFactory.getInstance();
+
     @BeforeAll
     public static void initAll() {
-        PostGres db = PostGres.getInstance();
+        DBAccess db = daoFactory.getDBAccess();
         try {
             db.startBigTransaction();
         } catch (SQLException e) {
@@ -26,7 +30,7 @@ public class MemberFacadeTest {
 
     @AfterAll
     public static void endAll() {
-        PostGres db = PostGres.getInstance();
+        DBAccess db = daoFactory.getDBAccess();
         try {
             db.rollbackBigTransaction();
         } catch (SQLException e) {

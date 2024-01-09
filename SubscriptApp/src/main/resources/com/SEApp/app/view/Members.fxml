@@ -22,25 +22,25 @@
         <HBox alignment="CENTER" prefHeight="331.0" prefWidth="554.0">
             <VBox prefHeight="331.0" prefWidth="387.0" styleClass="modal">
                 <HBox fx:id="idArea" prefHeight="100.0" prefWidth="200.0">
-                    <Label text="Manager ID : " />
+                    <Label text="MemberID ID : " />
                     <Label fx:id="id" text="1" />
                 </HBox>
                 <VBox fx:id="nameArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
-                    <Label text="Manager Name" />
+                    <Label text="Member Name" />
                     <TextField fx:id="name" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
                 <VBox fx:id="emailArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
-                    <Label text="Manager Email" />
+                    <Label text="Member Email" />
                     <TextField fx:id="email" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
 
                 <VBox fx:id="passwordArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
-                    <Label text="Manager Password" />
+                    <Label text="Member Password" />
                     <PasswordField fx:id="password" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
 
                 <VBox fx:id="confirmPasswordArea" prefHeight="74.0" prefWidth="387.0" styleClass="formControl">
-                    <Label text="Confirm Manager Password" />
+                    <Label text="Confirm Member Password" />
                     <PasswordField fx:id="confirmPassword" prefHeight="21.0" prefWidth="375.0" />
                 </VBox>
 

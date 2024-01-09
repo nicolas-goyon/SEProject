@@ -43,20 +43,17 @@ public class ManagerController {
         try {
             facade = ManagerFacade.getInstance();
         } catch (SQLException e) {
-            message.setText("Error while loading managers : connection error");
-            System.err.println("Error while loading managers : connection error");
+            raiseError("Error while loading managers : connection error", e);
             return;
         }
         if (facade == null) {
-            message.setText("Error while loading managers : instance error");
-            System.err.println("Error while loading managers : instance error");
+            raiseError("Error while loading managers : instance error");
             return;
         }
         try {
             managerList = facade.getAllManagers();
         } catch (Exception e) {
-            message.setText("Error while loading managers : get error");
-            System.err.println("Error while loading managers : get error");
+            raiseError("Error while loading managers : get error", e);
             return;
         }
 
@@ -105,16 +102,14 @@ public class ManagerController {
         try {
             isDeleted = facade.deleteManager(managerList.stream().filter(manager -> manager.getId() == id).toList().get(0));
         } catch (Exception e) {
-            message.setText("Error while deleting manager : delete error");
-            System.err.println("Error while deleting manager : delete error");
+            raiseError("Error while deleting manager : delete error");
             return null;
         }
 
         if (isDeleted) {
             message.setText("Manager deleted successfully");
         } else {
-            message.setText("Error while deleting manager : manager not deleted");
-            System.err.println("Error while deleting manager : manager not deleted");
+            raiseError("Error while deleting manager : manager not deleted");
             return null;
         }
 
@@ -138,7 +133,7 @@ public class ManagerController {
         String confirmPasswordS = confirmPassword.getText();
 
         if (nameS.isEmpty() || emailS.isEmpty() || passwordS.isEmpty() || confirmPasswordS.isEmpty()) {
-            message.setText("Please fill all the fields");
+            raiseError("Please fill all the fields");
             return;
         }
 
@@ -152,14 +147,14 @@ public class ManagerController {
         try {
             isCreated = facade.createManager(manager);
         } catch (Exception e) {
-            message.setText("Error while creating manager : connection error");
+            raiseError("Error while creating manager : connection error", e);
             return;
         }
 
         if (isCreated) {
             message.setText("Manager created successfully !");
         } else {
-            message.setText("Error while creating manager : manager not created");
+            raiseError("Error while creating manager : manager not created");
         }
 
         managerList.add(manager);
@@ -177,7 +172,7 @@ public class ManagerController {
         String confirmPasswordS = confirmPassword.getText();
 
         if (nameS.isEmpty() && emailS.isEmpty() && passwordS.isEmpty() && confirmPasswordS.isEmpty()) {
-            message.setText("Please fill at least one field");
+            raiseError("Please fill at least one field");
             return;
         }
 
@@ -207,14 +202,14 @@ public class ManagerController {
         try {
             isUpdated = facade.updateManager(newManager);
         } catch (Exception e) {
-            message.setText("Error while updating manager : connection error");
+            raiseError("Error while updating manager : connection error", e);
             return;
         }
 
         if (isUpdated) {
             message.setText("Manager updated successfully");
         } else {
-            message.setText("Error while updating manager : manager not updated");
+            raiseError("Error while updating manager : manager not updated");
             return;
         }
 
@@ -226,27 +221,27 @@ public class ManagerController {
 
     public boolean emailValidation(String email) {
         if (!email.contains("@")) {
-            message.setText("Email is not valid");
+            raiseError("Email is not valid");
             return false;
         }
 
         if (!email.contains(".")) {
-            message.setText("Email is not valid");
+            raiseError("Email is not valid");
             return false;
         }
 
         if (email.contains(" ")) {
-            message.setText("Email is not valid");
+            raiseError("Email is not valid");
             return false;
         }
 
         if (email.contains("@.")) {
-            message.setText("Email is not valid");
+            raiseError("Email is not valid");
             return false;
         }
 
         if (email.contains(".@")) {
-            message.setText("Email is not valid");
+            raiseError("Email is not valid");
             return false;
         }
         return true;
@@ -254,12 +249,12 @@ public class ManagerController {
 
     public boolean passwordValidation(String password , String confirmPassword) {
         if (!password.equals(confirmPassword)) {
-            message.setText("Passwords don't match");
+            raiseError("Passwords don't match");
             return false;
         }
 
         if (password.length() < 8) {
-            message.setText("Password must be at least 8 characters long");
+            raiseError("Password must be at least 8 characters long");
             return false;
         }
         return true;
@@ -270,8 +265,18 @@ public class ManagerController {
         try {
             FXRouter.goTo("home");
         } catch (IOException e) {
-            e.printStackTrace();
+            raiseError("Error while loading home page", e);
         }
+    }
+
+    private void raiseError(String msg) {
+        System.err.println(msg);
+        message.setText(msg);
+    }
+
+    private void raiseError(String message, Exception e) {
+        raiseError(message);
+        e.printStackTrace();
     }
 
 }

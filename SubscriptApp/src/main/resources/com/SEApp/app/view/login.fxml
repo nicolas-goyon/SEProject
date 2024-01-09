@@ -23,9 +23,9 @@
                   <Font name="DejaVu Sans Condensed Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="168.0" text="Email" />
+            <Label layoutX="27.0" layoutY="168.0" text="Username" />
             <Label layoutX="15.0" layoutY="251.0" text="Password" />
-            <TextField fx:id="email" layoutX="98.0" layoutY="164.0" prefHeight="24.0" prefWidth="207.0" promptText="email@email.com" />
+            <TextField fx:id="email" layoutX="98.0" layoutY="164.0" prefHeight="24.0" prefWidth="207.0" promptText="username" />
             <PasswordField fx:id="password" layoutX="98.0" layoutY="247.0" prefHeight="24.0" prefWidth="207.0" promptText="your password" />
              <HBox alignment="CENTER" spacing="10.0">
                  <Label fx:id="error" />

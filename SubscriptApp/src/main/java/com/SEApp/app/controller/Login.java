@@ -1,17 +1,27 @@
 package com.SEApp.app.controller;
 
+import com.SEApp.app.model.classes.Role;
+import com.SEApp.app.model.logic.Manager.ManagerFacade;
+import com.SEApp.app.model.logic.Member.MemberFacade;
+import com.SEApp.app.model.logic.account.AdminFacade;
 import com.SEApp.app.model.logic.account.UserFacade;
+import com.SEApp.app.model.logic.exceptions.LoginException;
 import com.github.fxrouter.FXRouter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class Login {
 
+    @FXML
+    public Label title;
 
     @FXML
     private TextField email;
@@ -23,33 +33,96 @@ public class Login {
     private Label error;
 
 
+    // --- Attributes ---
+    private Role role;
+
+    private UserFacade userFacade;
+
+    public void initialize() {
+        this.role = (Role) FXRouter.getData();
+
+        switch (role) {
+            case ADMIN:
+                title.setText("Admin Login");
+                break;
+            case MANAGER:
+                title.setText("Manager Login");
+                break;
+            case MEMBER:
+                title.setText("Member Login");
+                break;
+        }
+
+        userFacade = null;
+        try {
+            switch (role) {
+                case ADMIN:
+                    userFacade = AdminFacade.getInstance();
+                    break;
+                case MANAGER:
+                    userFacade = ManagerFacade.getInstance();
+                    break;
+                case MEMBER:
+                    userFacade = MemberFacade.getInstance();
+                    break;
+            }
+        } catch (SQLException e) {
+            raiseError("An error occurred, connection to the database failed", e);
+        }
+    }
+
+
     @FXML
     protected void onLogin() {
-        UserFacade userFacade = null;
-        try {
-            userFacade = UserFacade.getInstance();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         boolean isLog = false;
+
         try {
             isLog = userFacade.login(email.getText(), password.getText());
         } catch (SQLException | RuntimeException e) {
-            error.setText("An error occurred, connection to the database failed");
-            e.printStackTrace();
+            raiseError("An error occurred, connection to the database failed", e);
+            return;
+        } catch (LoginException e) {
+            raiseError("Wrong email or password", e);
+            return;
         }
 
         if (isLog) {
-            error.setText("Login successful");
-            /*try {
-                FXRouter.goTo("logged");
+            try {
+                FXRouter.goTo("home");
             } catch (IOException e) {
-                e.printStackTrace();
-            }*/
+                raiseError("Page changing error", e);
+                return;
+            }
         }
         else {
-            error.setText("Wrong email or password");
+            raiseError("Wrong email or password");
+            return;
         }
 
+    }
+
+    private void raiseError(String message) {
+        error.setText(message);
+    }
+
+    private void raiseError(String message, Exception e) {
+        raiseError(message);
+        e.printStackTrace();
+    }
+
+    public void handleRegisterButton() {
+        try {
+            FXRouter.goTo("register");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleHomeButton() {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

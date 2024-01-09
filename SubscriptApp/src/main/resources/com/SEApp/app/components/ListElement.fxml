@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root
+    alignment="CENTER_LEFT"
+    prefHeight="60.0"
+    prefWidth="600.0"
+    type="HBox"
+    stylesheets="@../Style/main.css"
+    xmlns="http://javafx.com/javafx/17.0.2-ea"
+    xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="376.0" spacing="30.0">
+        <Label styleClass="h1" text="Titre" fx:id="titleLabel"/>
+        <Label text="Description" fx:id="descriptionLabel"/>
+        <padding>
+            <Insets left="10.0"/>
+        </padding>
+    </HBox>
+    <ScrollPane prefHeight="60.0" prefWidth="231.0" >
+        <HBox alignment="CENTER_RIGHT" fx:id="buttonArea">
+
+        </HBox>
+    </ScrollPane>
+</fx:root>

@@ -1,12 +1,12 @@
 package com.SEApp.app.model.persist.utils;
 
-public class WhereOperand {
+public class WhereOperand<T> {
 
     private String column;
-    private String value;
+    private T value;
     private String operator;
 
-    public WhereOperand(String column, String operator, String value) {
+    public WhereOperand(String column, String operator, T value) {
         this.column = column;
         this.value = value;
         this.operator = operator;
@@ -15,7 +15,7 @@ public class WhereOperand {
     public String getColumn() {
         return column;
     }
-    public String getValue() {
+    public T getValue() {
         return value;
     }
     public String getOperator() {
@@ -33,7 +33,7 @@ public class WhereOperand {
     public void setColumn(String column) {
         this.column = column;
     }
-    public void setValue(String value) {
+    public void setValue(T value) {
         this.value = value;
     }
     public void setOperator(String operator) {

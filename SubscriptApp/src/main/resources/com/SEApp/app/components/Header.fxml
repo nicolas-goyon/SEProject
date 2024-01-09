@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="76.0" prefWidth="479.0" styleClass="headerBox" stylesheets="@../Style/header.css" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-      <Label fx:id="welcomeText" styleClass="h1" text="Substrack" textFill="WHITE" />
+<HBox alignment="CENTER" onMouseClicked="#handleHomeButton" prefHeight="119.0" prefWidth="746.0" style="-fx-background-color: #E0FCFC;" styleClass="headerBox" stylesheets="@../Style/header.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.components.Header">
+   <ImageView fitHeight="138.0" fitWidth="183.0" onMouseClicked="#handleHomeButton" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Images/substrack-logo.png" />
+      </image>
+   </ImageView>
 
-</fx:root>
+</HBox>

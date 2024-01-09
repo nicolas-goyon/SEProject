@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane dividerPositions="0.38294314381270905" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.Login">
+<SplitPane dividerPositions="0.38294314381270905" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Style/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SEApp.app.controller.Login">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="228.0" style="-fx-background-color: #E0FCFC;">
          <children>
-            <ImageView fitHeight="249.0" fitWidth="214.0" layoutX="6.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleHomeButton">
+            <ImageView fitHeight="249.0" fitWidth="214.0" layoutX="6.0" layoutY="92.0" onMouseClicked="#handleHomeButton" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/substrack-logo.png"/>
+                  <Image url="@../Images/substrack-logo.png" />
                </image>
             </ImageView>
             <Label layoutX="6.0" layoutY="306.0" prefHeight="54.0" prefWidth="201.0" />
@@ -25,10 +25,13 @@
             </Label>
             <Label layoutX="27.0" layoutY="168.0" text="Email" />
             <Label layoutX="15.0" layoutY="251.0" text="Password" />
-            <TextField layoutX="98.0" layoutY="164.0" prefHeight="24.0" prefWidth="207.0" promptText="email@email.com" />
-            <TextField layoutX="98.0" layoutY="247.0" prefHeight="24.0" prefWidth="207.0" promptText="your password" />
+            <TextField fx:id="email" layoutX="98.0" layoutY="164.0" prefHeight="24.0" prefWidth="207.0" promptText="email@email.com" />
+            <PasswordField fx:id="password" layoutX="98.0" layoutY="247.0" prefHeight="24.0" prefWidth="207.0" promptText="your password" />
+             <HBox alignment="CENTER" spacing="10.0">
+                 <Label fx:id="error" />
+             </HBox>
             <Button layoutX="154.0" layoutY="314.0" mnemonicParsing="false" onAction="#onLogin" style="-fx-background-color: #24C7E6;" text="Log In" />
-            <Hyperlink layoutX="35.0" layoutY="353.0" prefHeight="22.0" prefWidth="333.0" text="Don’t have an account? Register here" onAction="#handleRegisterButton"/>
+            <Hyperlink layoutX="35.0" layoutY="353.0" onAction="#handleRegisterButton" prefHeight="22.0" prefWidth="333.0" text="Don’t have an account? Register here" />
          </children></AnchorPane>
   </items>
 </SplitPane>

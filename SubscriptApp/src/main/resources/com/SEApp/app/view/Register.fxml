@@ -35,6 +35,7 @@
                 <Label layoutX="5.0" layoutY="228.0" prefHeight="16.0" prefWidth="124.0" text="Confirm pwd" />
                 <PasswordField fx:id="confirmPassword" layoutX="87.0" layoutY="224.0" prefHeight="24.0" prefWidth="252.0" promptText="Confirm your password" />
 
+                <Label layoutX="5.0" layoutY="276.0" fx:id="error"  />
                 <Button layoutX="154.0" layoutY="314.0" mnemonicParsing="false" onAction="#onRegister" style="-fx-background-color: #24C7E6;" text="Register" />
                 <Hyperlink layoutX="35.0" layoutY="353.0" onAction="#handleLoginMemberButton" prefHeight="22.0" prefWidth="333.0" text="Already have an account? Login here" />
             </children></AnchorPane>

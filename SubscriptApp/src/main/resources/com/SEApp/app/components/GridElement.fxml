@@ -14,7 +14,7 @@
         </VBox>
         <VBox fx:id="deleteButtonContainer" alignment="CENTER">
             <HBox alignment="CENTER">
-                <Button fx:id="deleteButton" style="-fx-background-color: ##F00020;" text="Supprimer" />
+                <Button fx:id="deleteButton" style="-fx-background-color: #F00020;" text="Supprimer" />
             </HBox>
         </VBox>
     </SplitPane>

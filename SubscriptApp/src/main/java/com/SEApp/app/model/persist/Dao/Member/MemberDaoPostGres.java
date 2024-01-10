@@ -29,7 +29,7 @@ public class MemberDaoPostGres extends MemberDao {
      * @return the user
      */
     public Member get(int id) throws SQLException {
-        String[] columns = {MemberSchema.USERNAME, MemberSchema.EMAIL, MemberSchema.PASSWORD, MemberSchema.PAYMENT_TYPE_ID, MemberSchema.PLAN_ID, MemberSchema.LAST_PAYMENT_DATE};
+        String[] columns = {MemberSchema.ID, MemberSchema.USERNAME, MemberSchema.EMAIL, MemberSchema.PASSWORD, MemberSchema.PAYMENT_TYPE_ID, MemberSchema.PLAN_ID, MemberSchema.LAST_PAYMENT_DATE};
 
         Map<String, Object> row = db.getByKey(MemberSchema.TABLE, columns, MemberSchema.ID, id);
 
